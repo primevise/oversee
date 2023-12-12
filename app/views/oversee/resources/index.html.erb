@@ -1,0 +1,33 @@
+<div class="p-8">
+  <div class="flex items-center justify-between">
+    <div>
+      <p class="text-xs uppercase font-medium text-gray-400">Resource</p>
+      <h1 class="text-xl"><%= params[:resource] %></h1>
+    </div>
+
+    <%= link_to 'Add new', "", class: "inline-flex items-center justify-center py-2 px-6 rounded bg-blue-500 text-white text-sm" %>
+  </div>
+
+  <div class="mt-8 flow-root">
+    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+        <table class="min-w-full divide-y divide-gray-300">
+          <thead>
+            <tr class="divide-x divide-gray-200">
+              <th scope="col" class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 sm:pl-0">ID</th>
+              <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900">Title</th>
+              <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900">Kind</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200 bg-white">
+            <tr class="divide-x divide-gray-200">
+              <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 sm:pl-0">#1234</td>
+              <td class="whitespace-nowrap p-4 text-sm text-gray-500">General</td>
+              <td class="whitespace-nowrap p-4 text-sm text-gray-500">general</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
