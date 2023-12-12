@@ -14,17 +14,19 @@
         <table class="min-w-full divide-y divide-gray-300">
           <thead>
             <tr class="divide-x divide-gray-200">
-              <th scope="col" class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 sm:pl-0">ID</th>
-              <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900">Title</th>
-              <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900">Kind</th>
+              <% @klass.column_names.each do |column_name| %>
+              <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900"><%= column_name %></th>
+              <% end %>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-200 bg-white">
-            <tr class="divide-x divide-gray-200">
-              <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 sm:pl-0">#1234</td>
-              <td class="whitespace-nowrap p-4 text-sm text-gray-500">General</td>
-              <td class="whitespace-nowrap p-4 text-sm text-gray-500">general</td>
-            </tr>
+            <% @resources.each do |resource| %>
+              <tr class="divide-x divide-gray-200">
+                <% @klass.column_names.each do |column_name| %>
+                  <td class="whitespace-nowrap p-4 text-sm text-gray-500"><%= resource.send(column_name) %></td>
+                <% end %>
+              </tr>
+            <% end %>
           </tbody>
         </table>
       </div>
