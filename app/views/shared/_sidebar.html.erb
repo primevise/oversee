@@ -1,0 +1,22 @@
+<div class="bg-gray-50 h-full border-r relative">
+  <div class="p-4">
+    <%= link_to '← Return to app', main_app.root_path, class: "text-sm flex items-center justify-center bg-white hover:shadow-sm py-2 rounded-md border" %>
+  </div>
+  
+  <div class="px-4">
+    <p class="font-semibold mb-2 text-sm">Resources</p>
+    <ul class="">
+      <% 8.times do %>
+        <li class="flex items-center space-x-1.5 rounded-md hover:bg-gray-100 p-2">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="text-gray-400 w-4 h-4">
+            <path d="M3 3.5A1.5 1.5 0 014.5 2h6.879a1.5 1.5 0 011.06.44l4.122 4.12A1.5 1.5 0 0117 7.622V16.5a1.5 1.5 0 01-1.5 1.5h-11A1.5 1.5 0 013 16.5v-13z" />
+          </svg>
+          <p class="text-sm text-gray-700">Resource</p>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="absolute bottom-0 w-full text-xs flex items-center justify-center pb-3">
+    <p>Powered by <a href="https://github.com/primevise/oversee" class="text-blue-500 hover:underline" target="_blank">Oversee</a></p>
+  </div>
+</div>

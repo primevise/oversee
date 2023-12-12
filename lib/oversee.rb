@@ -2,5 +2,13 @@ require "oversee/version"
 require "oversee/engine"
 
 module Oversee
-  # Your code goes here...
+  class << self
+    def resource_list
+      ApplicationRecord.descendants
+    end
+
+    def foobar(klass)
+      klass
+    end
+  end
 end
