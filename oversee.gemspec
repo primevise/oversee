@@ -17,4 +17,7 @@ Gem::Specification.new do |spec|
   end
 
   spec.add_dependency "rails", ">= 7.0.3"
+  spec.add_dependency "zeitwerk", ">= 2.6.12"
+  spec.add_dependency "pagy"
+  spec.add_runtime_dependency "phlex-rails", ">= 1.1.1"
 end
