@@ -1,28 +1,37 @@
-# Oversee
-Short description and motivation.
+[![Gem Version](https://badge.fury.io/rb/oversee.svg)](https://badge.fury.io/rb/oversee)
 
-## Usage
-How to use my plugin.
+# 👓 Oversee
+Plug & play admin dashboard for Rails applications.
+
+Developed by [Primevise](https://primevise.com)
 
 ## Installation
-Add this line to your application's Gemfile:
+Add it to your application by running
+
+```bash
+$ bundle add oversee
+```
+
+
+or add this line to your application's Gemfile:
 
 ```ruby
 gem "oversee"
 ```
 
-And then execute:
+And then run:
 ```bash
 $ bundle
 ```
 
-Or install it yourself as:
-```bash
-$ gem install oversee
-```
-
 ## Contributing
-Contribution directions go here.
+TBA
+
+## Notable mentions
+This gem is inspired by other open source admin dashboards. A big thank you goes to these projects:
+
+- [madmin](https://github.com/excid3/madmin)
+- [Avo](https://github.com/avo-hq/avo)
 
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
