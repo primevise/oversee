@@ -6,7 +6,8 @@ module Oversee
     end
 
     def show
-      
+      @klass = resource_class
+      @resource = resource_class.find(params[:id])
     end
 
     private

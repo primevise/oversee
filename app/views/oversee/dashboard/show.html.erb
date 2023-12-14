@@ -1,5 +1,22 @@
-<h1>
-  Oversee
-</h1>
+<div class="p-8">
+  <div class="flex items-center justify-between">
+    <div>
+      <p class="text-xs uppercase font-medium text-gray-400">Dashboard</p>
+      <h1 class="text-xl">Welcome</h1>
+    </div>
+  </div>
+</div>
 
-<p>dashboard#show</p>
+<div class="p-8">
+  <h2 class="text-xl mb-8">Aggregate statistics</h2>
+  <div class="grid grid-cols-4 gap-4">
+    <% 6.times do %>
+      <div class="col-span-1">
+        <div class="bg-white rounded-md border shadow-sm p-4">
+          <p class="text-xs uppercase font-medium text-gray-400">Statistic</p>
+          <h4 class="mt-2 text-gray-900 text-2xl">91.5k</h4>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

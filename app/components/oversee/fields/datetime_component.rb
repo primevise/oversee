@@ -6,7 +6,7 @@ module Oversee
       end
 
       def template
-        p { @value.to_s }
+        p { @value&.to_fs(:short) || "N/A" }
       end
     end
   end
