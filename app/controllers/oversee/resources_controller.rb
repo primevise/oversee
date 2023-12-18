@@ -25,6 +25,16 @@ module Oversee
       end
     end
 
+    # Non-standard actions
+    def input_field
+      @resource = @resource_class.find(params[:id])
+      @key = params[:key].to_sym
+      @value = @resource.send(@key)
+      @datatype = @resource.class.columns_hash[@field.to_s].type
+      
+      # TODO Turbo response for an input field partial
+    end
+
     private
 
     def set_resource_class

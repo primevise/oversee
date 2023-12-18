@@ -23,7 +23,10 @@
 </div>
 
 <div class="p-8">
-  <pre>
+  <pre class="rounded border p-4">
+    <%= debug @resource_class.columns_hash %>
+  </pre>
+  <pre class="rounded border p-4">
     <%= debug @resource.attributes %>
   </pre>
 </div>
