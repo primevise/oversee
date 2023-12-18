@@ -1,6 +1,10 @@
 module Oversee
   class FieldComponent < Phlex::HTML
-    MAP = {
+    # A map for components to use when rendering a key
+    KEY_MAP = {}
+    
+    # A map for components to use when rendering a value
+    VALUE_MAP = {
       string: Oversee::Fields::StringComponent,
       boolean: Oversee::Fields::BooleanComponent,
       integer: Oversee::Fields::IntegerComponent,
@@ -9,13 +13,16 @@ module Oversee
       enum: Oversee::Fields::EnumComponent,
     }
 
+    # A map for components to use when rendering a form input field
+    INPUT_MAP ={}
+
     def initialize(datatype:, value:)
       @datatype = datatype
       @value = value
     end
 
     def template
-      render MAP[@datatype.to_sym].new(@value)
+      render VALUE_MAP[@datatype.to_sym].new(@value)
     end
 
     def display_value

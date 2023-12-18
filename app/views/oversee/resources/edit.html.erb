@@ -8,14 +8,16 @@
     <%= link_to 'Edit', edit_resource_path(@resource, resource: params[:resource]), class: "inline-flex items-center justify-center py-2 px-6 rounded bg-blue-500 text-white text-sm font-medium" %>
   </div>
 </div>
-
+<div class="p-8">
+  <%= render "form" %>
+</div>
 <div class="p-8">
   <div class="bg-white px-8 border shadow-sm rounded">
     <div class="divide-y divide-gray-100 -mx-8">
       <% @resource.attributes.each do |attribute, value| %>
         <div class="py-4 px-8">
           <p class="text-xs font-medium text-gray-500 uppercase"><%= attribute.humanize %></p>
-          <p class="mt-1 text-lg"><%= value %></p>
+          <p class="mt-1 text-lg"><%= raw(Oversee::FieldComponent.new(datatype: :string, value: value).call(view_context: nil)) %></p>
         </div>
       <% end %>
     </div>

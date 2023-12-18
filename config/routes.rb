@@ -1,7 +1,7 @@
 Oversee::Engine.routes.draw do
 
   # Resources
-  resources :resources, only: [:index, :show]
+  resources :resources
   
   root to: "dashboard#show"
 end

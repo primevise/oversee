@@ -1,0 +1,10 @@
+<%= form_with model: @resource, scope: :resource, url: resource_path do |form| %>
+  <% @resource_class.columns_hash.each do |key, metadata| %>
+    <div class="mb-4">
+      <%= form.label key, class: "uppercase text-xs" %>
+      <%= form.text_field key, class: "block border" %>
+    </div>
+  <% end %>
+  <%= hidden_field_tag :resource_class, @resource_class %>
+  <%= form.submit %>
+<% end %>
