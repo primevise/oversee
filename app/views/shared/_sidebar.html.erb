@@ -1,10 +1,10 @@
-<div class="bg-gray-50 h-full border-r relative p-4">
+<div class="bg-white h-full border-r relative p-4">
   <div class="">
     <%= link_to '← Return to app', main_app.root_path, class: "text-sm flex items-center justify-center bg-white hover:shadow-sm py-2 rounded-md border" %>
   </div>
 
   <div class="overflow-y-scroll my-4">
-    <p class="font-semibold mb-2 text-sm">Resources</p>
+    <p class="font-semibold mb-2 text-xs uppercase text-gray-700">Resources</p>
     <ul>
       <% ApplicationRecord.descendants.map(&:to_s).sort.each do |resource_name| %>
         <li class="flex">
