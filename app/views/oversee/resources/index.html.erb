@@ -10,7 +10,7 @@
 </div>
 <div class="p-8">
   <div class="bg-white rounded border shadow-sm overflow-x-hidden">
-    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="-mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
         <table class="min-w-full divide-y divide-gray-300">
           <thead>
@@ -50,4 +50,5 @@
       </div>
     </div>
   </div>
+  <%= raw(pagy_nav(@pagy)) if @pagy.pages > 1 %>
 </div>

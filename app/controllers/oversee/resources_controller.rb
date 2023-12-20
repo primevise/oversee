@@ -3,7 +3,7 @@ module Oversee
     before_action :set_resource_class, except: [:update]
 
     def index
-      @resources = @resource_class.all
+      @pagy, @resources = pagy(@resource_class.all)
     end
 
     def show

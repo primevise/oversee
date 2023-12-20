@@ -2,11 +2,14 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="ROBOTS" content="NOODP">
+
   <title>Oversee | <%= Rails.application.class %></title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
   <%# stylesheet_link_tag    "oversee/application", media: "all" %>
+  <%= render "oversee/application/javascript" %>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
