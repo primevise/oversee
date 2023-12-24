@@ -30,9 +30,13 @@ module Oversee
       @resource = @resource_class.find(params[:id])
       @key = params[:key].to_sym
       @value = @resource.send(@key)
-      @datatype = @resource.class.columns_hash[@field.to_s].type
-      
-      # TODO Turbo response for an input field partial
+      @datatype = @resource.class.columns_hash[@key.to_s].type
+      puts "---"
+      puts "key: #{@key}"
+      puts "value: #{@value}"
+      puts "datatype: #{@datatype}"
+      puts "---"
+
     end
 
     private

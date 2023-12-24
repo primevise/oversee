@@ -1,32 +1,38 @@
 module Oversee
   class FieldComponent < Phlex::HTML
     # A map for components to use when rendering a key
-    KEY_MAP = {}
+    LABEL_MAP = {
+      string: Oversee::Fields::Label::StringComponent,
+    }
     
     # A map for components to use when rendering a value
     VALUE_MAP = {
-      string: Oversee::Fields::StringComponent,
-      boolean: Oversee::Fields::BooleanComponent,
-      integer: Oversee::Fields::IntegerComponent,
-      datetime: Oversee::Fields::DatetimeComponent,
-      text: Oversee::Fields::TextComponent,
-      enum: Oversee::Fields::EnumComponent,
+      string: Oversee::Fields::Value::StringComponent,
+      boolean: Oversee::Fields::Value::BooleanComponent,
+      integer: Oversee::Fields::Value::IntegerComponent,
+      datetime: Oversee::Fields::Value::DatetimeComponent,
+      text: Oversee::Fields::Value::TextComponent,
+      enum: Oversee::Fields::Value::EnumComponent,
     }
 
     # A map for components to use when rendering a form input field
     INPUT_MAP ={}
 
-    def initialize(datatype:, value:)
+    MAP = {
+      label: LABEL_MAP,
+      value: VALUE_MAP,
+      input: INPUT_MAP,
+    }
+
+    def initialize(datatype: :string, key: nil, value: nil, kind: :value)
+      @kind = kind
       @datatype = datatype
+      @key = key
       @value = value
     end
 
     def template
-      render VALUE_MAP[@datatype.to_sym].new(@value)
-    end
-
-    def display_value
-      @value.present? ? @value : "N/A"
+      render MAP[@kind][@datatype.to_sym].new(datatype: @datatype, key: @key, value: @value)
     end
   end
 end
