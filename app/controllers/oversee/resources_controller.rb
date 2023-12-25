@@ -25,6 +25,13 @@ module Oversee
       end
     end
 
+    def destroy
+      @resource = @resource_class.find(params[:id])
+      
+      @resource.destroy
+      redirect_to resources_path(resource: @resource_class)
+    end
+
     # Non-standard actions
     def input_field
       @resource = @resource_class.find(params[:id])

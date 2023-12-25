@@ -3,6 +3,11 @@ module Oversee
     # A map for components to use when rendering a key
     LABEL_MAP = {
       string: Oversee::Fields::Label::StringComponent,
+      boolean: Oversee::Fields::Label::BooleanComponent,
+      integer: Oversee::Fields::Label::IntegerComponent,
+      datetime: Oversee::Fields::Label::DatetimeComponent,
+      text: Oversee::Fields::Label::TextComponent,
+      enum: Oversee::Fields::Label::EnumComponent
     }
     
     # A map for components to use when rendering a value
@@ -12,7 +17,7 @@ module Oversee
       integer: Oversee::Fields::Value::IntegerComponent,
       datetime: Oversee::Fields::Value::DatetimeComponent,
       text: Oversee::Fields::Value::TextComponent,
-      enum: Oversee::Fields::Value::EnumComponent,
+      enum: Oversee::Fields::Value::EnumComponent
     }
 
     # A map for components to use when rendering a form input field

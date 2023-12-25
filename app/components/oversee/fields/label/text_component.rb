@@ -1,8 +1,8 @@
 module Oversee
   module Fields
     module Label
-      class StringComponent < Phlex::HTML
-        def initialize(datatype: :string, key: nil, value: nil, kind: :value)
+      class TextComponent < Phlex::HTML
+        def initialize(datatype: :text, key: nil, value: nil, kind: :value)
           @key = key
         end
 

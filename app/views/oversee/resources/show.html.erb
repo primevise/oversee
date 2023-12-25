@@ -1,25 +1,28 @@
-<div class="p-8">
+<div class="p-8 bg-white shadow-sm">
   <div class="flex items-center justify-between">
     <div>
       <p class="text-xs uppercase font-medium text-gray-400">Resource</p>
       <h1 class="text-xl"><%= params[:resource] %></h1>
     </div>
-
-    <%= link_to 'Edit', edit_resource_path(@resource, resource: params[:resource]), class: "inline-flex items-center justify-center py-2 px-6 rounded bg-blue-500 text-white text-sm font-medium" %>
+    <%= button_to resource_path(resource: params[:resource]), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "py-2 px-6 inline-flex border rounded text-red-500 shadow-sm hover:bg-gray-50 text-sm font-medium" do %>
+      Delete
+    <% end %>
   </div>
 </div>
 
 <div class="p-8">
   <div class="bg-white px-8 border shadow-sm rounded">
     <div class="divide-y divide-gray-100 -mx-8">
-      <% @resource.attributes.each do |attribute, value| %>
-        <div id="<%= dom_id(@resource, attribute) %>" class="py-4 px-8 hover:bg-gray-50 group flex items-center justify-between">
+      <% @resource_class.columns_hash.each do |key, metadata| %>
+        <div id="<%= dom_id(@resource, key) %>" class="py-4 px-8 hover:bg-gray-50 group flex items-center justify-between">
           <div>
-            <p class="text-xs font-medium text-gray-500 uppercase"><%= attribute.humanize %></p>
-            <p class="mt-1 text-lg"><%= value %></p>
+            <%= raw(Oversee::FieldComponent.new(kind: :label, datatype: metadata.sql_type_metadata.type, key: key).call(view_context: nil)) %>
+            <div class="mt-2 bg-gray-50 rounded px-4 py-2">
+              <%= raw(Oversee::FieldComponent.new(kind: :value, datatype: metadata.sql_type_metadata.type, value: @resource.send(key)).call(view_context: nil)) %>
+            </div>
           </div>
           <div>
-            <a href="<%= input_field_resource_path(@resource, resource: params[:resource], key: attribute) %>" data-turbo-stream="true" class="opacity-0 group-hover:opacity-100 transition h-8 w-8 rounded-md bg-white border inline-flex justify-center items-center text-gray-400 hover:text-gray-800">
+            <a href="<%= input_field_resource_path(@resource, resource: params[:resource], key: key) %>" data-turbo-stream="true" class="opacity-0 group-hover:opacity-100 transition h-8 w-8 rounded-md bg-white border inline-flex justify-center items-center text-gray-400 hover:text-gray-800">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" data-slot="icon" class="w-4 h-4">
                 <path d="M13.488 2.513a1.75 1.75 0 0 0-2.475 0L6.75 6.774a2.75 2.75 0 0 0-.596.892l-.848 2.047a.75.75 0 0 0 .98.98l2.047-.848a2.75 2.75 0 0 0 .892-.596l4.261-4.262a1.75 1.75 0 0 0 0-2.474Z" />
                 <path d="M4.75 3.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h6.5c.69 0 1.25-.56 1.25-1.25V9A.75.75 0 0 1 14 9v2.25A2.75 2.75 0 0 1 11.25 14h-6.5A2.75 2.75 0 0 1 2 11.25v-6.5A2.75 2.75 0 0 1 4.75 2H7a.75.75 0 0 1 0 1.5H4.75Z" />

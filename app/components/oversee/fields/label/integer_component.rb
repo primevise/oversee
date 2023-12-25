@@ -1,8 +1,8 @@
 module Oversee
   module Fields
     module Label
-      class StringComponent < Phlex::HTML
-        def initialize(datatype: :string, key: nil, value: nil, kind: :value)
+      class IntegerComponent < Phlex::HTML
+        def initialize(datatype: :integer, key: nil, value: nil, kind: :value)
           @key = key
         end
 
@@ -22,13 +22,13 @@ module Oversee
                 stroke_linejoin: "round"
               ) do |s|
                 s.path(stroke: "none", d: "M0 0h24v24H0z", fill: "none")
-                s.path(d: "M6 4l12 0")
-                s.path(d: "M12 4l0 16")
+                s.path(d: "M4 17v-10l7 10v-10")
+                s.path(d: "M15 17h5")
+                s.path(d: "M17.5 10m-2.5 0a2.5 3 0 1 0 5 0a2.5 3 0 1 0 -5 0")
               end
             end
             p(class: "uppercase text-xs text-gray-500 font-medium") { @key.to_s.humanize }
           end
-
         end
       end
     end
