@@ -46,7 +46,6 @@ module Oversee
       puts "value: #{@value}"
       puts "datatype: #{@datatype}"
       puts "---"
-
     end
 
     private

@@ -1,6 +1,0 @@
-<div>
-  <%= raw(Oversee::FieldLabelComponent.new(key: key, datatype: datatype).call(view_context: nil)) %>
-  <div class="mt-2 bg-gray-100 rounded px-4 py-2 min-w-64">
-    <%= raw(Oversee::FieldComponent.new(kind: :value, datatype: datatype, value: resource.send(key)).call(view_context: nil)) %>
-  </div>
-</div>
