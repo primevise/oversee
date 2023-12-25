@@ -17,17 +17,20 @@ module Oversee
     def update
       @resource_class = params[:resource_class].constantize
       @resource = @resource_class.find(params[:id])
+      # @datatype = @resource_class.columns_hash[@key.to_s].type
 
-      if @resource.update(resource_params)
-        redirect_to resource_path(@resource, resource: @resource_class)
-      else
-
+      respond_to do |format|
+        if @resource.update(resource_params)
+          format.html { redirect_to resource_path(@resource, resource: @resource_class) }
+          format.turbo_stream
+        else
+        end
       end
     end
 
     def destroy
       @resource = @resource_class.find(params[:id])
-      
+
       @resource.destroy
       redirect_to resources_path(resource: @resource_class)
     end

@@ -4,6 +4,12 @@
     <div class="h-8 w-32 bg-gray-100 rounded-md"></div>
   </div>
   <div>
-    <%= raw(Oversee::FieldComponent.new(kind: :label, datatype: datatype, key: key).call(view_context: nil)) %>
+    <%= raw(Oversee::FieldLabelComponent.new(key: key, datatype: datatype).call(view_context: nil)) %>
+    <div class="mt-2">
+      <%= form_with url: resource_path(@resource, resource_class: @resource_class), scope: :resource, model: @resource do |f| %>
+        <%= f.text_field :title, class: "border rounded-md px-4 py-2 text-sm" %>
+        <%= f.submit "Save", class: "bg-blue-500 px-4 py-2 rounded-md text-white text-sm hover:bg-blue-600 hover:cursor-pointer" %>
+      <% end %>
+    </div>
   </div>
 </div>

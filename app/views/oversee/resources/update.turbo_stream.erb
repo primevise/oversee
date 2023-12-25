@@ -1,0 +1,3 @@
+<%= turbo_stream.replace dom_id(@resource, @key) do %>
+  <%= render partial: "oversee/resources/display_field", locals: { datatype: :string, key: @key, resource: @resource } %>
+<% end %>

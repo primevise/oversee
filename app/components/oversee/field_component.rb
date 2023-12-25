@@ -1,15 +1,5 @@
 module Oversee
   class FieldComponent < Phlex::HTML
-    # A map for components to use when rendering a key
-    LABEL_MAP = {
-      string: Oversee::Fields::Label::StringComponent,
-      boolean: Oversee::Fields::Label::BooleanComponent,
-      integer: Oversee::Fields::Label::IntegerComponent,
-      datetime: Oversee::Fields::Label::DatetimeComponent,
-      text: Oversee::Fields::Label::TextComponent,
-      enum: Oversee::Fields::Label::EnumComponent
-    }
-    
     # A map for components to use when rendering a value
     VALUE_MAP = {
       string: Oversee::Fields::Value::StringComponent,
@@ -24,7 +14,6 @@ module Oversee
     INPUT_MAP ={}
 
     MAP = {
-      label: LABEL_MAP,
       value: VALUE_MAP,
       input: INPUT_MAP,
     }
