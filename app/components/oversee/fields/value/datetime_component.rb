@@ -7,6 +7,7 @@ module Oversee
         end
 
         def template
+          return p(class: "text-gray-500 text-xs"){ "—" } if @value.blank?
           p { @value&.to_fs(:short) || "N/A" }
         end
       end

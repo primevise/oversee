@@ -7,7 +7,8 @@ module Oversee
         end
 
         def template
-          p { @value }
+          return p(class: "text-gray-500 text-xs"){ "—" } if @value.blank?
+          p(class: "truncate") { @value }
         end
       end
     end

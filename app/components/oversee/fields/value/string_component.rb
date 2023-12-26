@@ -9,10 +9,12 @@ module Oversee
         end
 
         def template
-          if @value&.downcase&.include?("password")
+          return p(class: "text-gray-500 text-xs"){ "—" } if @value.blank?
+          
+          if @key&.downcase&.include?("password") ||  @key&.downcase&.include?("token")
             p { "[REDACTED]" }
           else
-            p { @value }
+            p(class: "truncate") { @value }
           end
         end
       end

@@ -7,6 +7,7 @@ module Oversee
         end
 
         def template
+          return p(class: "text-gray-500 text-xs"){ "—" } if @value.blank?
           if @value
             svg(
               xmlns: "http://www.w3.org/2000/svg",
