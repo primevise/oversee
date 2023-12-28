@@ -16,8 +16,10 @@
     <div class="col-span-1">
       <%= render "shared/sidebar" %>
     </div>
-    <div class="col-span-4 bg-gray-50">
+    <div class="col-span-4 bg-gray-50 pt-4 pl-2 h-full">
+      <div class="bg-white rounded-tl-lg shadow-sm border">
       <%= yield %>
+      </div>
     </div>
   </div>
 </body>

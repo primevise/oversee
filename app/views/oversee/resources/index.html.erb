@@ -1,15 +1,15 @@
 <div class="p-8">
   <div class="flex items-center justify-between">
     <div>
-      <p class="text-xs uppercase font-medium text-gray-400">Resource</p>
-      <h1 class="text-xl"><%= params[:resource] %></h1>
+      <p class="text-xs font-medium text-gray-500">Index</p>
+      <h1 class="text-2xl"><%= params[:resource] %></h1>
     </div>
 
     <%= link_to 'Add new', "", class: "inline-flex items-center justify-center py-2 px-6 rounded bg-blue-500 text-white text-sm font-medium" %>
   </div>
 </div>
-<div class="p-8">
-  <div class="bg-white rounded border shadow-sm overflow-x-hidden">
+<div class="">
+  <div class="bg-white border-t overflow-x-hidden">
     <div class="-mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="inline-block min-w-full align-middle sm:px-6 lg:px-8">
         <table class="min-w-full divide-y divide-gray-300">
