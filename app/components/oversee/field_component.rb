@@ -20,7 +20,7 @@ module Oversee
 
     def initialize(datatype: :string, key: nil, value: nil, kind: :value)
       @kind = kind
-      @datatype = datatype
+      @datatype = VALUE_MAP.key?(datatype) ? datatype : :text
       @key = key
       @value = value
     end

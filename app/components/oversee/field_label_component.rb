@@ -8,7 +8,7 @@ module Oversee
     def template
       div(class:"inline-flex items-center space-x-2") do
         div(class: "h-5 w-5 bg-gray-100 inline-flex items-center justify-center rounded") do
-          send("#{@datatype}_icon")
+          respond_to?("#{@datatype}_icon", true) ? send("#{@datatype}_icon") : data_icon
         end
         p(class: "uppercase text-xs text-gray-500 font-medium") { @key.to_s.humanize }
       end
@@ -20,8 +20,6 @@ module Oversee
       svg(
         xmlns: "http://www.w3.org/2000/svg",
         class: "h-2.5 w-2.5",
-        width: "24",
-        height: "24",
         viewbox: "0 0 24 24",
         stroke_width: "2",
         stroke: "currentColor",
@@ -39,8 +37,6 @@ module Oversee
       svg(
         xmlns: "http://www.w3.org/2000/svg",
         class: "h-2.5 w-2.5",
-        width: "24",
-        height: "24",
         viewbox: "0 0 24 24",
         stroke_width: "2",
         stroke: "currentColor",
@@ -59,8 +55,6 @@ module Oversee
       svg(
         xmlns: "http://www.w3.org/2000/svg",
         class: "h-2.5 w-2.5",
-        width: "24",
-        height: "24",
         viewbox: "0 0 24 24",
         stroke_width: "2",
         stroke: "currentColor",
@@ -78,8 +72,6 @@ module Oversee
       svg(
         xmlns: "http://www.w3.org/2000/svg",
         class: "h-2.5 w-2.5",
-        width: "24",
-        height: "24",
         viewbox: "0 0 24 24",
         stroke_width: "2",
         stroke: "currentColor",
@@ -100,8 +92,6 @@ module Oversee
       svg(
         xmlns: "http://www.w3.org/2000/svg",
         class: "h-2.5 w-2.5",
-        width: "24",
-        height: "24",
         viewbox: "0 0 24 24",
         stroke_width: "2",
         stroke: "currentColor",
@@ -122,8 +112,6 @@ module Oversee
       svg(
         xmlns: "http://www.w3.org/2000/svg",
         class: "h-2.5 w-2.5",
-        width: "24",
-        height: "24",
         viewbox: "0 0 24 24",
         stroke_width: "2",
         stroke: "currentColor",
@@ -141,6 +129,26 @@ module Oversee
         s.path(d: "M4 11h16")
         s.path(d: "M11 15h1")
         s.path(d: "M12 15v3")
+      end
+    end
+
+    def data_icon
+      svg(
+        xmlns: "http://www.w3.org/2000/svg",
+        viewbox: "0 0 24 24",
+        fill: "none",
+        stroke: "currentColor",
+        stroke_width: "2",
+        stroke_linecap: "round",
+        stroke_linejoin: "round",
+        class: "h-2.5 w-2.5",
+      ) do |s|
+        s.path(stroke: "none", d: "M0 0h24v24H0z", fill: "none")
+        s.path(d: "M15 12h.01")
+        s.path(d: "M12 12h.01")
+        s.path(d: "M9 12h.01")
+        s.path(d: "M6 19a2 2 0 0 1 -2 -2v-4l-1 -1l1 -1v-4a2 2 0 0 1 2 -2")
+        s.path(d: "M18 19a2 2 0 0 0 2 -2v-4l1 -1l-1 -1v-4a2 2 0 0 0 -2 -2")
       end
     end
   end
