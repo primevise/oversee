@@ -1,22 +1,21 @@
 module Oversee
   class ResourcesController < BaseController
     before_action :set_resource_class, except: [:update]
+    before_action :set_resource, only: %i[show edit destroy]
 
     def index
       @pagy, @resources = pagy(@resource_class.all)
     end
 
     def show
-      @resource = @resource_class.find(params[:id])
     end
 
     def edit
-      @resource = @resource_class.find(params[:id])
     end
 
     def update
       @resource_class = params[:resource_class].constantize
-      @resource = @resource_class.find(params[:id])
+      set_resource
       # @datatype = @resource_class.columns_hash[@key.to_s].type
 
       respond_to do |format|
@@ -29,8 +28,6 @@ module Oversee
     end
 
     def destroy
-      @resource = @resource_class.find(params[:id])
-
       @resource.destroy
       redirect_to resources_path(resource: @resource_class)
     end
@@ -52,6 +49,10 @@ module Oversee
 
     def set_resource_class
       @resource_class = params[:resource].constantize
+    end
+
+    def set_resource
+      @resource = @resource_class.find(params[:id])
     end
 
     def resource_params
