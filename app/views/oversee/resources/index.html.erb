@@ -4,7 +4,6 @@
       <p class="text-xs font-medium text-gray-500">Index</p>
       <h1 class="text-2xl"><%= params[:resource] %></h1>
     </div>
-
     <%= link_to 'Add new', "", class: "inline-flex items-center justify-center py-2 px-6 rounded bg-blue-500 text-white text-sm font-medium" %>
   </div>
 </div>
@@ -19,7 +18,7 @@
               <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 uppercase"></th>
               <% @resource_class.columns_hash.each do |key, metadata| %>
                 <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 uppercase whitespace-nowrap">
-                  <%= raw(Oversee::FieldLabelComponent.new(key: key, datatype: metadata.sql_type_metadata.type).call(view_context: nil)) %>
+                  <%= render Oversee::FieldLabelComponent.new(key: key, datatype: metadata.sql_type_metadata.type) %>
                 </th>
               <% end %>
             </tr>

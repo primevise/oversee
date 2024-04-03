@@ -17,7 +17,7 @@
       <% @resource.attributes.each do |attribute, value| %>
         <div class="py-4 px-8">
           <p class="text-xs font-medium text-gray-500 uppercase"><%= attribute.humanize %></p>
-          <p class="mt-1 text-lg"><%= raw(Oversee::FieldComponent.new(datatype: :string, value: value).call(view_context: nil)) %></p>
+          <p class="mt-1 text-lg"><%= render Oversee::FieldComponent.new(datatype: :string, value: value) %></p>
         </div>
       <% end %>
     </div>

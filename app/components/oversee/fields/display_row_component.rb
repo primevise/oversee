@@ -1,7 +1,7 @@
 class Oversee::Fields::DisplayRowComponent < Phlex::HTML
   include Phlex::Rails::Helpers::DOMID
   include Phlex::Rails::Helpers::Routes
-  
+
   def initialize(key:, resource:, datatype:, value:)
     @datatype = datatype
     @resource = resource
@@ -26,7 +26,7 @@ class Oversee::Fields::DisplayRowComponent < Phlex::HTML
           href:
             (
               helpers.input_field_resource_path(
-                @resource,
+                @resource.id,
                 resource: @resource.class,
                 key: @key
               )

@@ -16,11 +16,13 @@ module Oversee
     def update
       @resource_class = params[:resource_class].constantize
       set_resource
-      # @datatype = @resource_class.columns_hash[@key.to_s].type
+
+      @key = params[:resource][:oversee_key]
+      @datatype = params[:resource][:oversee_datatype]
 
       respond_to do |format|
         if @resource.update(resource_params)
-          format.html { redirect_to resource_path(@resource, resource: @resource_class) }
+          format.html { redirect_to resource_path(@resource.id, resource: @resource_class) }
           format.turbo_stream
         else
         end
@@ -34,7 +36,8 @@ module Oversee
 
     # Non-standard actions
     def input_field
-      @resource = @resource_class.find(params[:id])
+      set_resource
+
       @key = params[:key].to_sym
       @value = @resource.send(@key)
       @datatype = @resource.class.columns_hash[@key.to_s].type
@@ -56,6 +59,9 @@ module Oversee
     end
 
     def resource_params
+      params[:resource].delete(:oversee_key)
+      params[:resource].delete(:oversee_datatype)
+
       params.require(:resource).permit!
     end
   end
