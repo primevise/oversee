@@ -8,7 +8,7 @@ module Oversee
         end
 
         def template
-          p { @value }
+          input type: "text", name: @key, value: @value, class: ""
         end
       end
     end

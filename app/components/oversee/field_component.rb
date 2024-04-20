@@ -18,7 +18,7 @@ module Oversee
       input: INPUT_MAP,
     }
 
-    def initialize(datatype: :string, key: nil, value: nil, kind: :value)
+    def initialize(resource: nil, datatype: :string, kind: :value, key: nil, value: nil)
       @kind = kind
       @datatype = VALUE_MAP.key?(datatype) ? datatype : :text
       @key = key
