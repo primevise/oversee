@@ -5,7 +5,7 @@ module Oversee
       @key = key
     end
 
-    def template
+    def view_template
       div(class:"inline-flex items-center space-x-2") do
         div(class: "h-5 w-5 bg-gray-100 inline-flex items-center justify-center rounded") do
           respond_to?("#{@datatype}_icon", true) ? send("#{@datatype}_icon") : data_icon

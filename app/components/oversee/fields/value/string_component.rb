@@ -8,9 +8,9 @@ module Oversee
           @kind = kind
         end
 
-        def template
+        def view_template
           return p(class: "text-gray-500 text-xs"){ "—" } if @value.blank?
-          
+
           if @key&.downcase&.include?("password") ||  @key&.downcase&.include?("token")
             p { "[REDACTED]" }
           else

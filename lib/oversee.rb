@@ -4,6 +4,7 @@ require "oversee/version"
 require "oversee/engine"
 
 require "phlex-rails"
+require "pagy"
 
 # Zeitwerk
 loader = Zeitwerk::Loader.for_gem
