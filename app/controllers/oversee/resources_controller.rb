@@ -4,8 +4,10 @@ module Oversee
     before_action :set_resource, only: %i[show edit destroy]
 
     def index
-      @resources = @resource_class.order(created_at: :desc)
-      @pagy, @resources = pagy@resources)
+      set_sorting_rules
+
+      @resources = @resource_class.order(@sort_attribute.to_sym => sort_direction)
+      @pagy, @resources = pagy(@resources)
     end
 
     def show
@@ -61,6 +63,19 @@ module Oversee
 
     def set_resource
       @resource = @resource_class.find(params[:id])
+    end
+
+    def sort_attribute
+      @sort_attribute ||= @resource_class.column_names.include?(params[:sort_attribute]) ? params[:sort_attribute] : "created_at"
+    end
+
+    def sort_direction
+      @sort_direction ||= ["asc", "desc"].include?(params[:sort_direction]) ? params[:sort_direction] : "desc"
+    end
+
+    def set_sorting_rules
+      @sort_attribute = params[:sort_attribute] || "created_at"
+      @sort_direction = params[:sort_direction] || "desc"
     end
 
     def resource_params
