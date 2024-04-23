@@ -4,7 +4,8 @@ module Oversee
     before_action :set_resource, only: %i[show edit destroy]
 
     def index
-      @pagy, @resources = pagy(@resource_class.all)
+      @resources = @resource_class.order(created_at: :desc)
+      @pagy, @resources = pagy@resources)
     end
 
     def show
