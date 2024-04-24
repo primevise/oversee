@@ -9,7 +9,7 @@ class Oversee::Fields::DisplayRowComponent < Phlex::HTML
     @value = value
   end
 
-  def view_template
+  def template
     div(
       id: dom_id(@resource, @key),
       class:

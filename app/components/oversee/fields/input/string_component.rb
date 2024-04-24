@@ -7,7 +7,7 @@ module Oversee
           @value = value
         end
 
-        def view_template
+        def template
           input type: "text", name: @key, value: @value, class: ""
         end
       end
