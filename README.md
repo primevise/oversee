@@ -5,6 +5,9 @@ Plug & play admin dashboard for Rails applications.
 
 Developed by [Primevise](https://primevise.com)
 
+> [!NOTE]  
+> Oversee is still rather incomplete and only has the very basic features. It might significantly change and break things before a stable release.
+
 ## Installation
 Add it to your application by running
 
