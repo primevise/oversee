@@ -1,1 +1,3 @@
-
+<%= turbo_stream.replace(dom_id(@resource, @key)) do %>
+  <%= render Oversee::Fields::DisplayRowComponent.new(key: @key, resource: @resource, datatype: @datatype, value: @resource.send(@key)) %>
+<% end %>

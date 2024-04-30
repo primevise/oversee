@@ -11,7 +11,11 @@ module Oversee
     }
 
     # A map for components to use when rendering a form input field
-    INPUT_MAP ={}
+    INPUT_MAP ={
+      string: Oversee::Fields::Input::StringComponent,
+      integer: Oversee::Fields::Input::IntegerComponent,
+      datetime: Oversee::Fields::Input::DatetimeComponent,
+    }
 
     MAP = {
       value: VALUE_MAP,
@@ -26,7 +30,7 @@ module Oversee
     end
 
     def template
-      render MAP[@kind][@datatype.to_sym].new(datatype: @datatype, key: @key, value: @value)
+      render MAP[@kind][@datatype.to_sym].new(key: @key, value: @value)
     end
   end
 end

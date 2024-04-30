@@ -1,5 +1,7 @@
 module Oversee
   class ResourcesController < BaseController
+    include ActionView::RecordIdentifier
+
     before_action :set_resource_class, except: [:update]
     before_action :set_resource, only: %i[show edit destroy]
 
@@ -26,11 +28,7 @@ module Oversee
       respond_to do |format|
         if @resource.update(resource_params)
           format.html { redirect_to resource_path(@resource.id, resource: @resource_class) }
-          format.turbo_stream {
-            render turbo_stream: [
-            turbo_stream.replace(dom_id(@resource, @key)) { render Oversee::Fields::DisplayRowComponent.new(key: @key, resource: @resource, datatype: @datatype, value: @resource.send(@key)) }
-          ]
-          }
+          format.turbo_stream
         else
         end
       end
@@ -48,6 +46,7 @@ module Oversee
       @key = params[:key].to_sym
       @value = @resource.send(@key)
       @datatype = @resource.class.columns_hash[@key.to_s].type
+
       puts "---"
       puts "key: #{@key}"
       puts "value: #{@value}"

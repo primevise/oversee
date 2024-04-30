@@ -10,7 +10,9 @@
         <%= f.hidden_field :oversee_key, value: key %>
         <%= f.hidden_field :oversee_datatype, value: datatype %>
 
-        <%= f.text_field key.to_sym, class: "border rounded-md px-4 py-2 text-sm" %>
+        <% input_datatype = [:string, :integer, :datetime].include?(datatype) ? datatype : :string %>
+        <%= render Oversee::FieldComponent.new(kind: :input, datatype: input_datatype.to_sym, key: key, value: value)%>
+
         <%= f.submit "Save", class: "bg-blue-500 px-4 py-2 rounded-md text-white text-sm hover:bg-blue-600 hover:cursor-pointer" %>
       <% end %>
     </div>

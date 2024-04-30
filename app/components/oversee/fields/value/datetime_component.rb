@@ -2,7 +2,7 @@ module Oversee
   module Fields
     module Value
       class DatetimeComponent < Phlex::HTML
-        def initialize(datatype: :string, key: nil, value: nil, kind: :value)
+        def initialize(key: nil, value: nil, kind: :value)
           @value = value
         end
 
