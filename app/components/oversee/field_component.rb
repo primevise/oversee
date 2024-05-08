@@ -29,7 +29,7 @@ module Oversee
       @value = value
     end
 
-    def template
+    def view_template
       render MAP[@kind][@datatype.to_sym].new(key: @key, value: @value)
     end
   end

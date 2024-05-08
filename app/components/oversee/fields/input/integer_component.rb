@@ -7,7 +7,7 @@ module Oversee
           @value = value
         end
 
-        def template
+        def view_template
           input type: "number", id: field_id, name: field_name, value: @value, class: "border rounded-md px-4 py-2 text-sm"
         end
 
