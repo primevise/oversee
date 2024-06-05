@@ -2,6 +2,7 @@ require "zeitwerk"
 
 require "oversee/version"
 require "oversee/engine"
+require "oversee/configuration"
 
 require "phlex-rails"
 require "pagy"
