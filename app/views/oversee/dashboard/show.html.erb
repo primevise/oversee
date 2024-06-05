@@ -7,16 +7,18 @@
   </div>
 </div>
 
+<% if  @metrics.present? %>
 <div class="p-8">
   <h2 class="text-xl mb-8">Aggregate statistics</h2>
   <div class="grid grid-cols-4 gap-4">
-    <% 6.times do %>
+    <% @metrics.each do |metric| %>
       <div class="col-span-1">
         <div class="bg-white rounded-md border shadow-sm p-4">
-          <p class="text-xs uppercase font-medium text-gray-400">Statistic</p>
-          <h4 class="mt-2 text-gray-900 text-2xl">91.5k</h4>
+          <p class="text-xs uppercase font-medium text-gray-400"><%= metric[:label]%></p>
+          <h4 class="mt-2 text-gray-900 text-2xl"><%= number_to_human(metric[:metric], units: { thousand: :K, million: :M, billion: :B }) %></h4>
         </div>
       </div>
     <% end %>
   </div>
 </div>
+<% end %>
