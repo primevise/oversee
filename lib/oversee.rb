@@ -17,5 +17,11 @@ module Oversee
     def allowed_resource_list
       ApplicationRecord.descendants
     end
+
+    def card_class_names
+      root = Rails.root.join("app/oversee/cards/")
+      files = Dir.glob(root.join("**/*.rb"))
+      files.map! { |f| f.split(root.to_s).last.delete_suffix(".rb").classify.prepend("Cards::") }
+    end
   end
 end
