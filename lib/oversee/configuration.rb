@@ -2,13 +2,14 @@
 
 module Oversee
   class Configuration
-
     attr_accessor :excluded_resources
     attr_accessor :filter_sensitive_columns
+    attr_accessor :sensitive_column_titles
 
     def initialize
       @excluded_resources = []
       @filter_sensitive_columns = true
+      @sensitive_column_titles = %w[password password_digest access_token]
     end
   end
 
