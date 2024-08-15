@@ -12,13 +12,15 @@
   <%= render "oversee/application/javascript" %>
 </head>
 <body class="min-h-screen bg-gray-100 p-8">
-  <div class="flex gap-4">
-	  	<div class="w-72 shrink-0">
-				<%= render Oversee::Dashboard::SidebarComponent.new %>
-		  </div>
-			<div class="w-full bg-white rounded-lg border shadow-sm overflow-clip">
-				<%= yield %>
-			</div>
-	  </div>
+  <div class="flex gap-4 w-full">
+    <div class="w-72 shrink-0">
+			<%= render Oversee::Dashboard::SidebarComponent.new %>
+		</div>
+		<div class="w-full overflow-scroll">
+			<div class="bg-white rounded-lg border overflow-clip">
+  			<%= yield %>
+   	  </div>
+		</div>
+	</div>
 </body>
 </html>
