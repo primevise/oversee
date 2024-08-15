@@ -11,16 +11,14 @@
   <%# stylesheet_link_tag    "oversee/application", media: "all" %>
   <%= render "oversee/application/javascript" %>
 </head>
-<body>
-  <div class="h-screen grid grid-cols-5">
-    <div class="col-span-1">
-      <%= render "shared/sidebar" %>
-    </div>
-    <div class="col-span-4 bg-gray-50 pt-4 pl-2 h-full">
-      <div class="bg-white rounded-tl-lg shadow-sm border">
-      <%= yield %>
-      </div>
-    </div>
-  </div>
+<body class="min-h-screen bg-gray-100 p-8">
+  <div class="flex gap-4">
+	  	<div class="w-72 shrink-0">
+				<%= render Oversee::Dashboard::SidebarComponent.new %>
+		  </div>
+			<div class="w-full bg-white rounded-lg border shadow-sm overflow-clip">
+				<%= yield %>
+			</div>
+	  </div>
 </body>
 </html>
