@@ -13,6 +13,7 @@ module Oversee
     end
 
     def show
+      resource_associations
     end
 
     def edit
@@ -62,6 +63,10 @@ module Oversee
 
     def set_resource
       @resource = @resource_class.find(params[:id])
+    end
+
+    def resource_associations
+      @resource_associations ||= @resource_class.reflect_on_all_associations
     end
 
     def sort_attribute
