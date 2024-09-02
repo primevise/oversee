@@ -11,10 +11,11 @@ module Oversee
     private
 
     def fetch_metrics
-      @metrics = [{
-        label: "Total Users",
-        value: User.count,
-      }]
+      # @metrics = [{
+      #   label: "Total Users",
+      #   value: User.count,
+      # }]
+      @metrics = []
     end
   end
 end
