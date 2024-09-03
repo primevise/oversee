@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Oversee::Dashboard::SidebarComponent < ApplicationComponent
+class Oversee::Dashboard::SidebarComponent < Oversee::ApplicationComponent
   include Phlex::Rails::Helpers::LinkTo
   include Phlex::Rails::Helpers::ButtonTo
 
