@@ -26,7 +26,7 @@ module Oversee
       @kind = kind
       @datatype = VALUE_MAP.key?(datatype) ? datatype : :text
       @key = key
-      @value = value
+      @value = value || nil
     end
 
     def view_template

@@ -8,7 +8,7 @@ module Oversee
         end
 
         def view_template
-          input type: "text", id: field_id, name: field_name, value: @value, class: "border rounded-md px-4 py-2 text-sm"
+          input type: "text", id: field_id, name: field_name, value: @value, class: "border rounded-md px-4 py-2 text-sm w-full"
         end
 
         private

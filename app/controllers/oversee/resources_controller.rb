@@ -16,6 +16,19 @@ module Oversee
       @resource = @resource_class.new
     end
 
+    def create
+      @resource_class = params[:resource].constantize
+      @resource = @resource_class.new(resource_params)
+
+      respond_to do |format|
+        if @resource.update(resource_params)
+          format.html { redirect_to resource_path(@resource.id, resource: @resource_class) }
+          format.turbo_stream
+        else
+        end
+      end
+    end
+
     def show
       resource_associations
     end
