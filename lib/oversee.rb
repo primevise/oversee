@@ -14,6 +14,11 @@ loader.setup
 
 module Oversee
   class << self
+
+    def application_name
+      Rails.application.class.to_s.gsub("::Application", "")
+    end
+
     def allowed_resource_list
       ApplicationRecord.descendants
     end

@@ -25,7 +25,7 @@ class Oversee::Fields::DisplayRowComponent < Phlex::HTML
         a(
           href:
             (
-              helpers.input_field_resource_path(
+              input_field_path(
                 @resource.id,
                 resource: @resource.class,
                 key: @key

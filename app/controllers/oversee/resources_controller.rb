@@ -12,6 +12,10 @@ module Oversee
       @pagy, @resources = pagy(@resources)
     end
 
+    def new
+      @resource = @resource_class.new
+    end
+
     def show
       resource_associations
     end
@@ -53,6 +57,14 @@ module Oversee
       puts "value: #{@value}"
       puts "datatype: #{@datatype}"
       puts "---"
+
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.replace(dom_id(@resource, @key), partial: "oversee/resources/input_field", locals: { datatype: @datatype, key: @key, value: @value })
+          ]
+        end
+      end
     end
 
     private

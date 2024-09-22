@@ -21,5 +21,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "pagy", ">= 3.5"
   spec.add_dependency "phlex-rails", ">= 1.1.1"
   spec.add_dependency "turbo-rails"
-  # spec.add_dependency "phlex-tabler_icons", ">= 0.2.2"
+  # spec.add_dependency "phlex-tabler_icons", ">= 0.3.0"
 end
