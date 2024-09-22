@@ -13,8 +13,11 @@ module Oversee
     # A map for components to use when rendering a form input field
     INPUT_MAP ={
       string: Oversee::Fields::Input::StringComponent,
+      boolean: Oversee::Fields::Input::StringComponent,
       integer: Oversee::Fields::Input::IntegerComponent,
       datetime: Oversee::Fields::Input::DatetimeComponent,
+      text: Oversee::Fields::Input::StringComponent,
+      enum: Oversee::Fields::Input::StringComponent,
     }
 
     MAP = {

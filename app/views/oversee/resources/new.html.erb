@@ -8,14 +8,14 @@
 </div>
 
 <div class="pb-8 px-8">
-  <%= form_with model: @resource, scope: :resource, url: create_resource_path do |f| %>
-    <div class="border-y _divide-y -mx-8 py-8">
+  <%= form_with model: @resource, scope: :resource, url: create_resource_path, scope: :resource do |f| %>
+    <div class="border-y -mx-8 py-8">
       <% @resource_class.columns_hash.each do |key, metadata| %>
-        <% next if key == @resource_class.primary_key %>
+        <% next if [@resource_class.primary_key, "created_at", "updated_at"].include?(key) %>
         <div class="px-8 py-2">
           <%= render Oversee::FieldLabelComponent.new(key: key, datatype: metadata.sql_type_metadata.type) %>
           <div class="mt-2 w-2/3">
-            <%= render Oversee::FieldComponent.new(kind: :input, datatype: :string, key: key)%>
+            <%= render Oversee::FieldComponent.new(kind: :input, datatype: metadata.sql_type_metadata.type, key: key)%>
           </div>
         </div>
         <%#= render Oversee::Fields::DisplayRowComponent.new(key: key, resource: @resource, datatype: metadata.sql_type_metadata.type, value: @resource.send(key)) %>
