@@ -1,7 +1,7 @@
 module Oversee
   module Fields
     module Input
-      class BooleanComponent < Phlex::HTML
+      class IntegerComponent < Phlex::HTML
         def initialize(key:, value:)
           @key = key
           @value = value
