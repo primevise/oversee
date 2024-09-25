@@ -4,7 +4,7 @@ Oversee::Engine.routes.draw do
   scope :resources, controller: "resources" do
     get ":resource/", action: :index, as: :resources
     get ":resource/new", action: :new, as: :new_resource
-    post ":resource/", action: :create, as: :create_resource
+    post ":resource_class/", action: :create, as: :create_resource
     get ":resource/:id", action: :show, as: :resource
     get ":resource/:id/edit", action: :edit, as: :edit_resource
     patch ":resource/:id", action: :update, as: :update_resource

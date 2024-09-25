@@ -8,7 +8,7 @@
 </div>
 
 <div class="pb-8 px-8">
-  <%= form_with model: @resource, scope: :resource, url: create_resource_path, scope: :resource do |f| %>
+  <%= form_with model: @resource, scope: :resource, url: create_resource_path(resource_class: @resource.class), scope: :resource do |f| %>
     <div class="border-y -mx-8 py-8">
       <% @resource_class.columns_hash.each do |key, metadata| %>
         <% next if [@resource_class.primary_key, "created_at", "updated_at"].include?(key) %>

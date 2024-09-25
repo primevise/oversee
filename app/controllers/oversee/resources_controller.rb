@@ -2,7 +2,7 @@ module Oversee
   class ResourcesController < BaseController
     include ActionView::RecordIdentifier
 
-    before_action :set_resource_class, except: [:update]
+    before_action :set_resource_class, except: [:create, :update]
     before_action :set_resource, only: %i[show edit destroy]
 
     def index
@@ -17,7 +17,7 @@ module Oversee
     end
 
     def create
-      @resource_class = params[:resource].constantize
+      @resource_class = params[:resource_class].constantize
       @resource = @resource_class.new(resource_params)
 
       respond_to do |format|
@@ -64,12 +64,6 @@ module Oversee
       @key = params[:key].to_sym
       @value = @resource.send(@key)
       @datatype = @resource.class.columns_hash[@key.to_s].type
-
-      puts "---"
-      puts "key: #{@key}"
-      puts "value: #{@value}"
-      puts "datatype: #{@datatype}"
-      puts "---"
 
       respond_to do |format|
         format.turbo_stream do
