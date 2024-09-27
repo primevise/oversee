@@ -9,7 +9,14 @@ module Oversee
       set_sorting_rules
 
       @resources = @resource_class.order(@sort_attribute.to_sym => sort_direction)
-      @pagy, @resources = pagy(@resources)
+      @pagy, @resources = pagy(@resources, items: 3)
+
+      render Oversee::Resources::Index.new(
+        resources: @resources,
+        resource_class: @resource_class,
+        pagy: @pagy,
+        params: params
+      )
     end
 
     def new

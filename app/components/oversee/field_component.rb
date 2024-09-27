@@ -2,12 +2,12 @@ module Oversee
   class FieldComponent < Phlex::HTML
     # A map for components to use when rendering a value
     VALUE_MAP = {
-      string: Oversee::Fields::Value::StringComponent,
-      boolean: Oversee::Fields::Value::BooleanComponent,
-      integer: Oversee::Fields::Value::IntegerComponent,
-      datetime: Oversee::Fields::Value::DatetimeComponent,
-      text: Oversee::Fields::Value::TextComponent,
-      enum: Oversee::Fields::Value::EnumComponent
+      string: Oversee::Field::Value::StringComponent,
+      boolean: Oversee::Field::Value::BooleanComponent,
+      integer: Oversee::Field::Value::IntegerComponent,
+      datetime: Oversee::Field::Value::DatetimeComponent,
+      text: Oversee::Field::Value::TextComponent,
+      enum: Oversee::Field::Value::EnumComponent
     }
 
     # A map for components to use when rendering a form input field

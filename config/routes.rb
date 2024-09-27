@@ -1,5 +1,7 @@
 Oversee::Engine.routes.draw do
 
+  get :dashboard, to: "dashboard#index"
+
   # Resources
   scope :resources, controller: "resources" do
     get ":resource/", action: :index, as: :resources
@@ -12,5 +14,5 @@ Oversee::Engine.routes.draw do
     get ":resource/:id/input_field", action: :input_field, as: :input_field
   end
 
-  root to: "dashboard#show"
+  root to: "dashboard#index"
 end
