@@ -1,7 +1,4 @@
 Oversee::Engine.routes.draw do
-
-  get :dashboard, to: "dashboard#index"
-
   # Resources
   scope :resources, controller: "resources" do
     get ":resource/", action: :index, as: :resources

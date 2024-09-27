@@ -37,7 +37,12 @@ module Oversee
     end
 
     def show
-      resource_associations
+      render Oversee::Resources::Show.new(
+        resource: @resource,
+        resource_class: @resource_class,
+        resource_associations: resource_associations,
+        params: params
+      )
     end
 
     def edit
