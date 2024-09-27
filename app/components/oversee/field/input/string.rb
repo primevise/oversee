@@ -1,4 +1,4 @@
-class Oversee::Field::Input::StringComponent < Phlex::HTML
+class Oversee::Field::Input::String < Phlex::HTML
   def initialize(key:, value:)
     @key = key
     @value = value

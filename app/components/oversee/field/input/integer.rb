@@ -1,4 +1,4 @@
-class Oversee::Field::Input::IntegerComponent < Phlex::HTML
+class Oversee::Field::Input::Integer < Phlex::HTML
   def initialize(key:, value:)
     @key = key
     @value = value

@@ -21,6 +21,11 @@ module Oversee
 
     def new
       @resource = @resource_class.new
+      render Oversee::Resources::New.new(
+        resource: @resource,
+        resource_class: @resource_class,
+        params: params
+      )
     end
 
     def create
