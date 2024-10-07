@@ -63,7 +63,12 @@ module Oversee
       respond_to do |format|
         if @resource.update(resource_params)
           format.html { redirect_to resource_path(@resource.id, resource: @resource_class) }
-          format.turbo_stream
+          format.turbo_stream do
+            component = Oversee::Fields::DisplayRowComponent.new(key: @key, resource: @resource, datatype: @datatype, value: @resource.send(@key))
+            render turbo_stream: [
+              turbo_stream.replace(dom_id(@resource, @key), component)
+            ]
+          end
         else
         end
       end
