@@ -8,10 +8,11 @@ class Oversee::Field::Value < Oversee::Base
     enum: Oversee::Field::Value::Enum
   }
 
-  def initialize(key: nil, value: nil, datatype: :string)
+  def initialize(key: nil, value: nil, datatype: :string, **options)
     @key = key
     @value = value
     @datatype = datatype
+    @options = options
   end
 
   def view_template

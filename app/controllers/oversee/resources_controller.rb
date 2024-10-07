@@ -85,10 +85,15 @@ module Oversee
       @value = @resource.send(@key)
       @datatype = @resource.class.columns_hash[@key.to_s].type
 
+      component = Oversee::Field::Input.new(
+              datatype: @datatype,
+              key: @key,
+              value: @value
+            )
       respond_to do |format|
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace(dom_id(@resource, @key), partial: "oversee/resources/input_field", locals: { datatype: @datatype, key: @key, value: @value })
+            turbo_stream.replace(dom_id(@resource, @key), component)
           ]
         end
       end

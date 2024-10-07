@@ -8,7 +8,7 @@ Oversee::Engine.routes.draw do
     get ":resource_class_name/:id/edit", action: :edit, as: :edit_resource
     patch ":resource_class_name/:id", action: :update, as: :update_resource
     delete ":resource_class_name/:id", action: :destroy, as: :destroy_resource
-    get ":resource_class_name/:id/input_field", action: :input_field, as: :input_field
+    get ":resource_class_name/:id/input_field", action: :input_field, as: :resource_input_field
   end
 
   root to: "dashboard#index"

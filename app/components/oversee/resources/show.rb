@@ -13,7 +13,7 @@ class Oversee::Resources::Show < Oversee::Base
 
   def view_template
     render Oversee::Dashboard::Header.new(title: @resource_class.to_s, subtitle: "##{@resource.id}") do
-      button_to(helpers.resource_path(resource: @params[:resource]), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "py-2 px-6 inline-flex border rounded text-rose-500 shadow-sm hover:bg-gray-50 text-sm font-medium") { "Delete" }
+      button_to(helpers.resource_path(resource_class_name: @params[:resource_class_name]), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "py-2 px-6 inline-flex border rounded text-rose-500 shadow-sm hover:bg-gray-50 text-sm font-medium") { "Delete" }
     end
 
     div(class: "p-8") do
@@ -21,9 +21,9 @@ class Oversee::Resources::Show < Oversee::Base
       div(class: "-mx-8") do
         @resource_class.columns_hash.each do |key, metadata|
           div(class: "px-8 py-4 border-b") do
-            div(class: dom_id(@resource, key)) do
+            div(id: dom_id(@resource, key)) do
               render Oversee::Field::Label.new(key: key, datatype: metadata.sql_type_metadata.type)
-              div(class: "mt-4 bg-gray-100 flex px-4 py-2 hover:bg-gray-200 transition-colors") do
+              a(href: helpers.resource_input_field_path(resource_class_name: @resource_class.to_s, key: key), class: "mt-4 bg-gray-100 flex px-4 py-2 hover:bg-gray-200 transition-colors", data: { turbo_stream: true }) do
                 render Oversee::Field::Value.new(key: key, value: @resource.send(key), datatype: metadata.sql_type_metadata.type)
               end
             end

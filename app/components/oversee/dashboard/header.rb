@@ -36,7 +36,7 @@ class Oversee::Dashboard::Header < Oversee::Base
   end
 
   def return_button_path
-    @return_path || dashboard_path
+    @return_path || root_path
   end
 
   def back_icon
