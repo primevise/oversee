@@ -35,7 +35,8 @@ module Oversee
       respond_to do |format|
         if @resource.update(resource_params)
           format.html { redirect_to resource_path(@resource.id, resource: @resource_class) }
-          format.turbo_stream
+          format.turbo_stream do
+          end
         else
         end
       end
@@ -99,7 +100,7 @@ module Oversee
     private
 
     def set_resource_class
-      @resource_class = params[:resource].constantize
+      @resource_class = params[:resource_class_name].constantize
     end
 
     def set_resource

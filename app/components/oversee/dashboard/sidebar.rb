@@ -2,7 +2,7 @@
 
 class Oversee::Dashboard::Sidebar < Oversee::Base
   def view_template
-    div(class: "bg-white border p-4 rounded-lg") do
+    div(class: "bg-white p-4 rounded-lg") do
 
       p(class: "text-[0.7rem] uppercase text-gray-400 font-medium mb-2") { "Menu" }
       ul(class: "text-sm text-gray-700") do
@@ -23,11 +23,11 @@ class Oversee::Dashboard::Sidebar < Oversee::Base
       hr(class: "my-4")
       p(class: "text-[0.7rem] uppercase text-gray-400 font-medium mb-2") { "Resources" }
       ul(class: "text-sm text-gray-700") do
-        ApplicationRecord.descendants.map(&:to_s).sort.each do |resource_name|
+        ApplicationRecord.descendants.map(&:to_s).sort.each do |resource_class_name|
           li do
-            a(href: helpers.resources_path(resource: resource_name), class: "flex items-center gap-2 hover:bg-gray-50 p-2 rounded-lg") do
+            a(href: helpers.resources_path(resource_class_name:), class: "flex items-center gap-2 hover:bg-gray-50 p-2 rounded-lg") do
               folder_icon
-              span { resource_name }
+              span { resource_class_name }
             end
           end
         end

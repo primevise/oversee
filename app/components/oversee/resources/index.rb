@@ -12,7 +12,7 @@ class Oversee::Resources::Index < Oversee::Base
 
   def view_template
     render Oversee::Dashboard::Header.new(title: @resource_class.to_s, subtitle: "Index") do
-      a(href: helpers.new_resource_path(@params[:resource]), class: "inline-flex items-center justify-center py-2 px-6 rounded bg-blue-500 text-white text-sm font-medium") { "Add new" }
+      a(href: helpers.new_resource_path(@params[:resource_class_name]), class: "inline-flex items-center justify-center py-2 px-6 rounded bg-blue-500 text-white text-sm font-medium") { "Add new" }
     end
 
     div(class: "bg-white overflow-x-hidden") do
@@ -56,7 +56,7 @@ class Oversee::Resources::Index < Oversee::Base
                           (
                             helpers.resource_path(
                               resource.id,
-                              resource: @params[:resource]
+                              resource_class_name: @params[:resource_class_name]
                             )
                           ),
                         data_turbo_stream: "true"
