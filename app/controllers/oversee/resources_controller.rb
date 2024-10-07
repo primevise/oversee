@@ -33,9 +33,8 @@ module Oversee
 
       respond_to do |format|
         if @resource.update(resource_params)
-          format.html { redirect_to resource_path(@resource.id, resource: @resource_class) }
-          format.turbo_stream do
-          end
+          format.html { redirect_to resource_path(@resource.id, resource_class_name: @resource_class) }
+          format.turbo_stream { redirect_to resource_path(@resource.id, resource_class_name: @resource_class), status: :see_other }
         else
         end
       end

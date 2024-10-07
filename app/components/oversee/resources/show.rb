@@ -23,7 +23,7 @@ class Oversee::Resources::Show < Oversee::Base
           div(class: "px-8 py-4 border-b") do
             div(class: dom_id(@resource, key)) do
               render Oversee::Field::Label.new(key: key, datatype: metadata.sql_type_metadata.type)
-              div(class: "mt-4 bg-gray-100 flex px-4 py-2") do
+              div(class: "mt-4 bg-gray-100 flex px-4 py-2 hover:bg-gray-200 transition-colors") do
                 render Oversee::Field::Value.new(key: key, value: @resource.send(key), datatype: metadata.sql_type_metadata.type)
               end
             end
@@ -32,34 +32,36 @@ class Oversee::Resources::Show < Oversee::Base
       end
     end
 
-    div(class: "pb-8") do
-      div(class: "px-8") do
-        h3(class: "text-xl mb-8") { "Associations" }
-        div(class: "border-y divide-y -mx-8") do
-          @resource_associations.each do |association|
-            associated_resources = @resource.send(association.name.to_sym)
-            next if associated_resources.blank?
-            associated_resources = [
-              associated_resources
-            ] unless associated_resources.respond_to?(:each)
-            div(class: "px-8 py-6") do
-              div(class: "inline-flex items-center gap-2 mb-4") do
-                div(
-                  class:
-                    "inline-flex items-center justify-center h-6 w-6 bg-gray-50"
-                ) { association_icon }
-                plain association.name.to_s.titleize
-              end
-              div(class: "flex gap-2 flex-wrap") do
-                associated_resources.each do |ar|
-                  a(
-                    href: (helpers.resource_path(ar.id, resource: ar.class)),
+    if has_associations?
+      div(class: "pb-8") do
+        div(class: "px-8") do
+          h3(class: "text-xl mb-8") { "Associations" }
+          div(class: "border-y divide-y -mx-8") do
+            @resource_associations.each do |association|
+              associated_resources = @resource.send(association.name.to_sym)
+              next if associated_resources.blank?
+              associated_resources = [
+                associated_resources
+              ] unless associated_resources.respond_to?(:each)
+              div(class: "px-8 py-6") do
+                div(class: "inline-flex items-center gap-2 mb-4") do
+                  div(
                     class:
-                      "inline-flex text-xs border border-transparent rounded-full bg-gray-100 hover:bg-gray-200 px-3 py-1.5"
-                  ) do
-                    plain ar.class.to_s
-                    plain " - "
-                    plain ar.to_param
+                      "inline-flex items-center justify-center h-6 w-6 bg-gray-50"
+                  ) { association_icon }
+                  plain association.name.to_s.titleize
+                end
+                div(class: "flex gap-2 flex-wrap") do
+                  associated_resources.each do |ar|
+                    a(
+                      href: (helpers.resource_path(ar.id, resource: ar.class)),
+                      class:
+                        "inline-flex text-xs border border-transparent rounded-full bg-gray-100 hover:bg-gray-200 px-3 py-1.5"
+                    ) do
+                      plain ar.class.to_s
+                      plain " - "
+                      plain ar.to_param
+                    end
                   end
                 end
               end
@@ -68,6 +70,7 @@ class Oversee::Resources::Show < Oversee::Base
         end
       end
     end
+
   end
 
   private
@@ -92,5 +95,10 @@ class Oversee::Resources::Show < Oversee::Base
       s.path(d: "M6.5 17.5l5.5 -4.5l5.5 4.5")
       s.path(d: "M12 7l0 6")
     end
+  end
+
+  def has_associations?
+    puts @resource_associations.length
+    @resource_associations.present?
   end
 end
