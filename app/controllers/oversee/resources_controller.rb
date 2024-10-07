@@ -2,7 +2,7 @@ module Oversee
   class ResourcesController < BaseController
     include ActionView::RecordIdentifier
 
-    before_action :set_resource_class, except: [:create, :update]
+    before_action :set_resource_class
     before_action :set_resource, only: %i[show edit destroy]
 
     def index
@@ -29,7 +29,6 @@ module Oversee
     end
 
     def create
-      @resource_class = params[:resource_class].constantize
       @resource = @resource_class.new(resource_params)
 
       respond_to do |format|
@@ -55,7 +54,6 @@ module Oversee
     end
 
     def update
-      @resource_class = params[:resource_class].constantize
       set_resource
 
       @key = params[:resource][:oversee_key]

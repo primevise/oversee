@@ -15,7 +15,7 @@ class Oversee::Resources::New < Oversee::Base
       form_with model: @resource,
 
                 scope: :resource,
-                url: helpers.create_resource_path(resource_class: @resource.class),
+                url: helpers.create_resource_path(resource_class_name: @resource.class),
                 scope: :resource do |f|
         div(class: "-mx-8 py-8") do
           @resource_class.columns_hash.each do |key, metadata|
