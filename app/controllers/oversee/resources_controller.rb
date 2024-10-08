@@ -3,7 +3,7 @@ module Oversee
     include ActionView::RecordIdentifier
 
     before_action :set_resource_class
-    before_action :set_resource, only: %i[show edit destroy]
+    before_action :set_resource, only: %i[show edit update destroy input_field]
 
     def index
       set_sorting_rules
@@ -53,8 +53,6 @@ module Oversee
     end
 
     def update
-      set_resource
-
       @key = params[:resource][:oversee_key]
       @datatype = params[:resource][:oversee_datatype]
 

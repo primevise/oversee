@@ -21,9 +21,9 @@ class Oversee::Resources::Show < Oversee::Base
       div(class: "-mx-8") do
         @resource_class.columns_hash.each do |key, metadata|
           div(class: "px-8 py-4 border-b") do
-            div(id: dom_id(@resource, key)) do
+            div(class: "space-y-2") do
               render Oversee::Field::Label.new(key: key, datatype: metadata.sql_type_metadata.type)
-              a(href: helpers.resource_input_field_path(resource_class_name: @resource_class.to_s, key: key), class: "mt-4 bg-gray-100 flex px-4 py-2 hover:bg-gray-200 transition-colors", data: { turbo_stream: true }) do
+              a(id: dom_id(@resource, key), href: helpers.resource_input_field_path(resource_class_name: @resource_class.to_s, key: key), class: "mt-4 bg-gray-100 flex px-4 py-2 hover:bg-gray-200 transition-colors", data: { turbo_stream: true }) do
                 render Oversee::Field::Value.new(key: key, value: @resource.send(key), datatype: metadata.sql_type_metadata.type)
               end
             end

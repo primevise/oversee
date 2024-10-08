@@ -5,7 +5,7 @@ class Oversee::Field::Input::Integer < Phlex::HTML
   end
 
   def view_template
-    input type: "number", id: field_id, name: field_name, value: @value, class: "border rounded-md px-4 py-2 text-sm"
+    input type: "number", id: field_id, name: field_name, value: @value, class: "flex w-full border rounded-md px-4 py-2 text-sm"
   end
 
   private

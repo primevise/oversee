@@ -5,7 +5,7 @@ class Oversee::Field::Input::String < Phlex::HTML
   end
 
   def view_template
-    input type: "text", id: field_id, name: field_name, value: @value, class: "border rounded-md px-4 py-2 text-sm w-full"
+    input type: "text", id: field_id, name: field_name, value: @value, class: "flex border px-4 py-2 text-sm w-full"
   end
 
   private
