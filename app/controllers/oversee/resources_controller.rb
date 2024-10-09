@@ -80,19 +80,20 @@ module Oversee
     def input_field
       set_resource
 
-      @key = params[:key].to_sym
-      @value = @resource.send(@key)
-      @datatype = @resource.class.columns_hash[@key.to_s].type
+      key = params[:key].to_sym
+      value = @resource.send(key)
+      datatype = @resource.class.columns_hash[key.to_s].type
 
-      component = Oversee::Field::Input.new(
-              datatype: @datatype,
-              key: @key,
-              value: @value
-            )
+      field_dom_id = dom_id(@resource, key)
+      field = Oversee::Field::Input.new(datatype:, key:, value:)
+
+      actions_dom_id = dom_id(@resource, :"#{key}_actions")
+
       respond_to do |format|
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace(dom_id(@resource, @key), component)
+            turbo_stream.replace(field_dom_id, field),
+            turbo_stream.replace(actions_dom_id, "<p>kakalas</p>")
           ]
         end
       end

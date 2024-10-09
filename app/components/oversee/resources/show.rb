@@ -27,7 +27,9 @@ class Oversee::Resources::Show < Oversee::Base
                 a(id: dom_id(@resource, key), href: helpers.resource_input_field_path(resource_class_name: @resource_class.to_s, key: key), class: "bg-gray-100 h-10 flex px-4 py-2 hover:bg-gray-200 transition-colors w-full", data: { turbo_stream: true }) do
                   render Oversee::Field::Value.new(key: key, value: @resource.send(key), datatype: metadata.sql_type_metadata.type)
                 end
-                div(class: "bg-white text-gray-400 size-9 aspect-square inline-flex items-center justify-center"){ copy_icon }
+                div(id: dom_id(@resource, :"#{key}_actions")) do
+                  div(class: "bg-white text-gray-400 size-9 aspect-square inline-flex items-center justify-center"){ copy_icon }
+                end
               end
             end
           end
