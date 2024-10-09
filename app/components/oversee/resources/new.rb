@@ -34,7 +34,6 @@ class Oversee::Resources::New < Oversee::Base
                       )
               end
             end
-            # = render Oversee::Fields::DisplayRowComponent.new(key: key, resource: @resource, datatype: metadata.sql_type_metadata.type, value: @resource.send(key))
           end
         end
 

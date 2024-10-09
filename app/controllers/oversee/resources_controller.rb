@@ -53,16 +53,17 @@ module Oversee
     end
 
     def update
-      @key = params[:resource][:oversee_key]
-      @datatype = params[:resource][:oversee_datatype]
+      key = params[:resource][:oversee_key]
+      datatype = params[:resource][:oversee_datatype]
+      value = @resource.send(@key)
 
       respond_to do |format|
         if @resource.update(resource_params)
           format.html { redirect_to resource_path(@resource.id, resource: @resource_class) }
           format.turbo_stream do
-            component = Oversee::Fields::DisplayRowComponent.new(key: @key, resource: @resource, datatype: @datatype, value: @resource.send(@key))
+            component = Oversee::Field::Value.new(datatype:, key:, value:)
             render turbo_stream: [
-              turbo_stream.replace(dom_id(@resource, @key), component)
+              turbo_stream.replace(dom_id(@resource, key), component)
             ]
           end
         else
