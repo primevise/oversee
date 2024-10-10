@@ -7,17 +7,15 @@
   <title>Oversee | <%= Oversee.application_name %></title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
-
-  <%# stylesheet_link_tag    "oversee/application", media: "all" %>
-  <%= render "oversee/application/javascript" %>
+  <%= render Oversee::Dashboard::Javascript.new %>
 </head>
 <body class="min-h-screen bg-gray-100 p-8">
   <div class="flex gap-4 w-full">
     <div class="w-72 shrink-0">
-			<%= render Oversee::Dashboard::SidebarComponent.new %>
+			<%= render Oversee::Dashboard::Sidebar.new %>
 		</div>
 		<div class="w-full overflow-scroll">
-			<div class="bg-white rounded-lg border overflow-clip">
+			<div class="bg-white rounded-lg overflow-clip">
   			<%= yield %>
    	  </div>
 		</div>

@@ -2,51 +2,67 @@ module Oversee
   class ResourcesController < BaseController
     include ActionView::RecordIdentifier
 
-    before_action :set_resource_class, except: [:create, :update]
-    before_action :set_resource, only: %i[show edit destroy]
+    before_action :set_resource_class
+    before_action :set_resource, only: %i[show edit update destroy input_field]
 
     def index
       set_sorting_rules
 
       @resources = @resource_class.order(@sort_attribute.to_sym => sort_direction)
-      @pagy, @resources = pagy(@resources)
+      @pagy, @resources = pagy(@resources, items: 3)
+
+      render Oversee::Resources::Index.new(
+        resources: @resources,
+        resource_class: @resource_class,
+        pagy: @pagy,
+        params: params
+      )
     end
 
     def new
       @resource = @resource_class.new
+      render Oversee::Resources::New.new(
+        resource: @resource,
+        resource_class: @resource_class,
+        params: params
+      )
     end
 
     def create
-      @resource_class = params[:resource_class].constantize
       @resource = @resource_class.new(resource_params)
 
       respond_to do |format|
         if @resource.update(resource_params)
-          format.html { redirect_to resource_path(@resource.id, resource: @resource_class) }
-          format.turbo_stream
+          format.html { redirect_to resource_path(@resource.id, resource_class_name: @resource_class) }
+          format.turbo_stream { redirect_to resource_path(@resource.id, resource_class_name: @resource_class), status: :see_other }
         else
         end
       end
     end
 
     def show
-      resource_associations
+      render Oversee::Resources::Show.new(
+        resource: @resource,
+        resource_class: @resource_class,
+        resource_associations: resource_associations,
+        params: params
+      )
     end
 
     def edit
     end
 
     def update
-      @resource_class = params[:resource_class].constantize
-      set_resource
-
-      @key = params[:resource][:oversee_key]
-      @datatype = params[:resource][:oversee_datatype]
+      key = params[:oversee_key]
+      datatype = params[:oversee_datatype]
 
       respond_to do |format|
         if @resource.update(resource_params)
           format.html { redirect_to resource_path(@resource.id, resource: @resource_class) }
-          format.turbo_stream
+          format.turbo_stream do
+            component = Oversee::Field::Display.new(resource: @resource, datatype:, key:, value: @resource.send(key))
+            render turbo_stream: turbo_stream.replace(dom_id(@resource, key), component)
+          end
         else
         end
       end
@@ -61,14 +77,20 @@ module Oversee
     def input_field
       set_resource
 
-      @key = params[:key].to_sym
-      @value = @resource.send(@key)
-      @datatype = @resource.class.columns_hash[@key.to_s].type
+      key = params[:key].to_sym
+      value = @resource.send(key)
+      datatype = @resource.class.columns_hash[key.to_s].type
+
+      field_dom_id = dom_id(@resource, key)
+      field = Oversee::Field::Form.new(resource: @resource, datatype:, key:, value:)
+
+      actions_dom_id = dom_id(@resource, :"#{key}_actions")
 
       respond_to do |format|
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace(dom_id(@resource, @key), partial: "oversee/resources/input_field", locals: { datatype: @datatype, key: @key, value: @value })
+            turbo_stream.replace(field_dom_id, field),
+            # turbo_stream.replace(actions_dom_id, "")
           ]
         end
       end
@@ -77,7 +99,7 @@ module Oversee
     private
 
     def set_resource_class
-      @resource_class = params[:resource].constantize
+      @resource_class = params[:resource_class_name].constantize
     end
 
     def set_resource

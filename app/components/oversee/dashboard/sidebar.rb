@@ -1,26 +1,19 @@
 # frozen_string_literal: true
 
-class Oversee::Dashboard::SidebarComponent < Oversee::ApplicationComponent
-  include Phlex::Rails::Helpers::LinkTo
-  include Phlex::Rails::Helpers::ButtonTo
-
+class Oversee::Dashboard::Sidebar < Oversee::Base
   def view_template
-    div(class: "bg-white border p-4 rounded-lg") do
+    div(class: "bg-white p-4 rounded-lg") do
 
       p(class: "text-[0.7rem] uppercase text-gray-400 font-medium mb-2") { "Menu" }
       ul(class: "text-sm text-gray-700") do
         li do
-          link_to root_path,
-            class:
-              "flex items-center gap-2 hover:bg-gray-50 p-2 rounded-lg" do
+          a(href: root_path, class:"flex items-center gap-2 hover:bg-gray-50 p-2 rounded-lg") do
             layout_icon
             span { "Dashboard" }
           end
         end
         li do
-          link_to helpers.main_app.root_path,
-            class:
-              "flex items-center gap-2 hover:bg-gray-50 p-2 rounded-lg" do
+          a(href: helpers.main_app.root_path, class: "flex items-center gap-2 hover:bg-gray-50 p-2 rounded-lg") do
             main_app_icon
             span { "Return to app" }
           end
@@ -30,11 +23,11 @@ class Oversee::Dashboard::SidebarComponent < Oversee::ApplicationComponent
       hr(class: "my-4")
       p(class: "text-[0.7rem] uppercase text-gray-400 font-medium mb-2") { "Resources" }
       ul(class: "text-sm text-gray-700") do
-        ApplicationRecord.descendants.map(&:to_s).sort.each do |resource_name|
+        ApplicationRecord.descendants.map(&:to_s).sort.each do |resource_class_name|
           li do
-            link_to helpers.resources_path(resource: resource_name), class: "flex items-center gap-2 hover:bg-gray-50 p-2 rounded-lg" do
+            a(href: helpers.resources_path(resource_class_name:), class: "flex items-center gap-2 hover:bg-gray-50 p-2 rounded-lg") do
               folder_icon
-              span { resource_name }
+              span { resource_class_name }
             end
           end
         end
