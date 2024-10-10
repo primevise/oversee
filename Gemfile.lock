@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    oversee (0.1.0)
+    oversee (0.1.1)
       pagy (>= 7.0.0)
       phlex-rails (>= 2.0.0.beta2)
       rails (>= 7.0.0)
@@ -109,7 +109,6 @@ GEM
       net-smtp
     marcel (1.0.4)
     mini_mime (1.1.5)
-    mini_portile2 (2.8.7)
     minitest (5.25.1)
     net-imap (0.4.16)
       date
@@ -121,10 +120,9 @@ GEM
     net-smtp (0.5.0)
       net-protocol
     nio4r (2.7.3)
-    nokogiri (1.16.7)
-      mini_portile2 (~> 2.8.2)
+    nokogiri (1.16.7-arm64-darwin)
       racc (~> 1.4)
-    pagy (9.0.9)
+    pagy (9.1.0)
     phlex (2.0.0.beta2)
     phlex-rails (2.0.0.beta2)
       phlex (= 2.0.0.beta2)

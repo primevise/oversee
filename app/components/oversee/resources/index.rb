@@ -12,7 +12,7 @@ class Oversee::Resources::Index < Oversee::Base
 
   def view_template
     render Oversee::Dashboard::Header.new(title: @resource_class.to_s, subtitle: "Index") do
-      a(href: helpers.new_resource_path(@params[:resource_class_name]), class: "inline-flex items-center justify-center py-2 px-6 rounded-full bg-gray-900 text-white text-sm font-medium") { "Add new" }
+      a(href: helpers.new_resource_path(@params[:resource_class_name]), class: "inline-flex items-center justify-center size-8 rounded-full bg-emerald-100 text-emerald-500 hover:bg-emerald-200 text-sm font-medium") { plus_icon }
     end
 
     div(class: "bg-white overflow-x-hidden") do
@@ -98,6 +98,25 @@ class Oversee::Resources::Index < Oversee::Base
         d:
           "M1.38 8.28a.87.87 0 0 1 0-.566 7.003 7.003 0 0 1 13.238.006.87.87 0 0 1 0 .566A7.003 7.003 0 0 1 1.379 8.28ZM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z",
         clip_rule: "evenodd"
+      )
+    end
+  end
+
+  def plus_icon
+    svg(
+      stroke_width: "2",
+      viewbox: "0 0 24 24",
+      fill: "none",
+      xmlns: "http://www.w3.org/2000/svg",
+      color: "currentColor",
+      class: "size-4"
+    ) do |s|
+      s.path(
+        d: "M6 12H12M18 12H12M12 12V6M12 12V18",
+        stroke: "currentColor",
+        stroke_width: "2",
+        stroke_linecap: "round",
+        stroke_linejoin: "round"
       )
     end
   end
