@@ -12,7 +12,7 @@ class Oversee::Resources::Index < Oversee::Base
 
   def view_template
     render Oversee::Dashboard::Header.new(title: @resource_class.to_s, subtitle: "Index") do
-      a(href: helpers.new_resource_path(@params[:resource_class_name]), class: "inline-flex items-center justify-center py-2 px-6 rounded bg-blue-500 text-white text-sm font-medium") { "Add new" }
+      a(href: helpers.new_resource_path(@params[:resource_class_name]), class: "inline-flex items-center justify-center py-2 px-6 rounded-full bg-gray-900 text-white text-sm font-medium") { "Add new" }
     end
 
     div(class: "bg-white overflow-x-hidden") do
@@ -59,7 +59,8 @@ class Oversee::Resources::Index < Oversee::Base
                               resource_class_name: @params[:resource_class_name]
                             )
                           ),
-                        data_turbo_stream: "true"
+                        data: { turbo_stream: true },
+                        class: "size-6 bg-gray-100 inline-flex items-center justify-center hover:bg-gray-200 group"
                       ) { eye_icon }
                     end
                   end
@@ -89,7 +90,7 @@ class Oversee::Resources::Index < Oversee::Base
       viewbox: "0 0 16 16",
       fill: "currentColor",
       data_slot: "icon",
-      class: "w-4 h-4 text-gray-500 hover:text-blue-500"
+      class: "w-4 h-4 text-gray-500 group-hover:text-black"
     ) do |s|
       s.path(d: "M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z")
       s.path(
