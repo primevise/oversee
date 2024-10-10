@@ -53,15 +53,14 @@ module Oversee
     end
 
     def update
-      key = params[:resource][:oversee_key]
-      datatype = params[:resource][:oversee_datatype]
-      value = @resource.send(@key)
+      key = params[:oversee_key]
+      datatype = params[:oversee_datatype]
 
       respond_to do |format|
         if @resource.update(resource_params)
           format.html { redirect_to resource_path(@resource.id, resource: @resource_class) }
           format.turbo_stream do
-            component = Oversee::Field::Value.new(datatype:, key:, value:)
+            component = Oversee::Field::Value.new(datatype:, key:, value: @resource.send(key))
             render turbo_stream: [
               turbo_stream.replace(dom_id(@resource, key), component)
             ]
@@ -85,7 +84,7 @@ module Oversee
       datatype = @resource.class.columns_hash[key.to_s].type
 
       field_dom_id = dom_id(@resource, key)
-      field = Oversee::Field::Input.new(datatype:, key:, value:)
+      field = Oversee::Field::Form.new(resource: @resource, datatype:, key:, value:)
 
       actions_dom_id = dom_id(@resource, :"#{key}_actions")
 
@@ -93,7 +92,7 @@ module Oversee
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.replace(field_dom_id, field),
-            turbo_stream.replace(actions_dom_id, "<p>kakalas</p>")
+            # turbo_stream.replace(actions_dom_id, "<p>kakalas</p>")
           ]
         end
       end
