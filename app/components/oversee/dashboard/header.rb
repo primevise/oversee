@@ -7,7 +7,7 @@ class Oversee::Dashboard::Header < Oversee::Base
   end
 
   def view_template(&)
-    div(class: "p-6 border-b flex items-center justify-between") do
+    div(class: "p-8 border-b flex items-center justify-between") do
       div(class: "flex items-center gap-4") do
         back_button
         div do

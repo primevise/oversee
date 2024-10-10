@@ -4,6 +4,7 @@ module Oversee
 
     before_action :set_resource_class
     before_action :set_resource, only: %i[show edit update destroy input_field]
+    before_action :fetch_filters
 
     def index
       set_sorting_rules
@@ -128,6 +129,18 @@ module Oversee
       params[:resource].delete(:oversee_datatype)
 
       params.require(:resource).permit!
+    end
+
+
+    # TODO
+    # Move to a separate class that filters resources. This is just a placeholder.
+    # filters[kind][is][]=get => {"kind"=>{"is"=>["get"]}}
+    def fetch_filters
+      @filters = params[:filters]
+      return if @filters.blank?
+      puts "-" * 40
+      puts @filters
+      puts "-" * 40
     end
   end
 end
