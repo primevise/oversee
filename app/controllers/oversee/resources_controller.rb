@@ -60,10 +60,8 @@ module Oversee
         if @resource.update(resource_params)
           format.html { redirect_to resource_path(@resource.id, resource: @resource_class) }
           format.turbo_stream do
-            component = Oversee::Field::Value.new(datatype:, key:, value: @resource.send(key))
-            render turbo_stream: [
-              turbo_stream.replace(dom_id(@resource, key), component)
-            ]
+            component = Oversee::Field::Display.new(resource: @resource, datatype:, key:, value: @resource.send(key))
+            render turbo_stream: turbo_stream.replace(dom_id(@resource, key), component)
           end
         else
         end
@@ -92,7 +90,7 @@ module Oversee
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.replace(field_dom_id, field),
-            # turbo_stream.replace(actions_dom_id, "<p>kakalas</p>")
+            # turbo_stream.replace(actions_dom_id, "")
           ]
         end
       end
