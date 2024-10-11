@@ -11,6 +11,8 @@ module Oversee
 
       @resources = @resource_class.order(@sort_attribute.to_sym => sort_direction)
       @resources = Filter.new(collection: @resources, params:).apply
+      @resources = Search.new(collection: @resources, resource_class: @resource_class, query: params[:query]).call
+
       @pagy, @resources = pagy(@resources, items: 3)
 
       render Oversee::Resources::Index.new(

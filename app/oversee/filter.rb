@@ -17,22 +17,18 @@ class Filter
       value = constraint[operator]
       chain(key:, operator:, value:)
     end
-
     return @collection
   end
 
   private
 
+  # Example params hash:
   # filters[kind][is][]=get => {"kind"=>{"is"=>["get"]}}
   def filters
     @filters ||= @params[:filters]
   end
 
   def chain(key:, operator:, value:)
-    puts "-" * 40
-    puts "Key: #{key} --- Operator: #{operator} --- Value: #{value}"
-    puts "-" * 40
-
     @collection = case operator
     when "eq"
       @collection.then { _1.where(key => value) }
