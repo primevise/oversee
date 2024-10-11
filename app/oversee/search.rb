@@ -1,4 +1,6 @@
 class Search
+  DEFAULT_SEARCHABLE_ATTRIBUTES = %w[name title email email_address]
+
   def initialize(collection:, resource_class:, query: nil)
     @collection = collection
     @resource_class = resource_class
@@ -7,24 +9,24 @@ class Search
 
   def call
     return @collection if @query.blank? || @resource_class.blank?
-
-    puts "-" * 40
-    puts @query
-    puts default_searchable_attribute
-    puts "-" * 40
-
     default_searchable_by
   end
 
   private
 
   def default_searchable_by
-    @collection.where("#{default_searchable_attribute} LIKE ?", "%#{@query}%")
+    return @collection.where(default_searchable_attribute => @query) if @resource_class.primary_key == default_searchable_attribute
+
+    @collection
+      .where(@resource_class.arel_table[default_searchable_attribute]
+      .matches("%#{@query}%"))
   end
 
   def default_searchable_attribute
-    return "name" if @resource_class.column_names.include?("name")
-    return "title" if @resource_class.column_names.include?("title")
+    DEFAULT_SEARCHABLE_ATTRIBUTES.each do |attr|
+      return attr if @resource_class.column_names.include?(attr)
+    end
+
     return @resource_class.primary_key
   end
 end
