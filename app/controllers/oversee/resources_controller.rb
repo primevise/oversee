@@ -10,6 +10,7 @@ module Oversee
       set_sorting_rules
 
       @resources = @resource_class.order(@sort_attribute.to_sym => sort_direction)
+      @resources = Filter.new(collection: @resources, params:).apply
       @pagy, @resources = pagy(@resources, items: 3)
 
       render Oversee::Resources::Index.new(
@@ -85,14 +86,9 @@ module Oversee
       field_dom_id = dom_id(@resource, key)
       field = Oversee::Field::Form.new(resource: @resource, datatype:, key:, value:)
 
-      actions_dom_id = dom_id(@resource, :"#{key}_actions")
-
       respond_to do |format|
         format.turbo_stream do
-          render turbo_stream: [
-            turbo_stream.replace(field_dom_id, field),
-            # turbo_stream.replace(actions_dom_id, "")
-          ]
+          render turbo_stream: turbo_stream.replace(field_dom_id, field)
         end
       end
     end

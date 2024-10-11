@@ -26,7 +26,7 @@ class Oversee::Resources::Index < Oversee::Base
           end
           div(class: "flex items-center gap-4") do
             form(action: "") do
-              input(type: :search, name: :query, class: "block bg-gray-100 pl-6 py-2 placeholder:text-gray-500", placeholder: "Search...")
+              input(type: :search, name: :query, class: "block bg-gray-100 pl-6 py-2 placeholder:text-gray-500", placeholder: "Search...", value: @params[:query])
             end
           end
         end

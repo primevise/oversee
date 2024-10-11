@@ -12,7 +12,7 @@ class Oversee::Resources::Show < Oversee::Base
 
 
   def view_template
-    render Oversee::Dashboard::Header.new(title: @resource_class.to_s, subtitle: "##{@resource.id}") do
+    render Oversee::Dashboard::Header.new(title: @resource_class.to_s, subtitle: "##{@resource.id}", return_path: helpers.resources_path(resource_class_name: @params[:resource_class_name])) do
       button_to(helpers.resource_path(resource_class_name: @params[:resource_class_name]), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "size-8 inline-flex items-center justify-center rounded-full text-rose-500 bg-rose-50 hover:bg-rose-100 text-sm font-medium transition-colors") { trash_icon }
     end
 
