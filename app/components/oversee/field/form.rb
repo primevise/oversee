@@ -11,7 +11,7 @@ class Oversee::Field::Form < Oversee::Base
 
   def view_template
     form_with(id: dom_id(@resource, @key), model: @resource, url: helpers.update_resource_path(resource_class_name: resource_class_name, id: @resource.id), method: @method, class: "flex items-center w-full gap-4") do |form|
-      input type: :hidden, id: "oversee_key", name: "oversee_key", value: @key
+      input type: :hidden, id: "oversee_key", name: "oversee_key", value: @key.to_s
       input type: :hidden, id: "oversee_datatype", name: "oversee_datatype", value: @datatype
       render Oversee::Field::Input.new(key: @key, value: @value, datatype: @datatype)
       button(class:"h-9 bg-gray-900 hover:bg-gray-700 text-white inline-flex items-center cursor-pointer gap-2 px-4 rounded-full text-xs font-medium") {

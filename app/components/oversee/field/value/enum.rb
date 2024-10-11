@@ -5,6 +5,6 @@ class Oversee::Field::Value::Enum < Phlex::HTML
 
   def view_template
     return p(class: "text-gray-500 text-xs"){ "—" } if @value.blank?
-    p { @value.to_s }
+    p(class:"inline-flex px-2 py-1 text-red-500") { @value.to_s }
   end
 end

@@ -5,7 +5,10 @@ class Oversee::Field::Input::Boolean < Phlex::HTML
   end
 
   def view_template
-    input type: "text", id: field_id, name: field_name, value: @value, class: "flex w-full border rounded-md px-4 py-2 text-sm"
+    select(id: field_id, name: field_name, class: "flex w-full border rounded-sm px-4 py-2 text-sm") do
+      option(value: 1, selected: @value) { "True" }
+      option(value: 0, selected: !@value) { "False" }
+    end
   end
 
   private
