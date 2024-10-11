@@ -6,7 +6,7 @@ class Oversee::Field::Value::String < Phlex::HTML
   end
 
   def view_template
-    return p(class: "text-gray-500 text-xs"){ "—" } if @value.blank?
+    return p(class: "text-gray-400 text-xs uppercase"){ "Empty" } if @value == ""
 
     if @key&.downcase&.include?("password") ||  @key&.downcase&.include?("token")
       p { "[REDACTED]" }

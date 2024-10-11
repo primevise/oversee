@@ -16,6 +16,7 @@ class Oversee::Field::Value < Oversee::Base
   end
 
   def view_template
+    return p(class: "text-gray-400 text-xs"){ "—" } if @value.nil?
     render component_class.new(key: @key, value: @value)
   end
 

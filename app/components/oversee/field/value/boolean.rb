@@ -4,7 +4,6 @@ class Oversee::Field::Value::Boolean < Phlex::HTML
   end
 
   def view_template
-    return p(class: "text-gray-500 text-xs"){ "—" } if @value.nil?
     @value ? check_icon : x_icon
   end
 
