@@ -21,7 +21,7 @@ class Oversee::Dashboard::Sidebar < Oversee::Base
         end
       end
 
-      hr(class: "my-4")
+      hr(class: "my-4 -mx-4")
       details(open: true, class: "group") do
         summary(class: "flex items-center justify-between cursor-pointer") do
           p(class: "text-[0.7rem] uppercase text-gray-400 font-medium") { "Resources" }
@@ -39,7 +39,7 @@ class Oversee::Dashboard::Sidebar < Oversee::Base
         end
       end
 
-      hr(class: "my-4")
+      hr(class: "my-4 -mx-4")
       p(class: "text-xs text-gray-500") do
         plain("Powered by ")
         a(

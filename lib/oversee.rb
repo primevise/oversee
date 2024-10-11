@@ -19,8 +19,14 @@ module Oversee
       Rails.application.class.to_s.gsub("::Application", "")
     end
 
-    def allowed_resource_list
-      ApplicationRecord.descendants
+    def filtered_resources
+      ApplicationRecord
+        .descendants
+        .filter { |klass| !configuration.excluded_resources.include?(klass.to_s) }
+    end
+
+    def application_resource_names
+      filtered_resources.map(&:to_s).sort
     end
 
     def card_class_names

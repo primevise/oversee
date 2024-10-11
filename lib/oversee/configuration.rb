@@ -6,8 +6,8 @@ module Oversee
     attr_accessor :filter_sensitive_columns
     attr_accessor :sensitive_column_titles
 
-    def initialize
-      @excluded_resources = []
+    def initialize(excluded_resources: [], filter_sensitive_columns: true, sensitive_column_titles: [])
+      @excluded_resources = excluded_resources
       @filter_sensitive_columns = true
       @sensitive_column_titles = %w[password password_digest access_token]
     end
