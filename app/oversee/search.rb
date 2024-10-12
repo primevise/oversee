@@ -12,6 +12,14 @@ class Search
     default_searchable_by
   end
 
+  def default_searchable_attribute
+    DEFAULT_SEARCHABLE_ATTRIBUTES.each do |attr|
+      return attr if @resource_class.column_names.include?(attr)
+    end
+
+    return @resource_class.primary_key
+  end
+
   private
 
   def default_searchable_by
@@ -22,11 +30,5 @@ class Search
       .matches("%#{@query}%"))
   end
 
-  def default_searchable_attribute
-    DEFAULT_SEARCHABLE_ATTRIBUTES.each do |attr|
-      return attr if @resource_class.column_names.include?(attr)
-    end
 
-    return @resource_class.primary_key
-  end
 end

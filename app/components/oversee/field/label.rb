@@ -17,18 +17,27 @@ class Oversee::Field::Label < Oversee::Base
 
   def string_icon
     svg(
-      xmlns: "http://www.w3.org/2000/svg",
-      class: "h-2.5 w-2.5",
-      viewbox: "0 0 24 24",
       stroke_width: "2",
-      stroke: "currentColor",
+      viewbox: "0 0 24 24",
       fill: "none",
-      stroke_linecap: "round",
-      stroke_linejoin: "round"
+      xmlns: "http://www.w3.org/2000/svg",
+      color: "currentColor",
+      class: "size-2.5"
     ) do |s|
-      s.path(stroke: "none", d: "M0 0h24v24H0z", fill: "none")
-      s.path(d: "M6 4l12 0")
-      s.path(d: "M12 4l0 16")
+      s.path(
+        d: "M19 7V5L5 5V7",
+        stroke: "currentColor",
+        stroke_width: "2",
+        stroke_linecap: "round",
+        stroke_linejoin: "round"
+      )
+      s.path(
+        d: "M12 5L12 19M12 19H10M12 19H14",
+        stroke: "currentColor",
+        stroke_width: "2",
+        stroke_linecap: "round",
+        stroke_linejoin: "round"
+      )
     end
   end
 
@@ -52,18 +61,27 @@ class Oversee::Field::Label < Oversee::Base
 
   def text_icon
     svg(
-      xmlns: "http://www.w3.org/2000/svg",
-      class: "h-2.5 w-2.5",
-      viewbox: "0 0 24 24",
       stroke_width: "2",
-      stroke: "currentColor",
+      viewbox: "0 0 24 24",
       fill: "none",
-      stroke_linecap: "round",
-      stroke_linejoin: "round"
+      xmlns: "http://www.w3.org/2000/svg",
+      color: "currentColor",
+      class: "size-2.5"
     ) do |s|
-      s.path(stroke: "none", d: "M0 0h24v24H0z", fill: "none")
-      s.path(d: "M6 4l12 0")
-      s.path(d: "M12 4l0 16")
+      s.path(
+        d: "M19 7V5L5 5V7",
+        stroke: "currentColor",
+        stroke_width: "2",
+        stroke_linecap: "round",
+        stroke_linejoin: "round"
+      )
+      s.path(
+        d: "M12 5L12 19M12 19H10M12 19H14",
+        stroke: "currentColor",
+        stroke_width: "2",
+        stroke_linecap: "round",
+        stroke_linejoin: "round"
+      )
     end
   end
 
