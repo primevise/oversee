@@ -10,6 +10,7 @@
   <%= render Oversee::Dashboard::Javascript.new %>
 </head>
 <body class="min-h-screen bg-gray-100 p-8">
+  <pre><%#= Oversee.filtered_resources.to_yaml %></pre>
   <div class="flex gap-4 w-full">
     <div class="w-72 shrink-0">
 			<%= render Oversee::Dashboard::Sidebar.new %>

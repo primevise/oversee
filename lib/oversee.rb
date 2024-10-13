@@ -19,16 +19,17 @@ module Oversee
       Rails.application.class.to_s.gsub("::Application", "")
     end
 
-    def filtered_resources
-      ApplicationRecord
-        .descendants
-        .filter { |klass| !configuration.excluded_resources.include?(klass.to_s) }
+    # Resources
+    def application_resources(filtered: true)
+      resources = ::ApplicationRecord.descendants
+      resources = resources.filter { |klass| !Oversee.configuration.excluded_resources.include?(klass.to_s) } if filtered
     end
 
-    def application_resource_names
-      filtered_resources.map(&:to_s).sort
+    def application_resource_names(filtered: true)
+      application_resources(filtered:).map(&:to_s)
     end
 
+    # Cards
     def card_class_names
       root = Rails.root.join("app/oversee/cards/")
       files = Dir.glob(root.join("**/*.rb"))

@@ -7,6 +7,10 @@ class Oversee::Resources::Index < Oversee::Base
     @resource_class = resource_class
     @pagy = pagy
     @params = params
+
+    puts "-" * 50
+    puts resource_associations
+    puts "-" * 50
   end
 
 
@@ -24,6 +28,7 @@ class Oversee::Resources::Index < Oversee::Base
             thead do
               tr(class: "divide-x divide-gray-200") do
                 th(scope: "col", class: "px-4 py-3 text-left text-xs text-gray-900 uppercase")
+                # Attributes
                 @resource_class.columns_hash.each do |key, metadata|
                   th(scope: "col", class: "text-left text-xs text-gray-900 uppercase whitespace-nowrap hover:bg-gray-50 transition relative") do
                     a(
@@ -40,6 +45,17 @@ class Oversee::Resources::Index < Oversee::Base
                     ) do
                       render Oversee::Field::Label.new(key: key, datatype: metadata.sql_type_metadata.type)
                       sort_icon
+                    end
+                  end
+                end
+
+                # Associations
+                resource_associations.each do |association|
+                  th(scope: "col", class: "text-left text-xs text-gray-900 uppercase whitespace-nowrap hover:bg-gray-50 transition relative") do
+                    span(
+                      class: "px-4 py-3 flex items-center justify-between gap-2 w-full h-full hover:text-gray-900 transition-colors"
+                    ) do
+                      render Oversee::Field::Label.new(key: association.name, datatype: nil)
                     end
                   end
                 end
@@ -70,6 +86,16 @@ class Oversee::Resources::Index < Oversee::Base
                       end
                     end
                   end
+                  resource_associations.each do |association|
+                    td(class: "whitespace-nowrap p-4 text-sm text-gray-500") do
+                      div(class: "max-w-96") do
+                        span(class:"px-2 py-1 rounded-full bg-gray-100 text-gray-500 text-xs") do
+                          plain "#{association.class_name} | #{resource.send(association.name).to_param}"
+                        end
+                        # render Oversee::Field::Value.new(datatype: metadata.sql_type_metadata.type, value: resource.send(key), key: key)
+                      end
+                    end
+                  end
                 end
               end
             end
@@ -82,6 +108,10 @@ class Oversee::Resources::Index < Oversee::Base
   end
 
   private
+
+  def resource_associations
+    @resource_class.reflect_on_all_associations.select { |association| association.macro == :belongs_to }
+  end
 
   def eye_icon
     svg(

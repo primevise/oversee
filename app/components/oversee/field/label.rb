@@ -6,7 +6,7 @@ class Oversee::Field::Label < Oversee::Base
 
   def view_template
     div(class:"inline-flex items-center space-x-2") do
-      div(class: "h-5 w-5 bg-gray-100 inline-flex items-center justify-center") do
+      div(class: "size-5 bg-gray-100 inline-flex items-center justify-center") do
         respond_to?("#{@datatype}_icon", true) ? send("#{@datatype}_icon") : data_icon
       end
       label(class: "uppercase text-xs text-gray-500 font-medium block") { @key.to_s.humanize }

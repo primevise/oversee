@@ -28,7 +28,7 @@ class Oversee::Dashboard::Sidebar < Oversee::Base
           caret_icon
         end
         ul(class: "mt-2 text-sm text-gray-700 overflow-x-hidden") do
-          ApplicationRecord.descendants.map(&:to_s).sort.each do |resource_class_name|
+          Oversee.application_resource_names.sort.each do |resource_class_name|
             li do
               a(href: helpers.resources_path(resource_class_name:), class: "flex items-center gap-2 hover:bg-gray-50 p-2 truncate") do
                 folder_icon
