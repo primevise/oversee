@@ -83,11 +83,19 @@ class Oversee::Resources::Index < Oversee::Base
                     end
                   end
                   resource_associations.each do |association|
+                    foreign_id = resource.send(association.foreign_key)
+                    resource_class_name = association.class_name
+
+                    path = !!foreign_id ? helpers.resource_path(id: foreign_id, resource_class_name:) : helpers.resources_path(resource_class_name: resource_class_name)
+
                     td(class: "whitespace-nowrap p-4 text-sm text-gray-500") do
                       div(class: "max-w-96") do
-                        span(class:"px-2 py-1 rounded-full bg-gray-100 text-gray-500 text-xs") do
-                          # plain "#{association.class_name} | #{resource.send(association.name).to_param}"
-                          plain "#{association.class_name}"
+                        a(
+                          href: path,
+                          class:"px-2 py-1 bg-gray-100 text-gray-500 text-sm flex items-center justify-between gap-2 hover:bg-gray-200 hover:text-gray-900 min-w-16") do
+                          span { foreign_id.presence || "N/A" }
+                          arrow_right_icon
+                          # plain "#{association.class_name} | #{resource.send(association.foreign_key).presence }"
                         end
                       end
                     end
@@ -166,6 +174,25 @@ class Oversee::Resources::Index < Oversee::Base
         d: "M17 16L12 21L7 16",
         stroke: "currentColor",
         stroke_width: "2.5",
+        stroke_linecap: "round",
+        stroke_linejoin: "round"
+      )
+    end
+  end
+
+  def arrow_right_icon
+    svg(
+      viewbox: "0 0 24 24",
+      stroke_width: "2",
+      fill: "none",
+      xmlns: "http://www.w3.org/2000/svg",
+      color: "currentColor",
+      class: "size-3"
+    ) do |s|
+      s.path(
+        d: "M3 12L21 12M21 12L12.5 3.5M21 12L12.5 20.5",
+        stroke: "currentColor",
+        stroke_width: "2",
         stroke_linecap: "round",
         stroke_linejoin: "round"
       )

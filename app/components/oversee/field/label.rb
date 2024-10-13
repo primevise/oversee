@@ -9,7 +9,7 @@ class Oversee::Field::Label < Oversee::Base
       div(class: "size-5 bg-gray-100 inline-flex items-center justify-center") do
         respond_to?("#{@datatype}_icon", true) ? send("#{@datatype}_icon") : data_icon
       end
-      label(class: "uppercase text-xs text-gray-500 font-medium block") { @key.to_s.humanize }
+      label(class: "uppercase text-xs text-gray-500 font-medium block") { @key.to_s.humanize(keep_id_suffix: true) }
     end
   end
 
