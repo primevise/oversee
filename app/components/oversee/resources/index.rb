@@ -7,10 +7,6 @@ class Oversee::Resources::Index < Oversee::Base
     @resource_class = resource_class
     @pagy = pagy
     @params = params
-
-    puts "-" * 50
-    puts resource_associations
-    puts "-" * 50
   end
 
 
@@ -90,9 +86,9 @@ class Oversee::Resources::Index < Oversee::Base
                     td(class: "whitespace-nowrap p-4 text-sm text-gray-500") do
                       div(class: "max-w-96") do
                         span(class:"px-2 py-1 rounded-full bg-gray-100 text-gray-500 text-xs") do
-                          plain "#{association.class_name} | #{resource.send(association.name).to_param}"
+                          # plain "#{association.class_name} | #{resource.send(association.name).to_param}"
+                          plain "#{association.class_name}"
                         end
-                        # render Oversee::Field::Value.new(datatype: metadata.sql_type_metadata.type, value: resource.send(key), key: key)
                       end
                     end
                   end
