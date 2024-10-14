@@ -37,7 +37,7 @@ class Oversee::Dashboard::Filters < Oversee::Base
   private
 
   def show_action_section?
-    Rails.env.development? || params[:experimental] == "true"
+    Rails.env.development? || @params[:experimental] == "true"
   end
 
   def sortless_path
