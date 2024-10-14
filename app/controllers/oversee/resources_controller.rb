@@ -39,6 +39,8 @@ module Oversee
           format.html { redirect_to resource_path(@resource.id, resource_class_name: @resource_class) }
           format.turbo_stream { redirect_to resource_path(@resource.id, resource_class_name: @resource_class), status: :see_other }
         else
+          format.html { render :new }
+          format.turbo_stream { render turbo_stream: turbo_stream.replace(dom_id(@resource), Oversee::Resources::Form.new(resource: @resource)) }
         end
       end
     end
