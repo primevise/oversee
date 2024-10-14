@@ -132,18 +132,27 @@ class Oversee::Resources::Index < Oversee::Base
 
   def eye_icon
     svg(
+      viewbox: "0 0 24 24",
+      stroke_width: "2",
+      fill: "none",
       xmlns: "http://www.w3.org/2000/svg",
-      viewbox: "0 0 16 16",
-      fill: "currentColor",
-      data_slot: "icon",
-      class: "w-4 h-4 text-gray-500 group-hover:text-black"
+      color: "currentColor",
+      class: "size-4 text-gray-500 group-hover:text-black"
     ) do |s|
-      s.path(d: "M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z")
       s.path(
-        fill_rule: "evenodd",
+        d: "M3 13C6.6 5 17.4 5 21 13",
+        stroke: "currentColor",
+        stroke_width: "2",
+        stroke_linecap: "round",
+        stroke_linejoin: "round"
+      )
+      s.path(
         d:
-          "M1.38 8.28a.87.87 0 0 1 0-.566 7.003 7.003 0 0 1 13.238.006.87.87 0 0 1 0 .566A7.003 7.003 0 0 1 1.379 8.28ZM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z",
-        clip_rule: "evenodd"
+          "M12 17C10.3431 17 9 15.6569 9 14C9 12.3431 10.3431 11 12 11C13.6569 11 15 12.3431 15 14C15 15.6569 13.6569 17 12 17Z",
+        stroke: "currentColor",
+        stroke_width: "2",
+        stroke_linecap: "round",
+        stroke_linejoin: "round"
       )
     end
   end
