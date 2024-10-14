@@ -1,10 +1,15 @@
+# Zeitwerk
 require "zeitwerk"
 
+# Oversee
 require "oversee/version"
 require "oversee/engine"
 require "oversee/configuration"
 
+# Phlex
 require "phlex-rails"
+
+# Pagy
 require "pagy"
 
 # Zeitwerk

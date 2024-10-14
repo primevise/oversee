@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Oversee::Resources::Index < Oversee::Base
+  include Pagy::Frontend
+  include Phlex::Rails::Helpers::Request
 
   def initialize(resources:, resource_class:, pagy:, params:)
     @resources = resources
@@ -17,6 +19,7 @@ class Oversee::Resources::Index < Oversee::Base
 
     render Oversee::Dashboard::Filters.new(params: @params)
 
+    # Table
     div(class: "bg-white overflow-x-hidden") do
       div(class: "-mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8") do
         div(class: "inline-block min-w-full align-middle sm:px-6 lg:px-8") do
@@ -92,10 +95,9 @@ class Oversee::Resources::Index < Oversee::Base
                       div(class: "max-w-96") do
                         a(
                           href: path,
-                          class:"px-2 py-1 bg-gray-100 text-gray-500 text-sm flex items-center justify-between gap-2 hover:bg-gray-200 hover:text-gray-900 min-w-16") do
+                          class:"px-2 py-1 bg-gray-100 text-gray-500 text-sm flex items-center justify-between gap-2 hover:bg-gray-200 hover:text-gray-900 min-w-20") do
                           span { foreign_id.presence || "N/A" }
                           arrow_right_icon
-                          # plain "#{association.class_name} | #{resource.send(association.foreign_key).presence }"
                         end
                       end
                     end
@@ -108,7 +110,18 @@ class Oversee::Resources::Index < Oversee::Base
       end
     end
 
-    render raw(pagy_nav(@pagy)) if @pagy.pages > 1
+    # Pagination
+    div(class:"p-4 border-t flex items-center justify-between") do
+
+      div(class: "font-regular text-xs") do
+        raw pagy_info(@pagy).html_safe
+      end
+
+      div(class: "flex items-center gap-4") do
+        raw pagy_nav(@pagy).html_safe
+      end
+    end
+
   end
 
   private

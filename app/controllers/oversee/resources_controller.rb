@@ -12,7 +12,7 @@ module Oversee
       @resources = Filter.new(collection: @resources, params:).apply
       @resources = Search.new(collection: @resources, resource_class: @resource_class, query: params[:query]).call
 
-      @pagy, @resources = pagy(@resources, items: 3)
+      @pagy, @resources = pagy(@resources, limit: params[:per_page] || Oversee.configuration.per_page)
 
       render Oversee::Resources::Index.new(
         resources: @resources,
