@@ -37,10 +37,11 @@ TBA
 
 ## Notable mentions
 
-This gem is inspired by other open source admin dashboards. A big thank you goes to these projects:
+This gem would not be possible without the work of others. A big thank you goes to these projects:
 
 - [madmin](https://github.com/excid3/madmin)
 - [Avo](https://github.com/avo-hq/avo)
+- [Iconoir](https://github.com/iconoir-icons/iconoir)
 
 ## License
 
