@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
 class Oversee::Resources::Index < Oversee::Base
-  include Pagy::Frontend
-  include Phlex::Rails::Helpers::Request
-
   def initialize(resources:, resource_class:, pagy:, params:)
     @resources = resources
     @resource_class = resource_class
@@ -111,16 +108,7 @@ class Oversee::Resources::Index < Oversee::Base
     end
 
     # Pagination
-    div(class:"p-4 border-t flex items-center justify-between") do
-
-      div(class: "font-regular text-xs") do
-        raw pagy_info(@pagy).html_safe
-      end
-
-      div(class: "flex items-center gap-4") do
-        raw pagy_nav(@pagy).html_safe
-      end
-    end
+    render Oversee::Dashboard::Pagination.new(pagy: @pagy, params: @params)
 
   end
 

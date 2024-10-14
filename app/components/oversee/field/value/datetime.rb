@@ -4,6 +4,6 @@ class Oversee::Field::Value::Datetime < Phlex::HTML
   end
 
   def view_template
-    p { @value&.to_fs(:short) || "N/A" }
+    time(title: @value) { @value&.to_fs(:long) || "N/A" }
   end
 end
