@@ -27,9 +27,8 @@ end
 
 Ideally, you'd want to limit access to the dashboard to only authorized users.
 
-## Contributing
 
-TBA
+
 
 ## Notable mentions
 
@@ -38,6 +37,19 @@ This gem would not be possible without the work of others. A big thank you goes 
 - [madmin](https://github.com/excid3/madmin)
 - [Avo](https://github.com/avo-hq/avo)
 - [Iconoir](https://github.com/iconoir-icons/iconoir)
+
+## Who uses Oversee?
+
+- [Mintis](https://mintis.app)
+- [No Logo X](https://nologox.com)
+- [Release Server](https://releaseserver.com)
+- [College Life Work](https://work.collegelife.co)
+
+Do you use Oversee in your project? Let us know!
+
+## Contributing
+
+TBA
 
 ## License
 
