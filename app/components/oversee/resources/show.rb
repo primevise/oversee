@@ -37,6 +37,10 @@ class Oversee::Resources::Show < Oversee::Base
           associated_resources = Array(@resource.send(association.name.to_sym))
           next if associated_resources.blank?
 
+          foreign_class_name = association.class_name
+          foreign_key = association.foreign_key
+          foreign_key_value = @resource.send(foreign_key) if @resource.respond_to?(foreign_key)
+
           div(class: "px-8 py-6") do
             div(class: "space-y-4") do
               div(class:"flex items-center gap-2") do
@@ -45,11 +49,8 @@ class Oversee::Resources::Show < Oversee::Base
               end
               div(class: "flex items-center gap-2 flex-wrap") do
                 associated_resources.each do |ar|
-                  # foreign_id = @resource.send(association.foreign_key)
-                  # resource_class_name = ar.class_name
 
-                  # path = !!foreign_id ? helpers.resource_path(id: foreign_id, resource_class_name:) : helpers.resources_path(resource_class_name: resource_class_name)
-                  path = "/"
+                  path = !!foreign_key_value ? helpers.resource_path(id: foreign_key_value, resource_class_name: foreign_class_name) : helpers.resources_path(resource_class_name: foreign_class_name)
 
                   a(
                     href: path,
