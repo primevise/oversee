@@ -13,6 +13,8 @@ class Oversee::Field::Value < Oversee::Base
     @value = value
     @datatype = datatype
     @options = options
+
+    @class = @options[:class]
   end
 
   def view_template
@@ -24,5 +26,9 @@ class Oversee::Field::Value < Oversee::Base
 
   def component_class
     MAP[@datatype.to_sym] || Oversee::Field::Value::String
+  end
+
+  def for_table?
+    @options[:for_table] || false
   end
 end
