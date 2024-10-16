@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "rails", ">= 7.0.0"
   spec.add_dependency "pagy", ">= 7.0.0"
   spec.add_dependency "phlex-rails", ">= 2.0.0.beta2"
+  spec.add_dependency "phlex-icons-iconoir", ">= 0.1.0"
   spec.add_dependency "turbo-rails", ">= 2.0.0"
   spec.add_dependency "zeitwerk", ">= 2.6.12"
-  # spec.add_dependency "phlex-tabler_icons", ">= 0.3.0"
 end
