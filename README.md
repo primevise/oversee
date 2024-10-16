@@ -13,23 +13,19 @@ Developed by [Primevise](https://primevise.com)
 
 ## Installation
 
-Add it to your application by running
-
 ```bash
 $ bundle add oversee
 ```
 
-or add this line to your application's Gemfile:
+and then mount the engine in your `config/routes.rb`:
 
 ```ruby
-gem "oversee"
+Rails.application.routes.draw do
+  mount Oversee::Engine => "/oversee"
+end
 ```
 
-And then run:
-
-```bash
-$ bundle
-```
+Ideally, you'd want to limit access to the dashboard to only authorized users.
 
 ## Contributing
 
