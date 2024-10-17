@@ -13,11 +13,19 @@ Developed by [Primevise](https://primevise.com)
 
 ## Installation
 
+Simply add the gem to your Gemfile:
+
 ```bash
 $ bundle add oversee
 ```
 
-and then mount the engine in your `config/routes.rb`:
+or you could use the edge version of the gem directly from GitHub:
+
+```ruby
+gem "oversee", git: "https://github.com/primevise/oversee", branch: :main
+```
+
+After you have the gem installed, you can then mount the engine in your `config/routes.rb`:
 
 ```ruby
 Rails.application.routes.draw do
@@ -26,9 +34,6 @@ end
 ```
 
 Ideally, you'd want to limit access to the dashboard to only authorized users.
-
-
-
 
 ## Notable mentions
 
