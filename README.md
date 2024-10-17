@@ -1,9 +1,18 @@
 
 # Oversee
 
+Plug & play admin dashboard for Rails applications.
+
+
 [![Gem Version](https://badge.fury.io/rb/oversee.svg)](https://badge.fury.io/rb/oversee)
 
-Plug & play admin dashboard for Rails applications.
+---
+
+### Features
+
+- Minimal, if any, configuration needed
+- Tailored and pleasant user interface
+- Geared for performance
 
 ---
 
