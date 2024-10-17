@@ -11,3 +11,4 @@
 *.gem
 
 .tool-versions
+.ruby-lsp
