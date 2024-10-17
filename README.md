@@ -1,8 +1,11 @@
+
+# Oversee
+
 [![Gem Version](https://badge.fury.io/rb/oversee.svg)](https://badge.fury.io/rb/oversee)
 
-# 👓 Oversee
-
 Plug & play admin dashboard for Rails applications.
+
+---
 
 ![Oversee Screenshot](docs/images/screenshot.png)
 
@@ -13,17 +16,23 @@ Developed by [Primevise](https://primevise.com)
 
 ## Installation
 
-Simply add the gem to your Gemfile:
+#### Add gem
+
+Simply add the gem to your Gemfile by running the following command
 
 ```bash
 $ bundle add oversee
 ```
 
-or you could use the edge version of the gem directly from GitHub:
+> [!TIP]
+> Currently, we don't release new gem versions too often due to the fragile nature of the gem. However, you can use the edge version of the gem by pointing directly to the git repository.
+> ```ruby
+> gem "oversee", git: "https://github.com/primevise/oversee", branch: :main
+> ```
 
-```ruby
-gem "oversee", git: "https://github.com/primevise/oversee", branch: :main
-```
+---
+
+#### Mount it on your application
 
 After you have the gem installed, you can then mount the engine in your `config/routes.rb`:
 
