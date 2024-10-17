@@ -11,7 +11,7 @@ class Oversee::Resources::Table < Oversee::Base
   end
 
   def view_template
-    turbo_frame_tag(id: "test") do
+    turbo_frame_tag dom_id(@resource_class, :table), target: :_top do
       render Oversee::Table.new do |table|
         table.head do |head|
           head.row do
