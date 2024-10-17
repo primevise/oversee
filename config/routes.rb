@@ -2,6 +2,7 @@ Oversee::Engine.routes.draw do
   # Resources
   scope :resources, controller: "resources" do
     get ":resource_class_name/", action: :index, as: :resources
+    get ":resource_class_name/table", action: :table, as: :resources_table
     get ":resource_class_name/new", action: :new, as: :new_resource
     post ":resource_class_name/", action: :create, as: :create_resource
     get ":resource_class_name/:id", action: :show, as: :resource

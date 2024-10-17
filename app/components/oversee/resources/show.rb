@@ -2,6 +2,7 @@
 
 class Oversee::Resources::Show < Oversee::Base
   include Phlex::Rails::Helpers::ButtonTo
+  include Phlex::Rails::Helpers::TurboFrameTag
 
   def initialize(resource:, resource_class:, resource_associations:, params:)
     @resource = resource
@@ -64,16 +65,31 @@ class Oversee::Resources::Show < Oversee::Base
       if !!has_many_associations.length
         has_many_associations.each do |association|
           associated_resources = @resource.send(association[:name])
+          associated_resource_class = association[:class_name].constantize
+
           div(class: "py-6") do
             div(class: "space-y-4") do
               div(class:"flex items-center gap-2") do
                 render Oversee::Field::Label.new(key: association[:name].to_s.titleize, datatype: :data)
-                a(href: helpers.resources_path(resource_class_name: association[:class_name].to_s), class: "hover:text-blue-500") { render Phlex::Icons::Iconoir::ArrowUpRight.new(class: "size-3") }
+                a(href: helpers.resources_path(resource_class_name: association[:class_name]), class: "hover:text-blue-500") { render Phlex::Icons::Iconoir::ArrowUpRight.new(class: "size-3") }
               end
 
               div(class: "bg-gray-50 p-2") do
                 if associated_resources.present?
-                  div(class: "bg-white") { render Oversee::Resources::Table.new(resources: associated_resources, params: @params) }
+                  # turbo_frame_tag(
+                  #   dom_id(associated_resource_class, :table),
+                  #   src: helpers.resources_table_path(resource_class_name: association[:class_name]),
+                  #   loading: :lazy,
+                  #   data: { turbo_stream: true }
+                  # )
+
+                  div(class: "bg-white") do
+                    render Oversee::Resources::Table.new(
+                      resources: associated_resources,
+                      resource_class: associated_resource_class,
+                      params: @params
+                    )
+                  end
                 else
                 p(class: "bg-gray-50 p-2 pr-4 flex gap-2 items-center text-xs") {
                   render Phlex::Icons::Iconoir::DatabaseSearch.new(class: "size-3")

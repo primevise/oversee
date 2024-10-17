@@ -4,14 +4,9 @@ module Oversee
 
     before_action :set_resource_class
     before_action :set_resource, only: %i[show edit update destroy input_field]
+    before_action :set_resources, only: %i[index table]
 
     def index
-      set_sorting_rules
-
-      @resources = @resource_class.order(@sort_attribute.to_sym => sort_direction)
-      @resources = Filter.new(collection: @resources, params:).apply
-      @resources = Search.new(collection: @resources, resource_class: @resource_class, query: params[:query]).call
-
       @pagy, @resources = pagy(@resources, limit: params[:per_page] || Oversee.configuration.per_page)
 
       render Oversee::Resources::Index.new(
@@ -96,6 +91,20 @@ module Oversee
       end
     end
 
+    def table
+      component_id = dom_id(@resource_class, :table)
+      component = Oversee::Resources::Table.new(resource_class: @resource_class, resources: @resources, params: params)
+
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(component_id, component)
+        end
+        format.html do
+          render component, layout: false
+        end
+      end
+    end
+
     private
 
     def set_resource_class
@@ -104,6 +113,14 @@ module Oversee
 
     def set_resource
       @resource = @resource_class.find(params[:id])
+    end
+
+    def set_resources
+      set_sorting_rules
+
+      @resources = @resource_class.order(@sort_attribute.to_sym => sort_direction)
+      @resources = Filter.new(collection: @resources, params:).apply
+      @resources = Search.new(collection: @resources, resource_class: @resource_class, query: params[:query]).call
     end
 
     def resource_associations
