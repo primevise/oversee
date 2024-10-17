@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class Oversee::Resources::Table < Oversee::Base
-  def initialize(resources:, params:, **options)
+  def initialize(resources:, resource_class:, params:, **options)
     @resources = resources
-    @resource_class = resources.first.class
+    @resource_class = resource_class || resources.first.class
     @params = params
     @options = options
   end
