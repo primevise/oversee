@@ -23,7 +23,7 @@ class Filter
   private
 
   # Example params hash:
-  # filters[kind][is][]=get => {"kind"=>{"is"=>["get"]}}
+  # filters[kind][eq][]=get => {"kind"=>{"is"=>["get"]}}
   def filters
     @filters ||= @params[:filters]
   end

@@ -81,7 +81,7 @@ class Oversee::Resources::Show < Oversee::Base
                     #   dom_id(associated_resource_class, :table),
                     #   src: helpers.resources_table_path(
                     #     resource_class_name: association[:class_name],
-                    #     filters: { eq: { association[:foreign_key] => [@resource.id] } }
+                    #     filters: { association[:foreign_key] => { eq: [@resource.id] } }
                     #   ),
                     #   loading: :lazy,
                     #   data: { turbo_stream: true }
@@ -89,7 +89,6 @@ class Oversee::Resources::Show < Oversee::Base
                     #   div(class: "h-20 flex items-center justify-center") { render Phlex::Icons::Iconoir::DatabaseSearch.new(class: "animate-pulse size-6 text-gray-600") }
                     # end
 
-                  #
                     render Oversee::Resources::Table.new(
                       resources: associated_resources,
                       resource_class: associated_resource_class,
