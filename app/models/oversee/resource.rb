@@ -13,6 +13,12 @@ class Oversee::Resource
   def resource_path
   end
 
+  # Columns
+  def columns_for_create
+    excluded_columns = [@resource_class.primary_key, "created_at", "updated_at"]
+    @resource_class.columns_hash.except(*excluded_columns)
+  end
+
   # Associations
   def associations
     map = {
@@ -27,7 +33,8 @@ class Oversee::Resource
         name: association.name,
         class_name: association.class_name,
         foreign_key: association.foreign_key,
-        optional: association.macro == :belongs_to ? !!association.options[:optional] : true
+        optional: association.macro == :belongs_to ? !!association.options[:optional] : true,
+        through: association.options[:through]
       }
     end
 
