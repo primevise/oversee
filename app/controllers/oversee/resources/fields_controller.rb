@@ -1,45 +1,25 @@
-module Oversee
-  module Resources
-    class FieldsController < BaseController
-      before_action :set_resource_class
+class Oversee::Resources::FieldsController < Oversee::ResourcesController
+  # Renders the display field for a resource
+  def show
+  end
 
-      def update
-        @resource_class = params[:resource_class].constantize
-        @resource = @resource_class.find(params[:id])
-        # @datatype = @resource_class.columns_hash[@key.to_s].type
+  # Renders the input field for a resource
+  def input
+    set_resource
 
-        respond_to do |format|
-          if @resource.update(resource_params)
-            format.html { redirect_to resource_path(@resource, resource: @resource_class) }
-            format.turbo_stream
-          else
-          end
-        end
-      end
-      
-      # Non-standard actions
-      def edit
-        @resource = @resource_class.find(params[:id])
-        @key = params[:key].to_sym
-        @value = @resource.send(@key)
-        @datatype = @resource.class.columns_hash[@key.to_s].type
-        puts "---"
-        puts "key: #{@key}"
-        puts "value: #{@value}"
-        puts "datatype: #{@datatype}"
-        puts "---"
+    key = params[:key].to_sym
+    value = @resource.send(key)
+    datatype = @resource.class.columns_hash[key.to_s].type
 
-      end
+    field_dom_id = dom_id(@resource, key)
+    field = Oversee::Field::Form.new(resource: @resource, datatype:, key:, value:)
 
-      private
-
-      def set_resource_class
-        @resource_class = params[:resource_class].constantize
-      end
-
-      def resource_params
-        params.require(:resource).permit!
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace(field_dom_id, field)
       end
     end
   end
+
+  private
 end

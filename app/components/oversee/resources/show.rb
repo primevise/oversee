@@ -75,17 +75,14 @@ class Oversee::Resources::Show < Oversee::Base
               end
 
               div(class: "bg-gray-50 p-2") do
-                # turbo_frame_tag(
-                #   dom_id(associated_resource_class, :table),
-                #   src: helpers.resources_table_path(
-                #     resource_class_name: association[:class_name],
-                #     filters: filter_params(association)
-                #   ),
-                #   loading: :lazy,
-                #   data: { turbo_stream: true }
-                # ) do
-                #   div(class: "h-20 flex items-center justify-center") { render Phlex::Icons::Iconoir::DatabaseSearch.new(class: "animate-pulse size-6 text-gray-600") }
-                # end
+                turbo_frame_tag(
+                  dom_id(associated_resource_class, :table),
+                  src: helpers.resources_table_path(resources_table_params(association)),
+                  loading: :lazy,
+                  data: { turbo_stream: true }
+                ) do
+                  div(class: "h-20 flex items-center justify-center") { render Phlex::Icons::Iconoir::DatabaseSearch.new(class: "animate-pulse size-6 text-gray-600") }
+                end
 
                 if associated_resources.present?
                   div(class: "bg-white") do
@@ -123,12 +120,18 @@ class Oversee::Resources::Show < Oversee::Base
     @resource_associations.present?
   end
 
-  def filter_params(association)
-    if association[:through].nil?
-      return { association[:foreign_key] => { eq: [@resource.id] } }
-    else
-      keys = @resource.send(association[:through]).pluck(association[:foreign_key])
-      return { @resource_class.primary_key => { eq: keys } }
-    end
+  def resources_table_params(association)
+    # if association[:through].nil?
+    #   return { association[:foreign_key] => { eq: [@resource.id] } }
+    # else
+    #   keys = @resource.send(association[:through]).pluck(association[:foreign_key])
+    #   return { @resource_class.primary_key => { eq: keys } }
+    # end
+
+    {
+      resource_class_name: association[:class_name],
+      association_name: association[:through],
+      filters: { association[:foreign_key] => { eq: [@resource.id] } }
+    }
   end
 end

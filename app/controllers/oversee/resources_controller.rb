@@ -4,7 +4,7 @@ module Oversee
 
     before_action :set_resource_class
     before_action :set_resource, only: %i[show edit update destroy input_field]
-    before_action :set_resources, only: %i[index table]
+    before_action :set_resources, only: %i[index]
 
     def index
       @pagy, @resources = pagy(@resources, limit: params[:per_page] || Oversee.configuration.per_page)
@@ -91,7 +91,25 @@ module Oversee
       end
     end
 
+    def association
+      @resources = @resource_class.find(params[:id]).send(params[:association_name])
+      @pagy, @resources = pagy(@resources, limit: params[:per_page] || Oversee.configuration.per_page)
+
+      render Oversee::Resources::Index.new(
+        resources: @resources,
+        resource_class: @resource_class,
+        pagy: @pagy,
+        params: params
+      )
+    end
+
     def table
+      if params[:association_name].present?
+        @resources = @resource_class.find(params[:id]).send(params[:association_name])
+      else
+        set_resources
+      end
+
       component_id = dom_id(@resource_class, :table)
       component = Oversee::Resources::Table.new(resource_class: @resource_class, resources: @resources, params: params)
 
