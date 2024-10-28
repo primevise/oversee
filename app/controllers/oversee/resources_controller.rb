@@ -78,8 +78,14 @@ module Oversee
       set_resource
 
       key = params[:key].to_sym
-      value = @resource.send(key)
-      datatype = @resource.class.columns_hash[key.to_s].type
+      value = params[:value] || @resource.send(key)
+      datatype = params[:datatype] || @resource.class.columns_hash[key.to_s].type
+
+      puts "---" * 30
+      puts "key: #{key}"
+      puts "value: #{value}"
+      puts "datatype: #{datatype}"
+      puts "---" * 30
 
       field_dom_id = dom_id(@resource, key)
       field = Oversee::Field::Form.new(resource: @resource, datatype:, key:, value:)

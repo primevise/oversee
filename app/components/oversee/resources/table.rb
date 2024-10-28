@@ -8,6 +8,8 @@ class Oversee::Resources::Table < Oversee::Base
     @resource_class = resource_class || resources.first.class
     @params = params
     @options = options
+
+    @oversee_resource = Oversee::Resource.new(resource_class: @resource_class)
   end
 
   def view_template
@@ -18,6 +20,7 @@ class Oversee::Resources::Table < Oversee::Base
             th(scope: "col", class: "px-4 py-3 text-left text-xs text-gray-900 uppercase")
             # Attributes
             @resource_class.columns_hash.each do |key, metadata|
+              next if @oversee_resource.foreign_keys.include?(key.to_s)
               th(scope: "col", class: "text-left text-xs text-gray-900 uppercase whitespace-nowrap hover:bg-gray-50 transition relative") do
                 a(
                   href:
@@ -52,6 +55,7 @@ class Oversee::Resources::Table < Oversee::Base
 
         table.body do |body|
           @resources.each do |resource|
+
             body.row do |row|
               td do
                 div(class: "flex space-x-2 mx-4") do
@@ -70,6 +74,7 @@ class Oversee::Resources::Table < Oversee::Base
               end
 
               @resource_class.columns_hash.each do |key, metadata|
+                next if @oversee_resource.foreign_keys.include?(key.to_s)
                 row.data do
                   div(class: "max-w-96") do
                     render Oversee::Field::Value.new(datatype: metadata.sql_type_metadata.type, value: resource.send(key), key: key)

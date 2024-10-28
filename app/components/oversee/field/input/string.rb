@@ -1,4 +1,4 @@
-class Oversee::Field::Input::String < Phlex::HTML
+class Oversee::Field::Input::String < Oversee::Field::Input
   def initialize(key:, value:)
     @key = key
     @value = value
@@ -6,15 +6,5 @@ class Oversee::Field::Input::String < Phlex::HTML
 
   def view_template
     input type: "text", id: field_id, name: field_name, value: @value, class: "flex border px-4 py-2 text-sm w-full rounded-sm"
-  end
-
-  private
-
-  def field_id
-    "resource_#{@key.to_s}"
-  end
-
-  def field_name
-    "resource[#{@key.to_s}]"
   end
 end

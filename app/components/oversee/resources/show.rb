@@ -4,12 +4,17 @@ class Oversee::Resources::Show < Oversee::Base
   include Phlex::Rails::Helpers::ButtonTo
   include Phlex::Rails::Helpers::TurboFrameTag
 
+  attr_reader :resource
+  attr_reader :resource_class
+  attr_reader :resource_associations
+
   def initialize(resource:, resource_class:, resource_associations:, params:)
     @resource = resource
     @resource_class = resource_class
     @resource_associations = resource_associations
     @params = params
-    @oversee_resource = Oversee::Resource.new(resource_class: @resource_class, resource: @resource)
+
+    @oversee_resource = Oversee::Resource.new(resource_class: @resource_class, instance: @resource)
   end
 
 
@@ -20,14 +25,13 @@ class Oversee::Resources::Show < Oversee::Base
 
     div(class: "p-8") do
       @resource_class.columns_hash.each do |key, metadata|
+        next if @oversee_resource.foreign_keys.include?(key.to_s)
+
         div(class: "py-4") do
           div(class: "space-y-2") do
             render Oversee::Field::Label.new(key: key, datatype: metadata.sql_type_metadata.type)
             div(id: dom_id(@resource, :"#{key}_row"), class: "flex items-center gap-2 mt-4") do
-              render Oversee::Field::Display.new(resource: @resource, key: key, datatype: metadata.sql_type_metadata.type)
-              # div(id: dom_id(@resource, :"#{key}_actions")) do
-              #   div(class: "bg-white text-gray-400 size-9 aspect-square inline-flex items-center justify-center"){ render Phlex::Icons::Iconoir::Copy.new(class: "size-5", stroke_width: 1.75) }
-              # end
+              render Oversee::Field::Display.new(resource:, key:, datatype: metadata.sql_type_metadata.type)
             end
           end
         end
@@ -43,17 +47,14 @@ class Oversee::Resources::Show < Oversee::Base
                 a(href: helpers.resources_path(resource_class_name: association[:class_name].to_s), class: "hover:text-blue-500") { render Phlex::Icons::Iconoir::ArrowUpRight.new(class: "size-3") }
               end
 
-              div(class: "flex items-center gap-2 flex-wrap") do
-                foreign_key_value = @resource[association[:foreign_key]]
-                path = !!foreign_key_value ? helpers.resource_path(id: foreign_key_value, resource_class_name: association[:class_name]) : helpers.resources_path(resource_class_name: association[:class_name])
+              foreign_key = association[:foreign_key]
+              foreign_key_value = @resource[association[:foreign_key]]
+              path = !!foreign_key_value ? helpers.resource_path(id: foreign_key_value, resource_class_name: association[:class_name]) : helpers.resources_path(resource_class_name: association[:class_name])
 
-                a(
-                  href: path,
-                  class:
-                    "inline-flex items-center gap-2 text-xs border border-transparent bg-gray-100 hover:bg-gray-200 px-3 py-1.5"
-                ) do
-                  plain "#{association[:class_name]} | #{foreign_key_value}"
-                  span { render Phlex::Icons::Iconoir::ArrowUpRight.new(class: "size-3") }
+              div(id: dom_id(@resource, :"#{foreign_key}_row"), class: "flex items-center gap-2 mt-4") do
+                render Oversee::Field::Display.new(resource:, key: foreign_key, value: foreign_key_value, datatype: :belongs_to, display_key: true)
+                div(id: dom_id(@resource, :"#{foreign_key}_actions")) do
+                  a(href: path, class: "bg-gray-100 hover:bg-gray-200 text-gray-400 hover:text-blue-500 size-10 aspect-square inline-flex items-center justify-center transition-colors"){ render Phlex::Icons::Iconoir::ArrowUpRight.new(class: "size-4") }
                 end
               end
             end
@@ -75,14 +76,14 @@ class Oversee::Resources::Show < Oversee::Base
               end
 
               div(class: "bg-gray-50 p-2") do
-                turbo_frame_tag(
-                  dom_id(associated_resource_class, :table),
-                  src: helpers.resources_table_path(resources_table_params(association)),
-                  loading: :lazy,
-                  data: { turbo_stream: true }
-                ) do
-                  div(class: "h-20 flex items-center justify-center") { render Phlex::Icons::Iconoir::DatabaseSearch.new(class: "animate-pulse size-6 text-gray-600") }
-                end
+                # turbo_frame_tag(
+                #   dom_id(associated_resource_class, :table),
+                #   src: helpers.resources_table_path(resources_table_params(association)),
+                #   loading: :lazy,
+                #   data: { turbo_stream: true }
+                # ) do
+                #   div(class: "h-20 flex items-center justify-center") { render Phlex::Icons::Iconoir::DatabaseSearch.new(class: "animate-pulse size-6 text-gray-600") }
+                # end
 
                 if associated_resources.present?
                   div(class: "bg-white") do

@@ -1,8 +1,12 @@
 class Oversee::Resource
-  def initialize(resource_class:, resource: nil)
+  attr_reader :resource_class
+  attr_reader :resource_class_name
+  attr_reader :instance
+
+  def initialize(resource_class:, instance: nil)
     @resource_class = resource_class
-    @resource = resource
     @resource_class_name = resource_class.to_s
+    @instance = instance
   end
 
   # Route helpers
@@ -15,8 +19,12 @@ class Oversee::Resource
 
   # Columns
   def columns_for_create
-    excluded_columns = [@resource_class.primary_key, "created_at", "updated_at"]
-    @resource_class.columns_hash.except(*excluded_columns)
+    excluded_columns = [resource_class.primary_key, "created_at", "updated_at"]
+    resource_class.columns_hash.except(*excluded_columns)
+  end
+
+  def columns_for_show
+
   end
 
   # Associations
@@ -39,5 +47,11 @@ class Oversee::Resource
     end
 
     return map
+  end
+
+  def foreign_keys
+    resource_class.reflections.map do |name, reflection|
+      reflection.foreign_key if reflection.belongs_to?
+    end.compact
   end
 end

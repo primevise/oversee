@@ -1,4 +1,4 @@
-class Oversee::Field::Input::Boolean < Phlex::HTML
+class Oversee::Field::Input::Boolean < Oversee::Field::Input
   def initialize(key:, value:)
     @key = key
     @value = value
@@ -9,15 +9,5 @@ class Oversee::Field::Input::Boolean < Phlex::HTML
       option(value: 1, selected: @value) { "True" }
       option(value: 0, selected: !@value) { "False" }
     end
-  end
-
-  private
-
-  def field_id
-    "resource_#{@key.to_s}"
-  end
-
-  def field_name
-    "resource[#{@key.to_s}]"
   end
 end
