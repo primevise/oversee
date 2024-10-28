@@ -16,7 +16,7 @@ class Oversee::Field::Display < Oversee::Base
   def view_template
     html_tag(
       id: dom_id(resource, key),
-      href: helpers.resource_input_field_path(resource_class_name:, key:, datatype:),
+      href: helpers.resource_input_path(resource_class_name:, key:, datatype:),
       class: "bg-gray-100 h-10 flex items-center px-4 py-2 hover:bg-gray-200 transition-colors w-full cursor-pointer",
       data: { turbo_stream: true }
     ) do

@@ -73,30 +73,6 @@ module Oversee
       redirect_to resources_path(resource: @resource_class)
     end
 
-    # Non-standard actions
-    def input_field
-      set_resource
-
-      key = params[:key].to_sym
-      value = params[:value] || @resource.send(key)
-      datatype = params[:datatype] || @resource.class.columns_hash[key.to_s].type
-
-      puts "---" * 30
-      puts "key: #{key}"
-      puts "value: #{value}"
-      puts "datatype: #{datatype}"
-      puts "---" * 30
-
-      field_dom_id = dom_id(@resource, key)
-      field = Oversee::Field::Form.new(resource: @resource, datatype:, key:, value:)
-
-      respond_to do |format|
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.replace(field_dom_id, field)
-        end
-      end
-    end
-
     def association
       @resources = @resource_class.find(params[:id]).send(params[:association_name])
       @pagy, @resources = pagy(@resources, limit: params[:per_page] || Oversee.configuration.per_page)

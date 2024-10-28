@@ -12,6 +12,10 @@ Oversee::Engine.routes.draw do
 
     get "/:id/input_field", action: :input_field, as: :resource_input_field
     get "/:id/association", action: :association, as: :resource_association
+
+
+    # To reach this route using Rails' route helpers, use resource_input_path(:resource_class_name, :id)
+    get "/:id/input", controller: "resources/fields", action: :input, as: :resource_input
   end
 
   root to: "dashboard#index"
