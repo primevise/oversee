@@ -3,7 +3,7 @@ module Oversee
     include ActionView::RecordIdentifier
 
     before_action :set_resource_class
-    before_action :set_resource, only: %i[show edit update destroy input_field]
+    before_action :set_resource, only: %i[show edit update destroy]
     before_action :set_resources, only: %i[index]
 
     def index

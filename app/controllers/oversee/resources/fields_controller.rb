@@ -25,6 +25,4 @@ class Oversee::Resources::FieldsController < Oversee::ResourcesController
       end
     end
   end
-
-  private
 end

@@ -31,7 +31,7 @@ class Oversee::Resources::Show < Oversee::Base
           div(class: "space-y-2") do
             render Oversee::Field::Label.new(key: key, datatype: metadata.sql_type_metadata.type)
             div(id: dom_id(@resource, :"#{key}_row"), class: "flex items-center gap-2 mt-4") do
-              render Oversee::Field::Display.new(resource:, key:, datatype: metadata.sql_type_metadata.type)
+              render Oversee::Field::Display.new(resource:, key:, value: @resource.send(key), datatype: metadata.sql_type_metadata.type)
             end
           end
         end
