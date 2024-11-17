@@ -18,6 +18,9 @@ loader.ignore("#{__dir__}/generators")
 loader.setup
 
 module Oversee
+
+  mattr_accessor :importmap, default: Importmap::Map.new
+
   class << self
 
     def application_name

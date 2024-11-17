@@ -32,6 +32,9 @@ class Oversee::Resources::Show < Oversee::Base
             render Oversee::Field::Label.new(key: key, datatype: metadata.sql_type_metadata.type)
             div(id: dom_id(@resource, :"#{key}_row"), class: "flex items-center gap-2 mt-4") do
               render Oversee::Field::Display.new(resource:, key:, value: @resource.send(key), datatype: metadata.sql_type_metadata.type)
+              # div(id: dom_id(@resource, :"#{key}_actions")) do
+              #   button(class: "bg-gray-100 hover:bg-gray-200 text-gray-400 hover:text-blue-500 size-10 aspect-square inline-flex items-center justify-center transition-colors") { render Phlex::Icons::Iconoir::Copy.new(class: "size-4") }
+              # end
             end
           end
         end
