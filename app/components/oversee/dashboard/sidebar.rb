@@ -22,7 +22,16 @@ class Oversee::Dashboard::Sidebar < Oversee::Base
       end
 
       hr(class: "my-4 -mx-4")
-      details(open: true, class: "group") do
+      details(
+        id: "resources-menu",
+        class: "group",
+        # open: true,
+        data: {
+          controller: "sidebar--state",
+          action: "sidebar--state#persist",
+          sidebar__state_target: "expandable"
+        }
+      ) do
         summary(class: "flex items-center justify-between cursor-pointer") do
           p(class: "text-[0.7rem] uppercase text-gray-400 font-medium") { "Resources" }
           render Phlex::Icons::Iconoir::NavArrowDown.new(class: "size-4 text-gray-400 transform transition-transform group-open:rotate-180 group-hover:text-blue-500")
