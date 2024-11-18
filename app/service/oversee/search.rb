@@ -1,4 +1,4 @@
-class Search
+class Oversee::Search
   DEFAULT_SEARCHABLE_ATTRIBUTES = %w[name title email email_address]
 
   def initialize(collection:, resource_class:, query: nil)

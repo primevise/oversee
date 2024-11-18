@@ -46,7 +46,7 @@ class Oversee::Dashboard::Filters < Oversee::Base
   end
 
   def search_placeholder
-    context = Search.new(collection: nil, resource_class: @params[:resource_class_name].constantize)
+    context = Oversee::Search.new(collection: nil, resource_class: @params[:resource_class_name].constantize)
     attr = context.default_searchable_attribute
 
     "Search by #{attr}"

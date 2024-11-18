@@ -1,4 +1,4 @@
-class Filter
+class Oversee::Filter
   ALLOWED_OPERATORS = %w[eq in gt gte lt lte].freeze
 
   def initialize(collection:, params: nil)
