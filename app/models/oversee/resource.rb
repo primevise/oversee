@@ -2,6 +2,9 @@ class Oversee::Resource
   attr_reader :resource_class
   attr_reader :resource_class_name
   attr_reader :instance
+  attr_reader :rich_text_fields
+
+  attr_accessor :associations
 
   def initialize(resource_class:, instance: nil)
     @resource_class = resource_class
@@ -29,29 +32,34 @@ class Oversee::Resource
 
   # Associations
   def associations
-    map = {
-      belongs_to: [],
-      has_many: [],
-      has_one: [],
-      has_and_belongs_to_many: []
-    }
-
-    @resource_class.reflect_on_all_associations.each do |association|
-      map[association.macro] << {
-        name: association.name,
-        class_name: association.class_name,
-        foreign_key: association.foreign_key,
-        optional: association.macro == :belongs_to ? !!association.options[:optional] : true,
-        through: association.options[:through]
+    @associations ||= begin
+      map = {
+        belongs_to: [],
+        has_many: [],
+        has_one: [],
+        has_and_belongs_to_many: [],
       }
-    end
 
-    return map
+      @resource_class.reflect_on_all_associations.each do |association|
+        map[association.macro] << {
+          name: association.name,
+          class_name: association.class_name,
+          foreign_key: association.foreign_key,
+          optional: association.macro == :belongs_to ? !!association.options[:optional] : true,
+          through: association.options[:through],
+          rich_text: association.name.to_s.start_with?("rich_text_"),
+        }
+      end
+    end
   end
 
   def foreign_keys
     resource_class.reflections.map do |name, reflection|
       reflection.foreign_key if reflection.belongs_to?
     end.compact
+  end
+
+  def rich_text_fields
+    @rich_text_fields ||= associations.select { |association| association[:rich_text] }
   end
 end

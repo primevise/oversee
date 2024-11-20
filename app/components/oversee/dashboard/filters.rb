@@ -26,7 +26,13 @@ class Oversee::Dashboard::Filters < Oversee::Base
         end
         div(class: "flex items-center gap-4") do
           form(action: "", class: "flex items-center gap-2") do
-            input(type: :search, name: :query, class: "flex bg-gray-100 min-w-80 h-10 items-center pl-4 py-2 placeholder:text-gray-500 rounded-sm text-sm", placeholder: search_placeholder, value: @params[:query])
+            input(
+              type: :search,
+              name: :query,
+              value: @params[:query],
+              placeholder: search_placeholder,
+              class: "flex bg-gray-100 min-w-64 w-64 focus:w-96 transition-all h-10 items-center pl-4 py-2 placeholder:text-gray-500 rounded-sm text-sm"
+            )
             button(class: "size-10 inline-flex items-center justify-center bg-gray-100 hover:bg-gray-200 transition-colors") { render Phlex::Icons::Iconoir::Search.new(class: "size-4 text-gray-600") }
           end
         end

@@ -21,7 +21,35 @@ class Oversee::Dashboard::Sidebar < Oversee::Base
         end
       end
 
+      if Rails.env.development?
+        hr(class: "my-4 -mx-4")
+        details(
+          id: "links-menu",
+          class: "group",
+          # open: true,
+          data: {
+            controller: "sidebar--state",
+            action: "sidebar--state#persist",
+            sidebar__state_target: "expandable"
+          }
+        ) do
+          summary(class: "flex items-center justify-between cursor-pointer") do
+            p(class: "text-[0.7rem] uppercase text-gray-400 font-medium") { "Links" }
+            render Phlex::Icons::Iconoir::NavArrowDown.new(class: "size-4 text-gray-400 transform transition-transform group-open:rotate-180 group-hover:text-blue-500")
+          end
+          ul(class: "mt-2 text-sm text-gray-700 overflow-x-hidden") do
+            li do
+              a(href: "https://github.com/primevise/oversee", target: "_blank", class: "flex items-center gap-2 hover:bg-gray-50 p-2 truncate") do
+                render Phlex::Icons::Iconoir::ArrowUpRightSquare.new(class: "size-4 text-gray-400")
+                span { "Repository" }
+              end
+            end
+          end
+        end
+      end
+
       hr(class: "my-4 -mx-4")
+
       details(
         id: "resources-menu",
         class: "group",
