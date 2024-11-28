@@ -10,7 +10,7 @@ gem "puma"
 gem "bcrypt"
 gem "ffaker"
 gem "turbo-rails"
-# gem "stimulus-rails"
+gem "stimulus-rails"
 gem "phlex-icons-iconoir"
 
 gem "web-console", group: :development
