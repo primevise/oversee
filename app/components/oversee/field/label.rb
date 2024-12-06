@@ -2,6 +2,7 @@ class Oversee::Field::Label < Oversee::Base
   ICON_MAP = {
     string: Phlex::Icons::Iconoir::Text,
     text: Phlex::Icons::Iconoir::TextSquare,
+    rich_text: Phlex::Icons::Iconoir::TextSquare,
     integer: Phlex::Icons::Iconoir::Number0Square,
     datetime: Phlex::Icons::Iconoir::Calendar,
     boolean: Phlex::Icons::Iconoir::SwitchOn,

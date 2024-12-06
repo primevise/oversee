@@ -21,6 +21,8 @@ class Oversee::Layout::Application < Oversee::Base
         meta(name: "viewport", content: "width=device-width, initial-scale=1.0")
         meta(name: "ROBOTS", content: "NOODP")
 
+        link(rel: "stylesheet", type: "text/css", href: "https://unpkg.com/trix@2.1.8/dist/trix.css")
+
         render Oversee::Dashboard::Javascript.new
         render Oversee::Dashboard::Tailwind.new
       end

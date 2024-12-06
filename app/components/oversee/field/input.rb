@@ -1,12 +1,13 @@
 class Oversee::Field::Input < Oversee::Base
   MAP = {
-    string: Oversee::Field::Input::String,
-    boolean: Oversee::Field::Input::Boolean,
-    integer: Oversee::Field::Input::Integer,
-    datetime: Oversee::Field::Input::Datetime,
-    text: Oversee::Field::Input::String,
-    enum: Oversee::Field::Input::String,
     belongs_to: Oversee::Field::Input::BelongsTo,
+    boolean: Oversee::Field::Input::Boolean,
+    datetime: Oversee::Field::Input::Datetime,
+    enum: Oversee::Field::Input::String,
+    integer: Oversee::Field::Input::Integer,
+    rich_text: Oversee::Field::Input::RichText,
+    string: Oversee::Field::Input::String,
+    text: Oversee::Field::Input::String,
   }
 
   def initialize(key: nil, value: nil, datatype: :string, **options)

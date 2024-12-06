@@ -2,7 +2,7 @@ class Oversee::Resource
   attr_reader :resource_class
   attr_reader :resource_class_name
   attr_reader :instance
-  attr_reader :rich_text_fields
+  attr_reader :rich_text_associations
 
   attr_accessor :associations
 
@@ -46,7 +46,6 @@ class Oversee::Resource
           rich_text: association.name.to_s.start_with?("rich_text_"),
         }
       end
-
       map
     end
   end
@@ -57,7 +56,7 @@ class Oversee::Resource
     end.compact
   end
 
-  def rich_text_fields
-    @rich_text_fields ||= associations.select { |association| association[:rich_text] }
+  def rich_text_associations
+    @rich_text_associations ||= associations[:has_one].select { |association| association[:rich_text] }
   end
 end

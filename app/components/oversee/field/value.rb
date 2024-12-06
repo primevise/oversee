@@ -1,12 +1,13 @@
 class Oversee::Field::Value < Oversee::Base
   MAP = {
     string: Oversee::Field::Value::String,
-    boolean: Oversee::Field::Value::Boolean,
-    integer: Oversee::Field::Value::Integer,
-    datetime: Oversee::Field::Value::Datetime,
-    text: Oversee::Field::Value::Text,
-    enum: Oversee::Field::Value::Enum,
     belongs_to: Oversee::Field::Value::BelongsTo,
+    boolean: Oversee::Field::Value::Boolean,
+    datetime: Oversee::Field::Value::Datetime,
+    enum: Oversee::Field::Value::Enum,
+    integer: Oversee::Field::Value::Integer,
+    rich_text: Oversee::Field::Value::RichText,
+    text: Oversee::Field::Value::Text,
   }
 
   attr_reader :key
