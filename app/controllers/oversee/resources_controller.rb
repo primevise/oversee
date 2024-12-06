@@ -14,7 +14,7 @@ module Oversee
         resource_class: @resource_class,
         pagy: @pagy,
         params: params
-      )
+      ), layout: false
     end
 
     def new
@@ -23,7 +23,7 @@ module Oversee
         resource: @resource,
         resource_class: @resource_class,
         params: params
-      )
+      ), layout: false
     end
 
     def create
@@ -46,7 +46,7 @@ module Oversee
         resource_class: @resource_class,
         resource_associations: resource_associations,
         params: params
-      )
+      ), layout: false
     end
 
     def edit

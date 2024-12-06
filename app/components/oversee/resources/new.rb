@@ -7,6 +7,10 @@ class Oversee::Resources::New < Oversee::Base
     @params = params
   end
 
+  def around_template
+    render Oversee::Layout::Application.new { super }
+  end
+
   def view_template
     render Oversee::Dashboard::Header.new(title: @resource_class.to_s, subtitle: "Creating new record")
 

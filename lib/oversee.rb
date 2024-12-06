@@ -44,4 +44,13 @@ module Oversee
       files.map! { |f| f.split(root.to_s).last.delete_suffix(".rb").classify.prepend("Cards::") }
     end
   end
+
+  # VIEWS
+  module Views
+  end
+
+  # COMPONENTS
+  module Components
+    extend Phlex::Kit
+  end
 end

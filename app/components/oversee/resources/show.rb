@@ -17,6 +17,9 @@ class Oversee::Resources::Show < Oversee::Base
     @oversee_resource = Oversee::Resource.new(resource_class: @resource_class, instance: @resource)
   end
 
+  def around_template
+    render Oversee::Layout::Application.new { super }
+  end
 
   def view_template
     render Oversee::Dashboard::Header.new(title: @resource_class.to_s, subtitle: "##{@resource.id}", return_path: helpers.resources_path(resource_class_name: @params[:resource_class_name])) do
