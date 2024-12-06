@@ -20,9 +20,13 @@ class Oversee::Resources::Index < Oversee::Base
         a(href: helpers.new_resource_path(@params[:resource_class_name]), class: "inline-flex items-center justify-center size-8 rounded-full bg-emerald-100 text-emerald-500 hover:bg-emerald-200 text-sm font-medium") { render Phlex::Icons::Iconoir::Plus.new(class: "size-4 text-emerald-500") }
       end
     end
+    hr(class: "my-4")
 
     render Oversee::Dashboard::Filters.new(params: @params)
+
+    hr(class: "mt-4")
     render Oversee::Resources::Table.new(resource_class: @resource_class, resources: @resources, params: @params)
+    hr()
     render Oversee::Dashboard::Pagination.new(pagy: @pagy, params: @params)
   end
 

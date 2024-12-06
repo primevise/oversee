@@ -31,7 +31,7 @@ class Oversee::Layout::Application < Oversee::Base
         div(class: "flex gap-4 w-full") do
           div(class: "w-72 shrink-0") { render Oversee::Dashboard::Sidebar.new }
           div(class: "w-full overflow-scroll") do
-            div(class: "bg-white rounded-lg overflow-clip") do
+            div(class: "bg-white rounded-lg overflow-clip p-4") do
               yield
             end
           end

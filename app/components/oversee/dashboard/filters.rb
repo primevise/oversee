@@ -8,33 +8,31 @@ class Oversee::Dashboard::Filters < Oversee::Base
   end
 
   def view_template(&)
-    div(class: "border-b p-4") do
-      div(class: "flex items-center justify-between") do
-        div(class: "flex items-center gap-2") do
-          if show_action_section?
-            button(class:"rounded-full bg-gray-100 inline-flex gap-2 items-center text-xs px-4 py-2 font-medium hover:bg-gray-200") do
-              render Phlex::Icons::Iconoir::FilterAlt.new(class: "size-3")
-              plain "Filters"
-            end
-          end
-          if false
-            a(class:"rounded-full bg-gray-100 inline-flex gap-2 items-center text-xs px-4 py-2 font-medium hover:bg-gray-200") do
-              render Phlex::Icons::Iconoir::XMark.new(class: "size-4 text-gray-500")
-              plain "Clear sorting"
-            end
+    div(class: "flex items-center justify-between") do
+      div(class: "flex items-center gap-2") do
+        if show_action_section?
+          button(class:"rounded-full bg-gray-100 inline-flex gap-2 items-center text-xs px-4 py-2 font-medium hover:bg-gray-200") do
+            render Phlex::Icons::Iconoir::FilterAlt.new(class: "size-3")
+            plain "Filters"
           end
         end
-        div(class: "flex items-center gap-4") do
-          form(action: "", class: "flex items-center gap-2") do
-            input(
-              type: :search,
-              name: :query,
-              value: @params[:query],
-              placeholder: search_placeholder,
-              class: "flex bg-gray-100 min-w-64 w-64 focus:w-96 transition-all h-10 items-center pl-4 py-2 placeholder:text-gray-500 rounded-sm text-sm"
-            )
-            button(class: "size-10 inline-flex items-center justify-center bg-gray-100 hover:bg-gray-200 transition-colors") { render Phlex::Icons::Iconoir::Search.new(class: "size-4 text-gray-600") }
+        if false
+          a(class:"rounded-full bg-gray-100 inline-flex gap-2 items-center text-xs px-4 py-2 font-medium hover:bg-gray-200") do
+            render Phlex::Icons::Iconoir::XMark.new(class: "size-4 text-gray-500")
+            plain "Clear sorting"
           end
+        end
+      end
+      div(class: "flex items-center gap-4") do
+        form(action: "", class: "flex items-center gap-2") do
+          input(
+            type: :search,
+            name: :query,
+            value: @params[:query],
+            placeholder: search_placeholder,
+            class: "flex bg-gray-100 min-w-64 w-64 focus:w-96 transition-all h-10 items-center pl-4 py-2 placeholder:text-gray-500 rounded-sm text-sm"
+          )
+          button(class: "size-10 inline-flex items-center justify-center bg-gray-100 hover:bg-gray-200 transition-colors") { render Phlex::Icons::Iconoir::Search.new(class: "size-4 text-gray-600") }
         end
       end
     end
