@@ -17,7 +17,14 @@ class Oversee::Resources::Index < Oversee::Base
     render Oversee::Dashboard::Header.new(title: @resource_class.to_s.pluralize) do |h|
       h.left
       h.right do
-        a(href: helpers.new_resource_path(@params[:resource_class_name]), class: "inline-flex items-center justify-center size-8 rounded-full bg-emerald-100 text-emerald-500 hover:bg-emerald-200 text-sm font-medium") { render Phlex::Icons::Iconoir::Plus.new(class: "size-4 text-emerald-500") }
+        a(
+          href: helpers.new_resource_path(@params[:resource_class_name]),
+          target: "_top",
+          class: "inline-flex items-center justify-center gap-1.5 h-8 px-4 rounded-full bg-transparent text-gray-900 hover:bg-gray-100 text-sm font-medium transition group"
+        ) do
+          render Phlex::Icons::Iconoir::Plus.new(class: "size-4 text-gray-500 group-hover:text-blue-500", stroke_width: 2.5)
+          plain "Add new"
+        end
       end
     end
     hr(class: "my-4")

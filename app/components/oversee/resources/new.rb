@@ -14,8 +14,8 @@ class Oversee::Resources::New < Oversee::Base
   def view_template
     render Oversee::Dashboard::Header.new(title: @resource_class.to_s, subtitle: "Creating new record")
 
-    div(class: "p-8") do
-      render Oversee::Resources::Form.new(resource: @resource)
-    end
+    hr(class: "my-4")
+
+    render Oversee::Resources::Form.new(resource: @resource)
   end
 end

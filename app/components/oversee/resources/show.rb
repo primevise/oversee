@@ -32,7 +32,26 @@ class Oversee::Resources::Show < Oversee::Base
         end
       end
       h.right do
-        button_to(helpers.resource_path(resource_class_name: @params[:resource_class_name]), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "size-8 inline-flex items-center justify-center rounded-full text-rose-500 bg-rose-50 hover:bg-rose-100 text-sm font-medium transition-colors") { render Phlex::Icons::Iconoir::Trash.new(class: "size-4") }
+        details(class: "relative inline-block") do
+          summary(class: "cursor-pointer list-none") do
+            div(class: "inline-flex items-center justify-center size-8 hover:bg-indigo-50 transition") do
+              render Phlex::Icons::Iconoir::MoreHorizCircle.new(class: "size-4 text-gray-500")
+            end
+          end
+          ul(
+            class:
+              "absolute p-2 mt-2 right-0 top-full min-w-40 overflow-hidden rounded-lg bg-white border border-b-2 border-gray-200/75 divide-y text-xs text-gray-500 font-medium"
+          ) do
+            li(class: "w-full") do
+              button_to(helpers.resource_path(resource_class_name: @params[:resource_class_name]), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "p-1 hover:bg-gray-50 w-full flex items-center gap-2 transition duration-100") do
+                div(class: "inline-flex items-center justify-center size-6 bg-gray-100") do
+                  render Phlex::Icons::Iconoir::Trash.new(class: "size-3 text-gray-500")
+                end
+                plain "Delete"
+              end
+            end
+          end
+        end
       end
     end
 

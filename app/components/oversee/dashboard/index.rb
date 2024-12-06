@@ -8,10 +8,8 @@ class Oversee::Dashboard::Index < Oversee::Base
 
   def view_template
     div(class: "flex items-center justify-between") do
-      div do
-        p(class: "text-xs uppercase font-medium text-gray-400") { "Dashboard" }
-        h1(class: "text-xl") { "Welcome" }
-      end
+      h1(class: "text-lg font-medium text-gray-900") { "Dashboard" }
+      h1(class: "text-sm font-medium text-gray-500") { Date.current.to_fs(:long) }
     end
 
     if Oversee.card_class_names.present?
