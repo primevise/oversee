@@ -31,14 +31,10 @@ class Oversee::Resource
   end
 
   # Associations
+  # Structured by association macro
   def associations
     @associations ||= begin
-      map = {
-        belongs_to: [],
-        has_many: [],
-        has_one: [],
-        has_and_belongs_to_many: [],
-      }
+      map = Hash.new { |hash, key| hash[key] = [] }
 
       @resource_class.reflect_on_all_associations.each do |association|
         map[association.macro] << {
@@ -50,6 +46,8 @@ class Oversee::Resource
           rich_text: association.name.to_s.start_with?("rich_text_"),
         }
       end
+
+      map
     end
   end
 
