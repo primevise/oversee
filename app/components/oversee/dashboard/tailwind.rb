@@ -1,6 +1,6 @@
 class Oversee::Dashboard::Tailwind < Phlex::HTML
   def view_template
-    script(src: "https://cdn.tailwindcss.com?plugins=typography")
+    script(src: "https://cdn.tailwindcss.com/3.4.15?plugins=typography@0.5.15")
     style(type:"text/tailwindcss") do
       raw pagy_css.html_safe
     end
