@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 class Oversee::Dashboard::Index < Oversee::Base
+
+  def around_template
+    render Oversee::Layout::Application.new { super }
+  end
+
   def view_template
     div(class: "p-8") do
       div(class: "flex items-center justify-between") do

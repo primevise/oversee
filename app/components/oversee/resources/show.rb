@@ -22,9 +22,16 @@ class Oversee::Resources::Show < Oversee::Base
   end
 
   def view_template
-    render Oversee::Dashboard::Header.new(title: @resource_class.to_s, subtitle: "##{@resource.id}", return_path: helpers.resources_path(resource_class_name: @params[:resource_class_name])) do
-      button_to(helpers.resource_path(resource_class_name: @params[:resource_class_name]), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "size-8 inline-flex items-center justify-center rounded-full text-rose-500 bg-rose-50 hover:bg-rose-100 text-sm font-medium transition-colors") { render Phlex::Icons::Iconoir::Trash.new(class: "size-4") }
+    render Oversee::Dashboard::Header.new(title: @resource_class.to_s.pluralize) do |h|
+      h.left do
+        h.separator
+        p { "##{@resource.id}"}
+      end
+      h.right do
+        button_to(helpers.resource_path(resource_class_name: @params[:resource_class_name]), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "size-8 inline-flex items-center justify-center rounded-full text-rose-500 bg-rose-50 hover:bg-rose-100 text-sm font-medium transition-colors") { render Phlex::Icons::Iconoir::Trash.new(class: "size-4") }
+      end
     end
+
 
     div(class: "p-8") do
       @resource_class.columns_hash.each do |key, metadata|

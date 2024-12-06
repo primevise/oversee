@@ -1,7 +1,7 @@
 module Oversee
   class DashboardController < BaseController
     def index
-      render Oversee::Dashboard::Index.new
+      render Oversee::Dashboard::Index.new, layout: false
     end
 
     def show
