@@ -11,6 +11,7 @@ require "phlex-rails"
 
 # Pagy
 require "pagy"
+require "pagy/extras/i18n"
 
 # Zeitwerk
 loader = Zeitwerk::Loader.for_gem
