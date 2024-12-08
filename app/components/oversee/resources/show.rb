@@ -63,15 +63,20 @@ class Oversee::Resources::Show < Oversee::Base
     # COLUMNS
     @resource_class.columns_hash.each do |key, metadata|
       next if @oversee_resource.foreign_keys.include?(key.to_s)
+      value = @resource.send(key)
+      datatype = metadata.sql_type_metadata.type
 
       div(class: "py-4") do
         div(class: "space-y-2") do
           render Oversee::Field::Label.new(key: key, datatype: metadata.sql_type_metadata.type)
           div(id: dom_id(@resource, :"#{key}_row"), class: "flex items-center gap-2 mt-4") do
-            render Oversee::Field::Display.new(resource:, key:, value: @resource.send(key), datatype: metadata.sql_type_metadata.type)
-            # div(id: dom_id(@resource, :"#{key}_actions")) do
-            #   button(class: "bg-gray-100 hover:bg-gray-200 text-gray-400 hover:text-blue-500 size-10 aspect-square inline-flex items-center justify-center transition-colors") { render Phlex::Icons::Iconoir::Copy.new(class: "size-4") }
-            # end
+            render Oversee::Field::Display.new(resource:, key:, value:, datatype:)
+            div(id: dom_id(@resource, :"#{key}_actions")) do
+              button(
+                class: "bg-gray-100 hover:bg-gray-200 text-gray-400 hover:text-blue-500 size-10 aspect-square inline-flex items-center justify-center transition-colors",
+                data: { controller: "clipboard", action: "click->clipboard#copy", clipboard_content_value: value.to_s }
+              ) { render Phlex::Icons::Iconoir::Copy.new(class: "size-4", stroke_width: 1.75) }
+            end
           end
         end
       end
