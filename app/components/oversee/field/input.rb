@@ -6,6 +6,8 @@ class Oversee::Field::Input < Oversee::Base
     datetime: Oversee::Field::Input::Datetime,
     enum: Oversee::Field::Input::String,
     integer: Oversee::Field::Input::Integer,
+    json: Oversee::Field::Input::Json,
+    jsonb: Oversee::Field::Input::Json,
     rich_text: Oversee::Field::Input::RichText,
     string: Oversee::Field::Input::String,
     text: Oversee::Field::Input::String,
