@@ -75,7 +75,10 @@ class Oversee::Resources::Show < Oversee::Base
               button(
                 class: "bg-gray-100 hover:bg-gray-200 text-gray-400 hover:text-blue-500 size-10 aspect-square inline-flex items-center justify-center transition-colors",
                 data: { controller: "clipboard", action: "click->clipboard#copy", clipboard_content_value: value.to_s }
-              ) { render Phlex::Icons::Iconoir::Copy.new(class: "size-4", stroke_width: 1.75) }
+              ) do
+                span(class: "hidden", data: { clipboard_target: "successIcon"}) { render Phlex::Icons::Iconoir::Check.new(class: "size-4 text-emerald-500", stroke_width: 1.75) }
+                span(data: { clipboard_target: "copyIcon"}) { render Phlex::Icons::Iconoir::Copy.new(class: "size-4", stroke_width: 1.75) }
+              end
             end
           end
         end

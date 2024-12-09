@@ -4,8 +4,10 @@ This is the changelog for the `oversee` gem. For now, most of the updates will b
 
 ### Unreleased
 
+- Adding JSON field support
 - Adding ability to copy field value to clipboard
 - Making the pagination more user friendly
+- Taking away `rails` as a dependency
 
 ### 0.3.0
 
