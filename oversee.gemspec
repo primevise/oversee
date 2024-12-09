@@ -18,7 +18,10 @@ Gem::Specification.new do |spec|
     Dir["{app,config,db,lib}/**/*", "LICENCE", "Rakefile", "README.md"]
   end
 
-  spec.add_dependency "rails", ">= 7.0.0"
+  spec.add_dependency "activerecord", ">= 7.0.0"
+  spec.add_dependency "activesupport", ">= 7.0.0"
+  spec.add_dependency "activestorage", ">= 7.0.0"
+  # spec.add_dependency "rails", ">= 7.0.0"
   spec.add_dependency "importmap-rails"
   spec.add_dependency "pagy", ">= 7.0.0"
   spec.add_dependency "phlex-rails", ">= 2.0.0.beta2"
