@@ -5,8 +5,9 @@ class CreateUsers < ActiveRecord::Migration[7.2]
       t.string :password_digest, null: false
       t.string :full_name
       t.string :access_token
+      t.boolean :is_verified, default: false
       t.date :birthday
-
+      t.json :metadata, default: {}
       t.timestamps
     end
   end

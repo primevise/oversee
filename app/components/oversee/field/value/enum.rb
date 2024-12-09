@@ -1,9 +1,5 @@
-class Oversee::Field::Value::Enum < Phlex::HTML
-  def initialize(key: nil, value: nil, kind: :value)
-    @value = value
-  end
-
+class Oversee::Field::Value::Enum < Oversee::Field::Value
   def view_template
-    p(class:"inline-flex px-2 py-1 text-red-500") { @value.to_s }
+    p(class:"inline-flex px-2 py-1 text-red-500") { value.to_s }
   end
 end

@@ -1,9 +1,5 @@
-class Oversee::Field::Value::Text < Phlex::HTML
-  def initialize(datatype: :string, key: nil, value: nil, kind: :value)
-    @value = value
-  end
-
+class Oversee::Field::Value::Text < Oversee::Field::Value
   def view_template
-    p(class: "truncate") { @value }
+    p(class: "truncate") { value }
   end
 end

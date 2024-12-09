@@ -1,12 +1,15 @@
 class Oversee::Field::Label < Oversee::Base
   ICON_MAP = {
-    string: Phlex::Icons::Iconoir::Text,
-    text: Phlex::Icons::Iconoir::TextSquare,
-    rich_text: Phlex::Icons::Iconoir::TextSquare,
-    integer: Phlex::Icons::Iconoir::Number0Square,
-    datetime: Phlex::Icons::Iconoir::Calendar,
     boolean: Phlex::Icons::Iconoir::SwitchOn,
     data: Phlex::Icons::Iconoir::Page,
+    date: Phlex::Icons::Iconoir::Calendar,
+    datetime: Phlex::Icons::Iconoir::Calendar,
+    integer: Phlex::Icons::Iconoir::Number0Square,
+    json: Phlex::Icons::Iconoir::CodeBracketsSquare,
+    jsonb: Phlex::Icons::Iconoir::CodeBracketsSquare,
+    rich_text: Phlex::Icons::Iconoir::TextSquare,
+    string: Phlex::Icons::Iconoir::Text,
+    text: Phlex::Icons::Iconoir::TextSquare,
   }
 
   def initialize(datatype: :string, key: nil)

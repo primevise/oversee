@@ -82,10 +82,10 @@ class Oversee::Resources::Show < Oversee::Base
       end
     end
 
-    hr(class: "my-4")
 
     # RICH TEXT Associations
     if !!rich_text_associations.length
+    hr(class: "my-4")
       rich_text_associations.each do |association|
 
         # Remove the "rich_text_" prefix from the association name

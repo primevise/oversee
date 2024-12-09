@@ -1,9 +1,5 @@
-class Oversee::Field::Value::Datetime < Phlex::HTML
-  def initialize(key: nil, value: nil, kind: :value)
-    @value = value
-  end
-
+class Oversee::Field::Value::Datetime < Oversee::Field::Value
   def view_template
-    time(title: @value.to_s) { @value&.to_fs(:long) || "N/A" }
+    time(title: value.to_s) { value&.to_fs(:long) || "N/A" }
   end
 end

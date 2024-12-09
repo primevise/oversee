@@ -3,9 +3,12 @@ class Oversee::Field::Value < Oversee::Base
     string: Oversee::Field::Value::String,
     belongs_to: Oversee::Field::Value::BelongsTo,
     boolean: Oversee::Field::Value::Boolean,
+    date: Oversee::Field::Value::Date,
     datetime: Oversee::Field::Value::Datetime,
     enum: Oversee::Field::Value::Enum,
     integer: Oversee::Field::Value::Integer,
+    json: Oversee::Field::Value::Json,
+    jsonb: Oversee::Field::Value::Json,
     rich_text: Oversee::Field::Value::RichText,
     text: Oversee::Field::Value::Text,
   }

@@ -1,17 +1,11 @@
-class Oversee::Field::Value::BelongsTo < Phlex::HTML
-  def initialize(key: nil, value: nil, **options)
-    @key = key
-    @value = value
-    @options = options
-  end
-
+class Oversee::Field::Value::BelongsTo < Oversee::Field::Value
   def view_template
-    p(title: @value, class:"inline-flex items-center gap-1") do
+    p(title: value, class:"inline-flex items-center gap-1") do
       if display_key?
-        span { @key.humanize }
+        span { key.humanize }
         span {"|"}
       end
-      span { @value }
+      span { value }
     end
   end
 

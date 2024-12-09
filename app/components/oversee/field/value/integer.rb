@@ -1,9 +1,5 @@
-class Oversee::Field::Value::Integer < Phlex::HTML
-  def initialize(key: nil, value: nil, kind: :value)
-    @value = value
-  end
-
+class Oversee::Field::Value::Integer < Oversee::Field::Value
   def view_template
-    p { @value }
+    p { value }
   end
 end

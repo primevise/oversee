@@ -78,7 +78,7 @@ class Oversee::Resources::Table < Oversee::Base
                 next if @oversee_resource.foreign_keys.include?(key.to_s)
                 row.data do
                   div(class: "max-w-96") do
-                    render Oversee::Field::Value.new(datatype: metadata.sql_type_metadata.type, value: resource.send(key), key: key)
+                    render Oversee::Field::Value.new(key:, datatype: metadata.sql_type_metadata.type, value: resource.send(key), for_table: true)
                   end
                 end
               end

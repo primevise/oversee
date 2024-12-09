@@ -16,7 +16,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_20_071220) do
     t.string "password_digest", null: false
     t.string "full_name"
     t.string "access_token"
+    t.boolean "is_verified", default: false
     t.date "birthday"
+    t.json "metadata", default: {}
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
