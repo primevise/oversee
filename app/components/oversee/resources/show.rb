@@ -61,34 +61,15 @@ class Oversee::Resources::Show < Oversee::Base
     div(class: "flex flex-col gap-4") do
       @resource_class.columns_hash.each do |key, metadata|
         next if @oversee_resource.foreign_keys.include?(key.to_s)
-        value = @resource.send(key)
-        datatype = metadata.sql_type_metadata.type
-        render Oversee::Field::Set.new(resource:, key:, value:, datatype:)
+        render Oversee::Field::Set.new(resource:, key:, value: @resource.send(key), datatype: metadata.sql_type_metadata.type)
       end
     end
 
 
     # RICH TEXT Associations
     if !!rich_text_associations.length
-    hr(class: "my-4")
-      rich_text_associations.each do |association|
-
-        # Remove the "rich_text_" prefix from the association name
-        key = association[:name].to_s[10..].to_sym
-
-        div do
-          div(class: "space-y-4") do
-            div(class:"flex items-center gap-2") do
-              render Oversee::Field::Label.new(key: key.to_s.titleize, datatype: :rich_text)
-              a(href: helpers.resources_path(resource_class_name: association[:class_name].to_s), class: "hover:text-blue-500") { render Phlex::Icons::Iconoir::ArrowUpRight.new(class: "size-3") }
-            end
-
-            div(id: dom_id(@resource, :"#{key.to_s}_row"), class: "flex items-center gap-2 mt-4") do
-              render Oversee::Field::Display.new(resource:, key:, value: @resource.send(key).to_plain_text[..196], datatype: :rich_text)
-            end
-          end
-        end
-      end
+      hr(class: "my-4")
+      render Oversee::Resources::Associations::RichText.new(resource:, associations: rich_text_associations)
     end
 
     # BELONGS_TO Associations
@@ -97,8 +78,11 @@ class Oversee::Resources::Show < Oversee::Base
         div(class: "py-6") do
           div(class: "space-y-4") do
             div(class:"flex items-center gap-2") do
-              render Oversee::Field::Label.new(key: association[:name].to_s.titleize, datatype: :data)
-              a(href: helpers.resources_path(resource_class_name: association[:class_name].to_s), class: "hover:text-blue-500") { render Phlex::Icons::Iconoir::ArrowUpRight.new(class: "size-3") }
+              render Oversee::Field::Label.new(
+                key: association[:name].to_s.titleize,
+                datatype: :data,
+                href: helpers.resources_path(resource_class_name: association[:class_name].to_s)
+              )
             end
 
             foreign_key = association[:foreign_key]
@@ -119,61 +103,21 @@ class Oversee::Resources::Show < Oversee::Base
     hr(class: "my-4")
 
     # HAS_MANY Associations
-    if !!has_many_associations.length
-      div(class: "flex flex-col gap-8") do
-        has_many_associations.each do |association|
-          associated_resources = @resource.send(association[:name])
-          associated_resource_class = association[:class_name].constantize
-
-          div(class: "space-y-4") do
-            div(class:"flex items-center gap-2") do
-              render Oversee::Field::Label.new(key: association[:name].to_s.titleize, datatype: :data)
-              a(href: helpers.resources_path(resource_class_name: association[:class_name]), class: "hover:text-blue-500") { render Phlex::Icons::Iconoir::ArrowUpRight.new(class: "size-3") }
-            end
-
-            div(class: "bg-gray-50 p-2") do
-              # turbo_frame_tag(
-              #   dom_id(associated_resource_class, :table),
-              #   src: helpers.resources_table_path(resources_table_params(association)),
-              #   loading: :lazy,
-              #   data: { turbo_stream: true }
-              # ) do
-              #   div(class: "h-20 flex items-center justify-center") { render Phlex::Icons::Iconoir::DatabaseSearch.new(class: "animate-pulse size-6 text-gray-600") }
-              # end
-
-              if associated_resources.present?
-                div(class: "bg-white") do
-                  render Oversee::Resources::Table.new(
-                    resources: associated_resources,
-                    resource_class: associated_resource_class,
-                    params: @params
-                  )
-                end
-              else
-                p(class: "bg-gray-50 p-2 pr-4 flex gap-2 items-center text-xs") {
-                  render Phlex::Icons::Iconoir::DatabaseSearch.new(class: "size-3")
-                  plain "No #{association[:name].to_s.titleize.downcase} found"
-                }
-              end
-            end
-          end
-        end
-      end
-    end
+    render Oversee::Resources::Associations::HasMany.new(resource:, associations: has_many_associations, params: @params) if !!has_many_associations.length
   end
 
   private
 
   def rich_text_associations
-    @oversee_resource.rich_text_associations
+    @rich_text_associations ||= @oversee_resource.rich_text_associations
   end
 
   def belongs_to_associations
-    @oversee_resource.associations[:belongs_to]
+    @belongs_to_associations ||= @oversee_resource.associations[:belongs_to]
   end
 
   def has_many_associations
-    @oversee_resource.associations[:has_many]
+    @has_many_associations ||= @oversee_resource.associations[:has_many]
   end
 
   def has_associations?

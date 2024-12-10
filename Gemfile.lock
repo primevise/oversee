@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    oversee (0.3.0)
+    oversee (0.3.1)
       activerecord (>= 7.0.0)
       activestorage (>= 7.0.0)
       activesupport (>= 7.0.0)

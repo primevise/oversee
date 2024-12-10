@@ -7,8 +7,8 @@ Gem::Specification.new do |spec|
   spec.authors     = ["Elvinas Predkelis", "Primevise"]
   spec.email       = ["info@primevise.com"]
   spec.homepage    = "https://rubygems.org/gems/oversee"
-  spec.summary     = "Lightweight admin dashboard for Rails"
-  spec.description = "Lightweight admin dashboard for Rails"
+  spec.summary     = "Plug & play CMS for Rails applications"
+  spec.description = "Plug & play CMS for Rails applications"
  	spec.required_ruby_version = ">= 3.3.1"
 
   spec.metadata["homepage_uri"] = spec.homepage

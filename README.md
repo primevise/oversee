@@ -69,6 +69,7 @@ This gem would not be possible without the work of others. A big thank you goes 
 ## Who uses Oversee?
 
 - [Mintis](https://mintis.app)
+- [Hansa](https://hansahq.com)
 - [No Logo X](https://nologox.com)
 - [Release Server](https://releaseserver.com)
 - [College Life Work](https://work.collegelife.co)

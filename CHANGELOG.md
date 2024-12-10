@@ -4,7 +4,8 @@ This is the changelog for the `oversee` gem. For now, most of the updates will b
 
 ### Unreleased
 
-- TBA
+- Componentizing associated resources
+- Making boolean input friendlier - using toggle switch
 
 ### 0.3.1
 
