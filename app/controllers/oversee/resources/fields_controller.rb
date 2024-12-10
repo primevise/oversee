@@ -8,7 +8,6 @@ class Oversee::Resources::FieldsController < Oversee::ResourcesController
   # Renders the input field for a resource
   def input
     component_dom_id = dom_id(@resource, key)
-    puts "DATATYPE: #{datatype}"
     component = Oversee::Field::Set.new(resource: @resource, datatype:, key:, value:, state: :input)
 
     respond_to do |format|
