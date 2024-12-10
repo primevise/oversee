@@ -13,7 +13,6 @@ export default class extends Controller {
   }
 
   toggle() {
-    console.log("Toggling");
     if (!this.target) return;
     this.target.classList.toggle("hidden");
   }

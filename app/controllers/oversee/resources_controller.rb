@@ -60,7 +60,7 @@ module Oversee
         if @resource.update(resource_params)
           format.html { redirect_to resource_path(@resource.id, resource: @resource_class) }
           format.turbo_stream do
-            component = Oversee::Field::Display.new(resource: @resource, datatype:, key:, value: @resource.send(key))
+            component = Oversee::Field::Set.new(resource: @resource, datatype:, key:, value: @resource.send(key))
             render turbo_stream: turbo_stream.replace(dom_id(@resource, key), component)
           end
         else

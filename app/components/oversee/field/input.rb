@@ -1,4 +1,4 @@
-class Oversee::Field::Input < Oversee::Base
+class Oversee::Field::Input < Oversee::Field
   MAP = {
     belongs_to: Oversee::Field::Input::BelongsTo,
     boolean: Oversee::Field::Input::Boolean,
@@ -13,17 +13,6 @@ class Oversee::Field::Input < Oversee::Base
     text: Oversee::Field::Input::String,
   }
 
-  attr_reader :key
-  attr_reader :value
-  attr_reader :datatype
-
-  def initialize(key: nil, value: nil, datatype: :string, **options)
-    @key = key
-    @value = value
-    @datatype = datatype
-    @options = options
-  end
-
   def view_template
     render component_class.new(key:, value:, **@options)
   end
@@ -36,6 +25,4 @@ class Oversee::Field::Input < Oversee::Base
 
   private
 
-  def field_id = "resource_#{key.to_s}"
-  def field_name = "resource[#{key.to_s}]"
 end

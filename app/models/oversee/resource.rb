@@ -2,22 +2,21 @@ class Oversee::Resource
   attr_reader :resource_class
   attr_reader :resource_class_name
   attr_reader :instance
-  attr_reader :rich_text_associations
-
-  attr_accessor :associations
+  attr_reader :associations
 
   def initialize(resource_class:, instance: nil)
     @resource_class = resource_class
-    @resource_class_name = resource_class.to_s
     @instance = instance
   end
 
   # Route helpers
-  def resources_path
-
+  def index_path
+    "/resources/#{resource_class_name}"
   end
 
-  def resource_path
+  def show_path
+    # Rails.application.routes.url_helpers.resource_path(instance || object, resource_class_name:)
+    "/resources/#{resource_class_name}/#{instance.to_param}"
   end
 
   # Columns
@@ -58,5 +57,9 @@ class Oversee::Resource
 
   def rich_text_associations
     @rich_text_associations ||= associations[:has_one].select { |association| association[:rich_text] }
+  end
+
+  def resource_class_name
+    @resource_class_name ||= resource_class.to_s
   end
 end

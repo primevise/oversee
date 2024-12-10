@@ -35,11 +35,7 @@ class Oversee::Dashboard::Actions < Oversee::Base
         end
       end
     end
-    if show_action_section?
-      div(id: :oversee_filters, class: "hidden pt-4 mt-4 border-t flex flex-col gap-2") do
-        render Oversee::Dashboard::Filter.new
-      end
-    end
+    render Oversee::Dashboard::Filters.new if show_action_section?
   end
 
   private
