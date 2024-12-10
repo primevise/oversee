@@ -1,17 +1,16 @@
-class Oversee::Dashboard::Filters < Oversee::Base
+class Oversee::Dashboard::Actions < Oversee::Base
   def initialize(params: nil)
-
     @params = params
-
-    puts "params: #{params}"
-    puts "sortless_path: #{sortless_path}"
   end
 
   def view_template(&)
     div(class: "flex items-center justify-between") do
       div(class: "flex items-center gap-2") do
         if show_action_section?
-          button(class:"rounded-full bg-gray-100 inline-flex gap-2 items-center text-xs px-4 py-2 font-medium hover:bg-gray-200") do
+          button(
+            class:"rounded-full bg-gray-100 inline-flex gap-2 items-center text-xs px-4 py-2 font-medium hover:bg-gray-200",
+            data: { controller: "reveal", action: "reveal#toggle", reveal_revealable_id_value: "oversee-filters" }
+          ) do
             render Phlex::Icons::Iconoir::FilterAlt.new(class: "size-3")
             plain "Filters"
           end
@@ -34,6 +33,11 @@ class Oversee::Dashboard::Filters < Oversee::Base
           )
           button(class: "size-10 inline-flex items-center justify-center bg-gray-100 hover:bg-gray-200 transition-colors") { render Phlex::Icons::Iconoir::Search.new(class: "size-4 text-gray-600") }
         end
+      end
+    end
+    if show_action_section?
+      div(id: :oversee_filters, class: "hidden pt-4 mt-4 border-t flex flex-col gap-2") do
+        render Oversee::Dashboard::Filter.new
       end
     end
   end

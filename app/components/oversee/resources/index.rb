@@ -29,7 +29,7 @@ class Oversee::Resources::Index < Oversee::Base
     end
     hr(class: "my-4")
 
-    render Oversee::Dashboard::Filters.new(params: @params)
+    render Oversee::Dashboard::Actions.new(params: @params)
 
     hr(class: "mt-4")
     render Oversee::Resources::Table.new(resource_class: @resource_class, resources: @resources, params: @params)
