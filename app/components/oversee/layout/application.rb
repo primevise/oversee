@@ -28,7 +28,7 @@ class Oversee::Layout::Application < Oversee::Base
       end
 
       body(class: "min-h-screen bg-gray-100 p-4") do
-        # render Flash.new
+        render Oversee::Flash.new
 
         div(class: "flex gap-4 w-full") do
           div(class: "w-72 shrink-0") { render Oversee::Dashboard::Sidebar.new }

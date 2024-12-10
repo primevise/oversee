@@ -4,11 +4,6 @@ export default class extends Controller {
   static targets = ["copyIcon", "successIcon"];
   static values = { content: String };
 
-  connect() {
-    console.log("Copy icon", this.copyIconTarget);
-    console.log("Success icon", this.successIconTarget);
-  }
-
   async copy() {
     try {
       await navigator.clipboard.writeText(this.contentValue);

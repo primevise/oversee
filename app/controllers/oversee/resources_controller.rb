@@ -31,6 +31,7 @@ module Oversee
 
       respond_to do |format|
         if @resource.update(resource_params)
+          flash.now[:notice] = "Resource was successfully created."
           format.html { redirect_to resource_path(@resource.id, resource_class_name: @resource_class) }
           format.turbo_stream { redirect_to resource_path(@resource.id, resource_class_name: @resource_class), status: :see_other }
         else
@@ -58,10 +59,14 @@ module Oversee
 
       respond_to do |format|
         if @resource.update(resource_params)
+          flash.now[:notice] = "Resource was successfully updated."
           format.html { redirect_to resource_path(@resource.id, resource: @resource_class) }
           format.turbo_stream do
             component = Oversee::Field::Set.new(resource: @resource, datatype:, key:, value: @resource.send(key))
-            render turbo_stream: turbo_stream.replace(dom_id(@resource, key), component)
+            render turbo_stream: [
+              turbo_stream.replace(dom_id(@resource, key), component),
+              turbo_stream.replace(:flash, Oversee::Flash)
+            ]
           end
         else
         end
