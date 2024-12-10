@@ -1,10 +1,14 @@
-
 # Oversee
 
-Plug & play admin dashboard for Rails applications.
+Plug & play content management system (CMS) for Rails applications. Some may call it an admin dashboard too.
 
+<a href="https://rubygems.org/gems/oversee">
+  <img alt="Oversee GEM Version" src="https://img.shields.io/gem/v/oversee?color=10b981&include_prereleases&logo=ruby&logoColor=f43f5e">
+</a>
 
-[![Gem Version](https://badge.fury.io/rb/oversee.svg)](https://badge.fury.io/rb/oversee)
+<a href="https://rubygems.org/gems/oversee">
+  <img alt="Oversee GEM Version" src="https://img.shields.io/gem/dt/oversee?color=10b981&include_prereleases&logo=ruby&logoColor=f43f5e">
+</a>
 
 ---
 
@@ -35,6 +39,7 @@ $ bundle add oversee
 
 > [!TIP]
 > Currently, we don't release new gem versions too often due to the fragile nature of the gem. However, you can use the edge version of the gem by pointing directly to the git repository.
+>
 > ```ruby
 > gem "oversee", git: "https://github.com/primevise/oversee", branch: :main
 > ```
