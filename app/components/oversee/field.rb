@@ -16,13 +16,18 @@ class Oversee::Field < Oversee::Base
     plain "Oversee::Field"
   end
 
-  def resource_class_name
-    @resource_class_name ||= @resource.class.name
-  end
+  # Sub-components
+  def __LABEL__ = Oversee::Field::Label.new(resource:, key:, value:, datatype:, **@options)
+  def __VALUE__ = Oversee::Field::Value.new(resource:, key:, value:, datatype:, **@options)
+  def __INPUT__ = Oversee::Field::Input.new(resource:, key:, value:, datatype:, **@options)
+  def __FORM__ = Oversee::Field::Form.new(resource:, key:, value:, datatype:, **@options)
+  def __SET__ = Oversee::Field::Set.new(resource:, key:, value:, datatype:, **@options)
 
+  # Helpers & Decorators
   def field_id
     @field_id ||= "resource_#{key}"
   end
+
   def field_name
     @field_name ||= "resource[#{key}]"
   end
@@ -31,6 +36,7 @@ class Oversee::Field < Oversee::Base
     @form_id ||= dom_id(resource, "#{key}_form")
   end
 
-  # def __SET__(...) = Oversee::Field::Set.new(...)
-  # def __LABEL__(...) = Oversee::Field::Label.new(...)
+  def resource_class_name
+    @resource_class_name ||= @resource.class.name
+  end
 end

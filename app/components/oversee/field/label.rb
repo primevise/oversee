@@ -20,6 +20,6 @@ class Oversee::Field::Label < Oversee::Field
   end
 
   def icon
-    ICON_MAP[datatype] || ICON_MAP[:data]
+    ICON_MAP[datatype&.to_sym] || ICON_MAP[:data]
   end
 end
