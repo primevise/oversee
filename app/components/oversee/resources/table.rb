@@ -65,7 +65,7 @@ class Oversee::Resources::Table < Oversee::Base
                       (
                         helpers.resource_path(
                           resource.id,
-                          resource_class_name: @params[:resource_class_name]
+                          resource_class_name: @resource_class
                         )
                       ),
                     data: { turbo_stream: true },

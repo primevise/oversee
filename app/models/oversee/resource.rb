@@ -1,11 +1,14 @@
 class Oversee::Resource
+  attr_reader :klass
   attr_reader :resource_class
   attr_reader :resource_class_name
   attr_reader :instance
   attr_reader :associations
 
-  def initialize(resource_class:, instance: nil)
-    @resource_class = resource_class
+  def initialize(klass: nil, resource_class: nil, instance: nil)
+    @klass = klass || resource_class
+    @resource_class = resource_class # For backwards compatibility
+
     @instance = instance
   end
 
