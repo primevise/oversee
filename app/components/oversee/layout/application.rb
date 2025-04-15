@@ -25,17 +25,14 @@ class Oversee::Layout::Application < Oversee::Base
         render Oversee::Dashboard::Javascript.new
         render Oversee::Dashboard::Tailwind.new
       end
-
-      body(class: "min-h-screen bg-gray-100") do
+      body(class: "bg-white") do
         render Oversee::Flash.new
 
-        div(class: "min-h-svh") do
-          div(class: "min-h-svh flex flex-col md:flex-row") do
+        div(class: "h-svh") do
+          div(class: "h-svh flex flex-col md:flex-row") do
             div(class: "w-72 shrink-0") { render Oversee::Dashboard::Sidebar.new }
-            div(class: "min-h-svh w-full") do
-              div(class: "h-full bg-white overflow-clip _rounded-lg border-l _border-b-2 border-gray-100") do
-                yield
-              end
+            div(class: "border-l border-gray-100 h-svh w-full overflow-y-scroll bg-white") do
+              yield if block_given?
             end
           end
         end

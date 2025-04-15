@@ -13,7 +13,7 @@ class Oversee::Dashboard::Header < Oversee::Base
 
   def view_template(&)
 
-    div(class: "min-h-10 flex items-center justify-between") do
+    div(class: "h-10 flex items-center justify-between px-4") do
       if block_given?
         yield(self)
       else
