@@ -2,7 +2,7 @@
 
 class Oversee::Dashboard::Sidebar < Oversee::Base
   def view_template
-    div(class: "bg-white p-4 rounded-lg") do
+    div(class: "bg-white min-h-svh p-4") do
       button(class: "mb-4 ") { collapse_icon } unless true
 
       p(class: "text-[0.7rem] uppercase text-gray-400 font-medium mb-2") { "Menu" }

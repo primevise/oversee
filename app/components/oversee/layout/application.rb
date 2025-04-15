@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Oversee::Layout::Application < Oversee::Base
-  extend Phlex::Kit
 
   include Phlex::Rails::Helpers::CSPMetaTag
   include Phlex::Rails::Helpers::CSRFMetaTags
@@ -27,19 +26,19 @@ class Oversee::Layout::Application < Oversee::Base
         render Oversee::Dashboard::Tailwind.new
       end
 
-      body(class: "min-h-screen bg-gray-100 p-4") do
+      body(class: "min-h-screen bg-gray-100") do
         render Oversee::Flash.new
 
-        div(class: "flex gap-4 w-full") do
-          div(class: "w-72 shrink-0") { render Oversee::Dashboard::Sidebar.new }
-          div(class: "w-full overflow-scroll") do
-            div(class: "bg-white rounded-lg overflow-clip p-4") do
-              yield
+        div(class: "min-h-svh") do
+          div(class: "min-h-svh flex flex-col md:flex-row") do
+            div(class: "w-72 shrink-0") { render Oversee::Dashboard::Sidebar.new }
+            div(class: "min-h-svh w-full") do
+              div(class: "h-full bg-white overflow-clip _rounded-lg border-l _border-b-2 border-gray-100") do
+                yield
+              end
             end
           end
         end
-
-
       end
     end
   end
