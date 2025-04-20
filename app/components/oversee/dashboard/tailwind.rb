@@ -1,10 +1,34 @@
 class Oversee::Dashboard::Tailwind < Phlex::HTML
   def view_template
-    script(src: "https://cdn.tailwindcss.com/3.4.15?plugins=typography@0.5.15")
+    script(src: "https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4")
     style(type:"text/tailwindcss") do
+      raw tailwind_theme_css.html_safe
       raw pagy_css.html_safe
       raw trix_css.html_safe
     end
+  end
+
+  def tailwind_theme_css
+    <<~CSS
+      @layer base {
+        *,
+        ::after,
+        ::before,
+        ::backdrop,
+        ::file-selector-button {
+          border-color: var(--color-gray-200, currentColor);
+        }
+      }
+
+      @theme {
+        /* Colors */
+        --color-primary: oklch(0.56 0.236 273.59);
+
+        /* ANIMATIONS */
+        --animate-fade-in-down: fadeInDown 0.35s ease-in-out;
+        --animate-slide-in-right: slideInRight 0.3s ease-in-out;
+      }
+    CSS
   end
 
   def trix_css

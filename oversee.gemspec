@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "essence", ">= 0.2.3"
   spec.add_dependency "importmap-rails"
   spec.add_dependency "pagy", ">= 7.0.0"
-  spec.add_dependency "phlex-rails", ">= 2.0.0.beta2"
+  spec.add_dependency "phlex-rails", ">= 2.2.0"
   spec.add_dependency "phlex-icons-iconoir", ">= 0.1.0"
   spec.add_dependency "turbo-rails", ">= 2.0.0"
   spec.add_dependency "zeitwerk", ">= 2.6.12"

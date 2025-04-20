@@ -9,7 +9,7 @@ class Oversee::Dashboard::Pagination < Oversee::Base
   end
 
   def view_template
-    div(class:"mt-4 flex items-center justify-between") do
+    div(class:"mt-4 flex items-center justify-between px-4") do
 
       div(class: "font-regular text-xs") do
         raw pagy_info(@pagy).html_safe

@@ -23,42 +23,55 @@ class Oversee::Resources::Show < Oversee::Base
   end
 
   def view_template
-    render Oversee::Dashboard::Header.new(title: @resource_class.to_s.pluralize) do |h|
-      h.left do
-        h.separator
-        div(class: "inline-flex items-center gap-1 text-sm bg-gray-100 text-gray-600 h-6 px-2") do
+    render Oversee::Dashboard::Header.new do |header|
+      header.item do
+        header.title { @resource_class.to_s.pluralize }
+        div(class: "inline-flex items-center justify-center gap-1 text-sm bg-gray-100 text-gray-600 h-6 px-2 rounded-xs min-w-10 w-fit") do
           render Phlex::Icons::Iconoir::Hashtag.new(class: "size-2.5 text-gray-500", stroke_width: 2)
           span { @resource.to_param }
         end
       end
-      h.right do
-        details(class: "relative inline-block") do
-          summary(class: "cursor-pointer list-none") do
-            div(class: "inline-flex items-center justify-center size-8 hover:bg-indigo-50 transition") do
-              render Phlex::Icons::Iconoir::MoreHorizCircle.new(class: "size-4 text-gray-500")
-            end
-          end
-          ul(
-            class:
-              "absolute p-2 mt-2 right-0 top-full min-w-40 overflow-hidden rounded-lg bg-white border border-b-2 border-gray-200/75 divide-y text-xs text-gray-500 font-medium"
-          ) do
-            li(class: "w-full") do
-              button_to(helpers.resource_path(resource_class_name: @params[:resource_class_name]), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "p-1 hover:bg-gray-50 w-full flex items-center gap-2 transition duration-100") do
-                div(class: "inline-flex items-center justify-center size-6 bg-gray-100") do
-                  render Phlex::Icons::Iconoir::Trash.new(class: "size-3 text-gray-500")
-                end
-                plain "Delete"
-              end
-            end
-          end
-        end
+      header.item do
+        # render Oversee::Button.new(size: :sm, kind: :primary, href: new_entry_path(client_id: client.id, modal: true), data: { turbo_frame: :modal }) do
+        #   render Phlex::Icons::Iconoir::Plus.new(class: "size-4 text-indigo-100", stroke_width: 2)
+        #   plain "Add new entry"
+        # end
       end
     end
-
-    hr(class: "my-4")
+    # render Oversee::Dashboard::Header.new(title: @resource_class.to_s.pluralize) do |h|
+    #   h.left do
+    #     h.separator
+    #     div(class: "inline-flex items-center gap-1 text-sm bg-gray-100 text-gray-600 h-6 px-2") do
+    #       render Phlex::Icons::Iconoir::Hashtag.new(class: "size-2.5 text-gray-500", stroke_width: 2)
+    #       span { @resource.to_param }
+    #     end
+    #   end
+    #   h.right do
+    #     details(class: "relative inline-block") do
+    #       summary(class: "cursor-pointer list-none") do
+    #         div(class: "inline-flex items-center justify-center size-8 hover:bg-indigo-50 transition") do
+    #           render Phlex::Icons::Iconoir::MoreHorizCircle.new(class: "size-4 text-gray-500")
+    #         end
+    #       end
+    #       ul(
+    #         class:
+    #           "absolute p-2 mt-2 right-0 top-full min-w-40 overflow-hidden rounded-lg bg-white border border-b-2 border-gray-200/75 divide-y text-xs text-gray-500 font-medium"
+    #       ) do
+    #         li(class: "w-full") do
+    #           button_to(helpers.resource_path(resource_class_name: @params[:resource_class_name]), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "p-1 hover:bg-gray-50 w-full flex items-center gap-2 transition duration-100") do
+    #             div(class: "inline-flex items-center justify-center size-6 bg-gray-100") do
+    #               render Phlex::Icons::Iconoir::Trash.new(class: "size-3 text-gray-500")
+    #             end
+    #             plain "Delete"
+    #           end
+    #         end
+    #       end
+    #     end
+    #   end
+    # end
 
     # COLUMNS
-    div(class: "flex flex-col gap-4") do
+    div(class: "flex flex-col gap-4 p-4") do
       @resource_class.columns_hash.each do |key, metadata|
         next if @oversee_resource.foreign_keys.include?(key.to_s)
         render Oversee::Field::Set.new(resource:, key:, value: @resource.send(key), datatype: metadata.sql_type_metadata.type)

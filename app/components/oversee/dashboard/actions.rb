@@ -4,7 +4,7 @@ class Oversee::Dashboard::Actions < Oversee::Base
   end
 
   def view_template(&)
-    div(class: "flex items-center justify-between") do
+    div(class: "flex items-center justify-between px-4 pt-4") do
       div(class: "flex items-center gap-2") do
         if show_action_section?
           button(

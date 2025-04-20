@@ -12,9 +12,17 @@ class Oversee::Resources::New < Oversee::Base
   end
 
   def view_template
-    render Oversee::Dashboard::Header.new(title: @resource_class.to_s, subtitle: "Creating new record")
+    render Oversee::Dashboard::Header.new do |header|
+      header.item do
+        header.title { @resource_class.to_s.pluralize }
+      end
+      header.item do
+      end
+    end
 
-    hr(class: "my-4")
+    # render Oversee::Dashboard::Header.new(title: @resource_class.to_s, subtitle: "Creating new record")
+
+    # hr(class: "my-4")
 
     render Oversee::Resources::Form.new(resource: @resource)
   end
