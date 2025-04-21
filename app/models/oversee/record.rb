@@ -1,6 +1,6 @@
 class Oversee::Record
-  def initialize(record:, entity: nil, **attributes)
+  def initialize(record:, resource: nil, **attributes)
     @record = record
-    @entity = entity || Oversee::Entity.new(entity: record.class)
+    @entity = resource || Oversee::Resource.new(resource: record.class)
   end
 end

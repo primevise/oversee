@@ -7,9 +7,15 @@ class Oversee::Dashboard::Index < Oversee::Base
   end
 
   def view_template
-    div(class: "flex items-center justify-between") do
-      h1(class: "text-lg font-medium text-gray-900") { "Dashboard" }
-      h1(class: "text-sm font-medium text-gray-500") { Date.current.to_fs(:long) }
+
+    render Oversee::Dashboard::Header.new do |header|
+      header.item do
+        header.title { "Dashboard" }
+      end
+      header.item do
+        p(class: "text-gray-500") { Date.current.to_fs(:long) }
+
+      end
     end
 
     if Oversee.card_class_names.present?
@@ -20,16 +26,17 @@ class Oversee::Dashboard::Index < Oversee::Base
       end
     end
 
-    hr(class: "my-4")
 
-    div(class: "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4") do
-      Oversee.application_resource_names.sort.each do |resource_class_name|
-          a(href: helpers.resources_path(resource_class_name:), class: "w-full bg-gray-100/75 block hover:bg-gray-50 p-4 truncate") do
-            div(class: "flex items-center justify-center size-8 bg-white") do
-              render Phlex::Icons::Iconoir::Folder.new(class: "size-4 text-gray-400")
+    div(class: "p-4") do
+      div(class: "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4") do
+        Oversee.application_entity_names.sort.each do |entity|
+            a(href: helpers.resources_path(entity:), class: "w-full bg-gray-100/75 block hover:bg-gray-50 p-4 truncate rounded-xs") do
+              div(class: "flex items-center justify-center size-8 bg-white") do
+                render Phlex::Icons::Iconoir::Folder.new(class: "size-4 text-gray-400")
+              end
+              p(class: "mt-4 font-medium text-gray-700") { entity }
             end
-            p(class: "mt-4 font-medium text-gray-700") { resource_class_name }
-          end
+        end
       end
     end
   end

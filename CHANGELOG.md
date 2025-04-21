@@ -4,7 +4,7 @@ This is the changelog for the `oversee` gem. For now, most of the updates will b
 
 ### Unreleased
 
-- Introducing `Oversee::Entity` and `Oversee::Record` classes
+- Separating `Oversee::Resource` and `Oversee::Record` classes
 - Componentizing associated resources
 - Adding `essence` component library to make the UI streamlined
 - Making boolean input friendlier - using toggle switch

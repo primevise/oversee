@@ -15,7 +15,7 @@ class Oversee::Resources::Show < Oversee::Base
     @resource_associations = resource_associations
     @params = params
 
-    @oversee_resource = Oversee::Resource.new(resource_class: @resource_class, instance: @resource)
+    @oversee_resource = Oversee::Resource.new(klass: @resource_class)
   end
 
   def around_template
@@ -70,8 +70,9 @@ class Oversee::Resources::Show < Oversee::Base
     #   end
     # end
 
+    div(class: "p-4") do
     # COLUMNS
-    div(class: "flex flex-col gap-4 p-4") do
+    div(class: "flex flex-col gap-4") do
       @resource_class.columns_hash.each do |key, metadata|
         next if @oversee_resource.foreign_keys.include?(key.to_s)
         render Oversee::Field::Set.new(resource:, key:, value: @resource.send(key), datatype: metadata.sql_type_metadata.type)
@@ -117,6 +118,7 @@ class Oversee::Resources::Show < Oversee::Base
 
     # HAS_MANY Associations
     render Oversee::Resources::Associations::HasMany.new(resource:, associations: has_many_associations, params: @params) if !!has_many_associations.length
+    end
   end
 
   private
