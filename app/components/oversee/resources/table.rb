@@ -65,12 +65,12 @@ class Oversee::Resources::Table < Oversee::Base
                       (
                         helpers.resource_path(
                           resource.id,
-                          resource_class_name: @resource_class
+                          resource: @resource_class
                         )
                       ),
                     data: { turbo_stream: true },
-                    class: "size-6 bg-gray-100 inline-flex items-center justify-center hover:bg-gray-200 group"
-                  ) { render Phlex::Icons::Iconoir::Eye.new(class: "size-4 text-gray-500") }
+                    class: "size-6 bg-gray-100 inline-flex items-center justify-center hover:bg-gray-200"
+                  ) { render Phlex::Icons::Iconoir::ArrowUpRight.new(class: "size-3.5 text-gray-400") }
                 end
               end
 

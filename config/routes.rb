@@ -1,6 +1,6 @@
 Oversee::Engine.routes.draw do
   # Resources
-  scope ":resource_class_name", controller: "resources" do
+  scope ":resource", controller: "resources" do
     get "/", action: :index, as: :resources
     post "/", action: :create, as: :create_resource
     get "/new", action: :new, as: :new_resource

@@ -8,11 +8,11 @@ class Oversee::Resource
   end
 
   # Route helpers
-  def index_path
-    "/resources/#{class_name}"
+  def index_path(**params)
+    "/#{class_name}"
   end
 
-  def show_path(record:)
+  def show_path(record:, **params)
     # Rails.application.routes.url_helpers.resource_path(instance || object, class_name:)
     "/resources/#{class_name}/#{record.to_param}"
   end

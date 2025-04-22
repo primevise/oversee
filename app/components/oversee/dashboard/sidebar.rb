@@ -65,11 +65,11 @@ class Oversee::Dashboard::Sidebar < Oversee::Base
           render Phlex::Icons::Iconoir::NavArrowDown.new(class: "size-4 text-gray-400 transform transition-transform group-open:rotate-180 group-hover:text-blue-500")
         end
         ul(class: "mt-2 text-sm text-gray-700 overflow-x-hidden") do
-          Oversee.application_resource_names.sort.each do |resource_class_name|
+          Oversee.application_resource_names.sort.each do |resource|
             li do
-              a(href: helpers.resources_path(resource_class_name:), class: "flex items-center gap-2 hover:bg-gray-50 p-2 truncate") do
+              a(href: helpers.resources_path(resource:), class: "flex items-center gap-2 hover:bg-gray-50 p-2 truncate") do
                 render Phlex::Icons::Iconoir::Folder.new(class: "size-4 text-gray-400")
-                span { resource_class_name }
+                span { resource }
               end
             end
           end

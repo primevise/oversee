@@ -29,12 +29,12 @@ class Oversee::Dashboard::Index < Oversee::Base
 
     div(class: "p-4") do
       div(class: "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4") do
-        Oversee.application_entity_names.sort.each do |entity|
-            a(href: helpers.resources_path(entity:), class: "w-full bg-gray-100/75 block hover:bg-gray-50 p-4 truncate rounded-xs") do
+        Oversee.application_resource_names.sort.each do |resource|
+            a(href: helpers.resources_path(resource:), class: "w-full bg-gray-100/75 block hover:bg-gray-50 p-4 truncate rounded-xs") do
               div(class: "flex items-center justify-center size-8 bg-white") do
                 render Phlex::Icons::Iconoir::Folder.new(class: "size-4 text-gray-400")
               end
-              p(class: "mt-4 font-medium text-gray-700") { entity }
+              p(class: "mt-4 font-medium text-gray-700") { resource }
             end
         end
       end
