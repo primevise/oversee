@@ -58,7 +58,7 @@ class Oversee::Resources::Show < Oversee::Base
     #           "absolute p-2 mt-2 right-0 top-full min-w-40 overflow-hidden rounded-lg bg-white border border-b-2 border-gray-200/75 divide-y text-xs text-gray-500 font-medium"
     #       ) do
     #         li(class: "w-full") do
-    #           button_to(helpers.resource_path(resource_class_name: @params[:resource_class_name]), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "p-1 hover:bg-gray-50 w-full flex items-center gap-2 transition duration-100") do
+    #           button_to(resource_path(resource_class_name: @params[:resource_class_name]), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "p-1 hover:bg-gray-50 w-full flex items-center gap-2 transition duration-100") do
     #             div(class: "inline-flex items-center justify-center size-6 bg-gray-100") do
     #               render Phlex::Icons::Iconoir::Trash.new(class: "size-3 text-gray-500")
     #             end
@@ -95,13 +95,13 @@ class Oversee::Resources::Show < Oversee::Base
               render Oversee::Field::Label.new(
                 key: association[:name].to_s.titleize,
                 datatype: :data,
-                href: helpers.resources_path(resource_class_name: association[:class_name].to_s)
+                href: resources_path(resource_class_name: association[:class_name].to_s)
               )
             end
 
             foreign_key = association[:foreign_key]
             foreign_key_value = @resource[association[:foreign_key]]
-            path = !!foreign_key_value ? helpers.resource_path(id: foreign_key_value, resource_class_name: association[:class_name]) : helpers.resources_path(resource_class_name: association[:class_name])
+            path = !!foreign_key_value ? resource_path(id: foreign_key_value, resource_class_name: association[:class_name]) : resources_path(resource_class_name: association[:class_name])
 
             div(id: dom_id(@resource, :"#{foreign_key}_row"), class: "flex items-center gap-2 mt-4") do
               render Oversee::Field::Display.new(resource:, key: foreign_key, value: foreign_key_value, datatype: :belongs_to, display_key: true)

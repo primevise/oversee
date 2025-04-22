@@ -22,7 +22,7 @@ class Oversee::Resources::Associations::RichText < Oversee::Resources::Base
             render Oversee::Field::Label.new(
               key: key.to_s.titleize,
               datatype: :rich_text,
-              href: helpers.resources_path(resource_class_name: association[:class_name].to_s)
+              href: resources_path(resource_class_name: association[:class_name].to_s)
             )
           end
         end

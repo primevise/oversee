@@ -7,7 +7,6 @@ class Oversee::Dashboard::Index < Oversee::Base
   end
 
   def view_template
-
     render Oversee::Dashboard::Header.new do |header|
       header.item do
         header.title { "Dashboard" }
@@ -26,11 +25,10 @@ class Oversee::Dashboard::Index < Oversee::Base
       end
     end
 
-
     div(class: "p-4") do
       div(class: "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4") do
         Oversee.application_resource_names.sort.each do |resource|
-            a(href: helpers.resources_path(resource:), class: "w-full bg-gray-100/75 block hover:bg-gray-50 p-4 truncate rounded-xs") do
+            a(href: resources_path(resource:), class: "w-full bg-gray-100/75 block hover:bg-gray-50 p-4 truncate rounded-xs") do
               div(class: "flex items-center justify-center size-8 bg-white") do
                 render Phlex::Icons::Iconoir::Folder.new(class: "size-4 text-gray-400")
               end

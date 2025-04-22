@@ -11,7 +11,7 @@ class Oversee::Resources::Form < Oversee::Base
       render Oversee::Resources::Errors.new(resource: @resource)
       form_with model: @resource,
                 scope: :resource,
-                url: helpers.create_resource_path(resource_class_name:),
+                url: create_resource_path(resource_class_name:),
                 scope: :resource do |f|
         @resource.class.columns_hash.each do |key, metadata|
           if [@resource.class.primary_key, "created_at", "updated_at"].include?(key)

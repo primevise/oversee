@@ -22,14 +22,14 @@ class Oversee::Resources::Associations::HasMany < Oversee::Resources::Base
             render Oversee::Field::Label.new(
               key: association[:name].to_s.titleize,
               datatype: :has_many,
-              href: helpers.resources_path(resource_class_name: association[:class_name])
+              href: resources_path(resource_class_name: association[:class_name])
             )
           end
 
           div(class: "bg-gray-50 p-2") do
             # turbo_frame_tag(
             #   dom_id(associated_resource_class, :table),
-            #   src: helpers.resources_table_path(resources_table_params(association)),
+            #   src: resources_table_path(resources_table_params(association)),
             #   loading: :lazy,
             #   data: { turbo_stream: true }
             # ) do

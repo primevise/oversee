@@ -14,7 +14,7 @@ class Oversee::Dashboard::Sidebar < Oversee::Base
           end
         end
         li do
-          a(href: helpers.main_app.root_path, class: "flex items-center gap-2 hover:bg-gray-50 p-2 rounded-lg") do
+          a(href: main_app.root_path, class: "flex items-center gap-2 hover:bg-gray-50 p-2 rounded-lg") do
             render Phlex::Icons::Iconoir::HomeAltSlimHoriz.new(class: "size-4 text-gray-400")
             span { "Return to app" }
           end
@@ -67,7 +67,7 @@ class Oversee::Dashboard::Sidebar < Oversee::Base
         ul(class: "mt-2 text-sm text-gray-700 overflow-x-hidden") do
           Oversee.application_resource_names.sort.each do |resource|
             li do
-              a(href: helpers.resources_path(resource:), class: "flex items-center gap-2 hover:bg-gray-50 p-2 truncate") do
+              a(href: resources_path(resource:), class: "flex items-center gap-2 hover:bg-gray-50 p-2 truncate") do
                 render Phlex::Icons::Iconoir::Folder.new(class: "size-4 text-gray-400")
                 span { resource }
               end

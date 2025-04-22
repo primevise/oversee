@@ -23,7 +23,7 @@ class Oversee::Resources::Index < Oversee::Base
         render Oversee::Button.new(
           size: :sm,
           kind: :primary,
-          href: helpers.new_resource_path(@params[:resource]),
+          href: new_resource_path(@params[:resource]),
           target: "_top"
         ) do
           render Phlex::Icons::Iconoir::Plus.new(class: "size-4 text-indigo-100", stroke_width: 2)

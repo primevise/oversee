@@ -25,7 +25,7 @@ class Oversee::Resources::Table < Oversee::Base
                 a(
                   href:
                     (
-                      helpers.resources_path(
+                      resources_path(
                         resource: @params[:resource],
                         sort_attribute: key,
                         sort_direction:
@@ -63,7 +63,7 @@ class Oversee::Resources::Table < Oversee::Base
                   a(
                     href:
                       (
-                        helpers.resource_path(
+                        resource_path(
                           resource.id,
                           resource: @resource_class
                         )
@@ -87,7 +87,7 @@ class Oversee::Resources::Table < Oversee::Base
                 foreign_id = resource.send(association.foreign_key)
                 resource_class_name = association.class_name
 
-                path = !!foreign_id ? helpers.resource_path(id: foreign_id, resource_class_name:) : helpers.resources_path(resource_class_name: resource_class_name)
+                path = !!foreign_id ? resource_path(id: foreign_id, resource_class_name:) : resources_path(resource_class_name: resource_class_name)
 
                 row.data do
                   div(class: "max-w-96") do
