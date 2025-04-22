@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class Oversee::Resources::New < Oversee::Base
-  def initialize(resource:, resource_class:, params:)
+  def initialize(record:, resource:, params:)
+    @record = Oversee::Record.new(record:)
     @resource = resource
-    @resource_class = resource_class
     @params = params
   end
 
@@ -14,7 +14,7 @@ class Oversee::Resources::New < Oversee::Base
   def view_template
     render Oversee::Dashboard::Header.new do |header|
       header.item do
-        header.title { @resource_class.to_s.pluralize }
+        header.title { @resource.to_s.pluralize }
       end
       header.item do
       end
@@ -24,6 +24,6 @@ class Oversee::Resources::New < Oversee::Base
 
     # hr(class: "my-4")
 
-    render Oversee::Resources::Form.new(resource: @resource)
+    render Oversee::Resources::Form.new(record: @record)
   end
 end

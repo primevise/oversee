@@ -16,6 +16,7 @@ class Oversee::Resources::Index < Oversee::Base
   def view_template
     render Oversee::Dashboard::Header.new do |header|
       header.item do
+        render Phlex::Icons::Iconoir::Folder.new(class: "size-4.5 text-gray-400", stroke_width: 1.75)
         header.title { @resource_class.to_s.pluralize }
       end
       header.item do

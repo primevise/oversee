@@ -25,19 +25,22 @@ class Oversee::Resources::Show < Oversee::Base
   def view_template
     render Oversee::Dashboard::Header.new do |header|
       header.item do
+        render Phlex::Icons::Iconoir::Folder.new(class: "size-4.5 text-gray-400", stroke_width: 1.75)
         header.title { @resource_class.to_s.pluralize }
         div(class: "inline-flex items-center justify-center gap-1 text-sm bg-gray-100 text-gray-600 h-6 px-2 rounded-xs min-w-10 w-fit") do
           render Phlex::Icons::Iconoir::Hashtag.new(class: "size-2.5 text-gray-500", stroke_width: 2)
           span { @resource.to_param }
         end
       end
-      header.item do
-        # render Oversee::Button.new(size: :sm, kind: :primary, href: new_entry_path(client_id: client.id, modal: true), data: { turbo_frame: :modal }) do
-        #   render Phlex::Icons::Iconoir::Plus.new(class: "size-4 text-indigo-100", stroke_width: 2)
-        #   plain "Add new entry"
-        # end
+      header.item
+    end
+
+    if false
+      div(id: "record-toolbar", class: "h-12 flex items-center px-4 border-b") do
+        render Oversee::Button.new(size: :xs) { "Mark as completed" }
       end
     end
+
     # render Oversee::Dashboard::Header.new(title: @resource_class.to_s.pluralize) do |h|
     #   h.left do
     #     h.separator

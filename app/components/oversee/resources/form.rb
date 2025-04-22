@@ -2,19 +2,21 @@
 
 class Oversee::Resources::Form < Oversee::Base
   include Phlex::Rails::Helpers::FormWith
-  def initialize(resource:)
-    @resource = resource
+
+  def initialize(record:)
+    @record = record
+    @resource = @record.resource
   end
 
   def view_template
-    div(id: dom_id(@resource)) do
-      render Oversee::Resources::Errors.new(resource: @resource)
-      form_with model: @resource,
+    div(id: dom_id(@record.record)) do
+      render Oversee::Resources::Errors.new(resource: @record.record)
+      form_with model: @record,
                 scope: :resource,
-                url: create_resource_path(resource_class_name:),
+                url: create_resource_path(@record.record),
                 scope: :resource do |f|
-        @resource.class.columns_hash.each do |key, metadata|
-          if [@resource.class.primary_key, "created_at", "updated_at"].include?(key)
+        @resource.columns_hash.each do |key, metadata|
+          if [@resource.primary_key, "created_at", "updated_at"].include?(key)
             next
           end
           div(class: "py-2") do
