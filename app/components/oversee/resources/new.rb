@@ -14,16 +14,14 @@ class Oversee::Resources::New < Oversee::Base
   def view_template
     render Oversee::Dashboard::Header.new do |header|
       header.item do
-        header.title { @resource.to_s.pluralize }
-      end
-      header.item do
+        render Phlex::Icons::Iconoir::Folder.new(class: "size-4.5 text-gray-400", stroke_width: 1.75)
+        header.title { "New #{@resource.to_s}"}
       end
     end
 
-    # render Oversee::Dashboard::Header.new(title: @resource_class.to_s, subtitle: "Creating new record")
 
-    # hr(class: "my-4")
-
-    render Oversee::Resources::Form.new(record: @record)
+    div(class: "p-4") do
+      render Oversee::Resources::Form.new(record: @record)
+    end
   end
 end

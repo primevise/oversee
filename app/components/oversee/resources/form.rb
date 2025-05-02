@@ -11,14 +11,14 @@ class Oversee::Resources::Form < Oversee::Base
   def view_template
     div(id: dom_id(@record.record)) do
       render Oversee::Resources::Errors.new(resource: @record.record)
-      form_with model: @record,
+      form_with model: @record.record,
                 scope: :resource,
-                url: create_resource_path(@record.record),
+                url: create_resource_path,
                 scope: :resource do |f|
-        @resource.columns_hash.each do |key, metadata|
-          if [@resource.primary_key, "created_at", "updated_at"].include?(key)
-            next
-          end
+        @resource.columns_for_create.each do |key, metadata|
+          # if [@resource.primary_key, "created_at", "updated_at"].include?(key)
+          #   next
+          # end
           div(class: "py-2") do
             render Oversee::Field::Label.new(
                     key: key,
