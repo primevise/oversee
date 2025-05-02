@@ -15,10 +15,8 @@ class Oversee::Resources::Form < Oversee::Base
                 scope: :resource,
                 url: create_resource_path,
                 scope: :resource do |f|
+
         @resource.columns_for_create.each do |key, metadata|
-          # if [@resource.primary_key, "created_at", "updated_at"].include?(key)
-          #   next
-          # end
           div(class: "py-2") do
             render Oversee::Field::Label.new(
                     key: key,

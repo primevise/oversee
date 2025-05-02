@@ -13,7 +13,6 @@ module Oversee
         resources: @records,
         resource_class: @resource,
         pagy: @pagy,
-        params: params
       ), layout: false
     end
 
@@ -153,8 +152,8 @@ module Oversee
     end
 
     def resource_params
-      params[:resource].delete(:oversee_key)
-      params[:resource].delete(:oversee_datatype)
+      params.dig(:resource)&.delete(:oversee_key)
+      params.dig(:resource)&.delete(:oversee_datatype)
 
       params.require(:resource).permit!
     end

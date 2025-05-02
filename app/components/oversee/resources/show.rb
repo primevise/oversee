@@ -13,8 +13,6 @@ class Oversee::Resources::Show < Oversee::Base
     @resource = resource
     @resource_class = resource_class
     @resource_associations = resource_associations
-    @params = params
-
     @oversee_resource = Oversee::Resource.new(klass: @resource_class)
   end
 
@@ -61,7 +59,7 @@ class Oversee::Resources::Show < Oversee::Base
     #           "absolute p-2 mt-2 right-0 top-full min-w-40 overflow-hidden rounded-lg bg-white border border-b-2 border-gray-200/75 divide-y text-xs text-gray-500 font-medium"
     #       ) do
     #         li(class: "w-full") do
-    #           button_to(resource_path(resource_class_name: @params[:resource_class_name]), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "p-1 hover:bg-gray-50 w-full flex items-center gap-2 transition duration-100") do
+    #           button_to(resource_path(resource_class_name: params[:resource_class_name]), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "p-1 hover:bg-gray-50 w-full flex items-center gap-2 transition duration-100") do
     #             div(class: "inline-flex items-center justify-center size-6 bg-gray-100") do
     #               render Phlex::Icons::Iconoir::Trash.new(class: "size-3 text-gray-500")
     #             end
@@ -120,7 +118,7 @@ class Oversee::Resources::Show < Oversee::Base
     hr(class: "my-4")
 
     # HAS_MANY Associations
-    render Oversee::Resources::Associations::HasMany.new(resource:, associations: has_many_associations, params: @params) if !!has_many_associations.length
+    render Oversee::Resources::Associations::HasMany.new(resource:, associations: has_many_associations) if !!has_many_associations.length
     end
   end
 

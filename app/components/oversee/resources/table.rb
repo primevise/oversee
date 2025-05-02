@@ -3,10 +3,9 @@
 class Oversee::Resources::Table < Oversee::Base
   include Phlex::Rails::Helpers::TurboFrameTag
 
-  def initialize(resources:, resource_class:, params:, **options)
+  def initialize(resources:, resource_class:, **options)
     @resources = resources
     @resource_class = resource_class || resources.first.class
-    @params = params
     @options = options
 
     @oversee_resource = Oversee::Resource.new(klass: @resource_class)
@@ -26,10 +25,10 @@ class Oversee::Resources::Table < Oversee::Base
                   href:
                     (
                       resources_path(
-                        resource: @params[:resource],
+                        resource: params[:resource],
                         sort_attribute: key,
                         sort_direction:
-                          @params[:sort_direction] == "asc" ? :desc : :asc
+                          params[:sort_direction] == "asc" ? :desc : :asc
                       )
                     ),
                   target: "_top",

@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
 class Oversee::Resources::Index < Oversee::Base
-  def initialize(resources:, resource_class:, pagy:, params:)
+  def initialize(resources:, resource_class:, pagy:)
     @resources = resources
     @resource_class = resource_class
     @pagy = pagy
-    @params = params
   end
 
 
@@ -24,7 +23,7 @@ class Oversee::Resources::Index < Oversee::Base
         render Oversee::Button.new(
           size: :sm,
           kind: :primary,
-          href: new_resource_path(@params[:resource]),
+          href: new_resource_path(params[:resource]),
           target: "_top"
         ) do
           render Phlex::Icons::Iconoir::Plus.new(class: "size-4 text-indigo-100", stroke_width: 2)
@@ -33,12 +32,12 @@ class Oversee::Resources::Index < Oversee::Base
       end
     end
 
-    render Oversee::Dashboard::Actions.new(params: @params)
+    render Oversee::Dashboard::Actions.new
 
     hr(class: "mt-4")
-    render Oversee::Resources::Table.new(resource_class: @resource_class, resources: @resources, params: @params)
+    render Oversee::Resources::Table.new(resource_class: @resource_class, resources: @resources)
     hr
-    render Oversee::Dashboard::Pagination.new(pagy: @pagy, params: @params)
+    render Oversee::Dashboard::Pagination.new(pagy: @pagy)
   end
 
   private

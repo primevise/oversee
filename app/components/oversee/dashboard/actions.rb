@@ -1,8 +1,4 @@
 class Oversee::Dashboard::Actions < Oversee::Base
-  def initialize(params: nil)
-    @params = params
-  end
-
   def view_template(&)
     div(class: "flex items-center justify-between px-4 pt-4") do
       div(class: "flex items-center gap-2") do
@@ -27,7 +23,7 @@ class Oversee::Dashboard::Actions < Oversee::Base
           input(
             type: :search,
             name: :query,
-            value: @params[:query],
+            value: params[:query],
             placeholder: search_placeholder,
             class: "flex bg-gray-100 min-w-64 w-64 focus:w-96 transition-all h-10 items-center pl-4 py-2 placeholder:text-gray-500 rounded-sm text-sm"
           )
@@ -41,16 +37,16 @@ class Oversee::Dashboard::Actions < Oversee::Base
   private
 
   def show_action_section?
-    Rails.env.development? || @params[:experimental] == "true"
+    Rails.env.development? || params[:experimental] == "true"
   end
 
   def sortless_path
-    sortless_query_params = @params.except(:sort_attribute, :sort_direction, :controller, :action)
+    sortless_query_params = params.except(:sort_attribute, :sort_direction, :controller, :action)
     # helpers.resources_path(sortless_query_params)
   end
 
   def search_placeholder
-    context = Oversee::Search.new(collection: nil, resource_class: @params[:resource].constantize)
+    context = Oversee::Search.new(collection: nil, resource_class: params[:resource].constantize)
     attr = context.default_searchable_attribute
 
     "Search by #{attr}"

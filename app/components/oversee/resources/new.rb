@@ -4,7 +4,6 @@ class Oversee::Resources::New < Oversee::Base
   def initialize(record:, resource:, params:)
     @record = Oversee::Record.new(record:)
     @resource = resource
-    @params = params
   end
 
   def around_template

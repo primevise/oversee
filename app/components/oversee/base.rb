@@ -3,6 +3,9 @@ class Oversee::Base < Phlex::HTML
   include Phlex::Rails::Helpers::Routes
   include Phlex::Rails::Helpers::LinkTo
 
+
+  register_value_helper :params
+
   RESOURCE_PATHS = [
     :resources_path,
     :resource_path,

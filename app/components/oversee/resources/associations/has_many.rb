@@ -8,7 +8,6 @@ class Oversee::Resources::Associations::HasMany < Oversee::Resources::Base
   def initialize(resource:, associations:, params:)
     @resource = resource
     @associations = associations
-    @params = params
   end
 
   def view_template
@@ -45,7 +44,6 @@ class Oversee::Resources::Associations::HasMany < Oversee::Resources::Base
                 render Oversee::Resources::Table.new(
                   resources: records,
                   resource_class: associated_resource,
-                  params: @params
                 )
               end
             else

@@ -3,9 +3,8 @@ class Oversee::Dashboard::Pagination < Oversee::Base
   include Pagy::Frontend
   include Phlex::Rails::Helpers::Request
 
-  def initialize(pagy:, params:)
+  def initialize(pagy:)
     @pagy = pagy
-    @params = params
   end
 
   def view_template
