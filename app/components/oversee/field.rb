@@ -25,11 +25,11 @@ class Oversee::Field < Oversee::Base
 
   # Helpers & Decorators
   def field_id
-    @field_id ||= "resource_#{key}"
+    @field_id ||= "record_#{key}"
   end
 
   def field_name
-    @field_name ||= "resource[#{key}]"
+    @field_name ||= "record[#{key}]"
   end
 
   def field_form_id

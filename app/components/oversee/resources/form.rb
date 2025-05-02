@@ -5,18 +5,14 @@ class Oversee::Resources::Form < Oversee::Base
 
   def initialize(record:)
     @record = record
-    @resource = @record.resource
   end
 
   def view_template
     div(id: dom_id(@record.record)) do
       render Oversee::Resources::Errors.new(resource: @record.record)
-      form_with model: @record.record,
-                scope: :resource,
-                url: create_resource_path,
-                scope: :resource do |f|
-
-        @resource.columns_for_create.each do |key, metadata|
+      form_with(model: @record.record, url: create_resource_path, scope: :record) do |f|
+        resource.columns_for_create.each do |key, metadata|
+          p {key}
           div(class: "py-2") do
             render Oversee::Field::Label.new(
                     key: key,
@@ -24,17 +20,15 @@ class Oversee::Resources::Form < Oversee::Base
                   )
             div(class: "mt-2") do
               render Oversee::Field::Input.new(
-                      datatype: metadata.sql_type_metadata.type,
-                      key: key
+                      key: key,
+                      datatype: metadata.sql_type_metadata.type
                     )
             end
           end
         end
         hr(class: "-mx-8 my-8")
         div(class: "flex justify-end mt-8") do
-          plain f.submit "Save",
-                        class:
-                          "bg-gray-900 px-6 py-2 rounded-full text-white font-medium text-sm hover:bg-gray-700 cursor-pointer"
+          render Oversee::Button.new(type: :submit) { "Save" }
         end
       end
     end
@@ -43,7 +37,7 @@ class Oversee::Resources::Form < Oversee::Base
 
   private
 
-  def resource_class_name
-    @resource.class.to_s
+  def resource
+    @resource ||= @record.resource
   end
 end

@@ -35,7 +35,7 @@ module Oversee
           format.turbo_stream { redirect_to resource_path(@resource.id, resource_class_name: @resource), status: :see_other }
         else
           format.html { render :new }
-          format.turbo_stream { render turbo_stream: turbo_stream.replace(dom_id(@resource), Oversee::Resources::Form.new(resource: @resource)) }
+          format.turbo_stream { render turbo_stream: turbo_stream.replace(dom_id(@resource), Oversee::Resources::Form.new(record: @resource)) }
         end
       end
     end
@@ -152,10 +152,10 @@ module Oversee
     end
 
     def resource_params
-      params.dig(:resource)&.delete(:oversee_key)
-      params.dig(:resource)&.delete(:oversee_datatype)
+      params.dig(:record)&.delete(:oversee_key)
+      params.dig(:record)&.delete(:oversee_datatype)
 
-      params.require(:resource).permit!
+      params.require(:record).permit!
     end
   end
 end

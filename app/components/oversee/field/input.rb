@@ -22,7 +22,4 @@ class Oversee::Field::Input < Oversee::Field
   def component_class
     MAP[@datatype.to_sym] || Oversee::Field::Input::String
   end
-
-  private
-
 end

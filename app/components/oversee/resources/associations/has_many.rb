@@ -5,7 +5,7 @@ class Oversee::Resources::Associations::HasMany < Oversee::Resources::Base
   attr_reader :associations
   attr_reader :params
 
-  def initialize(resource:, associations:, params:)
+  def initialize(resource:, associations:)
     @resource = resource
     @associations = associations
   end
