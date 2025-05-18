@@ -13,7 +13,7 @@ class Oversee::Components::Resource::Table < Oversee::Components::Base
 
   def view_template
     turbo_frame_tag dom_id(@resource_class, :table), target: "_top" do
-      render Oversee::Table.new do |table|
+      render Oversee::Components::Table.new do |table|
         table.head do |head|
           head.row do
             th(scope: "col", class: "px-4 py-3 text-left text-xs text-gray-900 uppercase")
@@ -34,7 +34,7 @@ class Oversee::Components::Resource::Table < Oversee::Components::Base
                   target: "_top",
                   class: "px-4 py-3 flex items-center justify-between gap-2 w-full h-full hover:text-gray-900 transition-colors"
                 ) do
-                  render Oversee::Field::Label.new(key: key, datatype: metadata.sql_type_metadata.type)
+                  render Oversee::Components::Field::Label.new(key: key, datatype: metadata.sql_type_metadata.type)
                   render Phlex::Icons::Iconoir::ArrowSeparateVertical.new(class: "size-3 text-gray-500", stroke_width: 2.5)
                 end
               end
@@ -46,7 +46,7 @@ class Oversee::Components::Resource::Table < Oversee::Components::Base
                 span(
                   class: "px-4 py-3 flex items-center justify-between gap-2 w-full h-full hover:text-gray-900 transition-colors"
                 ) do
-                  render Oversee::Field::Label.new(key: association.name, datatype: nil)
+                  render Oversee::Components::Field::Label.new(key: association.name, datatype: nil)
                 end
               end
             end
@@ -77,7 +77,7 @@ class Oversee::Components::Resource::Table < Oversee::Components::Base
                 next if @oversee_resource.foreign_keys.include?(key.to_s)
                 row.data do
                   div(class: "max-w-96") do
-                    render Oversee::Field::Value.new(key:, datatype: metadata.sql_type_metadata.type, value: resource.send(key), for_table: true)
+                    render Oversee::Components::Field::Value.new(key:, datatype: metadata.sql_type_metadata.type, value: resource.send(key), for_table: true)
                   end
                 end
               end

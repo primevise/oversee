@@ -18,7 +18,7 @@ class Oversee::Components::Resource::HasMany < Oversee::Components::Base
 
         div(class: "space-y-4") do
           div(class:"flex items-center gap-2") do
-            render Oversee::Field::Label.new(
+            render Oversee::Components::Field::Label.new(
               key: association[:name].to_s.titleize,
               datatype: :has_many,
               href: resources_path(
@@ -41,7 +41,7 @@ class Oversee::Components::Resource::HasMany < Oversee::Components::Base
 
             if records.present?
               div(class: "bg-white") do
-                render Oversee::Resources::Table.new(
+                render Oversee::Components::Resource::Table.new(
                   resources: records,
                   resource_class: associated_resource,
                 )

@@ -28,7 +28,7 @@ class Oversee::Views::Resources::Show < Oversee::Views::Base
 
     if false
       div(id: "record-toolbar", class: "h-12 flex items-center px-4 border-b") do
-        render Oversee::Button.new(size: :xs) { "Mark as completed" }
+        render Oversee::Components::Button.new(size: :xs) { "Mark as completed" }
       end
     end
 
@@ -69,7 +69,7 @@ class Oversee::Views::Resources::Show < Oversee::Views::Base
     div(class: "flex flex-col gap-4") do
       @resource_class.columns_hash.each do |key, metadata|
         next if @oversee_resource.foreign_keys.include?(key.to_s)
-        render Oversee::Field::Set.new(resource:, key:, value: @resource.send(key), datatype: metadata.sql_type_metadata.type)
+        render Oversee::Components::Field::Set.new(resource:, key:, value: @resource.send(key), datatype: metadata.sql_type_metadata.type)
       end
     end
 
@@ -86,7 +86,7 @@ class Oversee::Views::Resources::Show < Oversee::Views::Base
         div(class: "py-6") do
           div(class: "space-y-4") do
             div(class:"flex items-center gap-2") do
-              render Oversee::Field::Label.new(
+              render Oversee::Components::Field::Label.new(
                 key: association[:name].to_s.titleize,
                 datatype: :data,
                 href: resources_path(resource_class_name: association[:class_name].to_s)
@@ -98,7 +98,7 @@ class Oversee::Views::Resources::Show < Oversee::Views::Base
             path = !!foreign_key_value ? resource_path(id: foreign_key_value, resource_class_name: association[:class_name]) : resources_path(resource_class_name: association[:class_name])
 
             div(id: dom_id(@resource, :"#{foreign_key}_row"), class: "flex items-center gap-2 mt-4") do
-              render Oversee::Field::Display.new(resource:, key: foreign_key, value: foreign_key_value, datatype: :belongs_to, display_key: true)
+              render Oversee::Components::Field::Display.new(resource:, key: foreign_key, value: foreign_key_value, datatype: :belongs_to, display_key: true)
               div(id: dom_id(@resource, :"#{foreign_key}_actions")) do
                 a(href: path, class: "bg-gray-100 hover:bg-gray-200 text-gray-400 hover:text-blue-500 size-10 aspect-square inline-flex items-center justify-center transition-colors"){ render Phlex::Icons::Iconoir::ArrowUpRight.new(class: "size-4") }
               end
