@@ -1,4 +1,4 @@
-class Oversee::Components::Field::Input < Oversee::Field
+class Oversee::Components::Field::Input < Oversee::Components::Field
   MAP = {
     belongs_to: Oversee::Components::Field::Input::BelongsTo,
     boolean: Oversee::Components::Field::Input::Boolean,

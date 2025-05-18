@@ -1,5 +1,5 @@
 class Oversee::Resources::FieldsController < Oversee::ResourcesController
-  before_action :set_resource, only: %i[input]
+  before_action :set_record, only: %i[input]
 
   # Renders the display field for a resource
   def show
@@ -7,8 +7,8 @@ class Oversee::Resources::FieldsController < Oversee::ResourcesController
 
   # Renders the input field for a resource
   def input
-    component_dom_id = dom_id(@resource, key)
-    component = Oversee::Field::Set.new(resource: @resource, datatype:, key:, value:, state: :input)
+    component_dom_id = dom_id(@record, key)
+    component = Oversee::Components::Field::Set.new(resource: @record, datatype:, key:, value:, state: :input)
 
     respond_to do |format|
       format.turbo_stream do
@@ -24,10 +24,10 @@ class Oversee::Resources::FieldsController < Oversee::ResourcesController
   end
 
   def value
-    params[:value] || @resource.send(key)
+    params[:value] || @record.send(key)
   end
 
   def datatype
-    params[:datatype] || @resource.class.columns_hash[key.to_s].type
+    params[:datatype] || @record.class.columns_hash[key.to_s].type
   end
 end

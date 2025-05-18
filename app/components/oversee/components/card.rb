@@ -1,4 +1,4 @@
-class Oversee::Card < Phlex::HTML
+class Oversee::Components::Card < Phlex::HTML
   def initialize(card_name:)
     @card_name = card_name
     @card = card_name.constantize.new

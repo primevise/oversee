@@ -1,4 +1,4 @@
-class Oversee::Components::Field::Label < Oversee::Field
+class Oversee::Components::Field::Label < Oversee::Components::Field
   ICON_MAP = {
     belongs_to: Phlex::Icons::Iconoir::Database,
     boolean: Phlex::Icons::Iconoir::SwitchOn,

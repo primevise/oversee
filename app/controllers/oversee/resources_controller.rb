@@ -56,14 +56,14 @@ module Oversee
       datatype = params[:oversee_datatype]
 
       respond_to do |format|
-        if @resource.update(resource_params)
+        if @record.update(resource_params)
           flash.now[:notice] = "#{@resource.class.to_s.titleize.capitalize.gsub("::"," ")} was successfully updated!"
-          format.html { redirect_to resource_path(@resource.id, resource: @resource) }
+          format.html { redirect_to resource_path(@record.id, resource: @record) }
           format.turbo_stream do
-            component = Oversee::Field::Set.new(resource: @resource, datatype:, key:, value: @resource.send(key))
+            component = Oversee::Components::Field::Set.new(resource: @record, datatype:, key:, value: @record.send(key))
             render turbo_stream: [
-              turbo_stream.replace(dom_id(@resource, key), component),
-              turbo_stream.replace(:flash, Oversee::Flash)
+              turbo_stream.replace(dom_id(@record, key), component),
+              turbo_stream.replace(:flash, Oversee::Components::Flash)
             ]
           end
         else
@@ -153,7 +153,6 @@ module Oversee
     def resource_params
       params.dig(:record)&.delete(:oversee_key)
       params.dig(:record)&.delete(:oversee_datatype)
-
       params.require(:record).permit!
     end
   end
