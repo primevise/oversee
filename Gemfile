@@ -12,6 +12,7 @@ gem "ffaker"
 gem "turbo-rails"
 gem "stimulus-rails"
 gem "phlex-icons-iconoir"
+# gem "essence", ">= 1.0.2"
 
 gem "web-console", group: :development
 
