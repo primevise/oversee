@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Oversee::Heading < Oversee::Essence
+class Oversee::Components::Heading < Oversee::Components::Essence
   ALLOWED_TAGS = [ :h1, :h2, :h3, :h4, :h5, :h6 ]
   BASE = "font-medium text-gray-900 leading-normal"
   SIZES = {

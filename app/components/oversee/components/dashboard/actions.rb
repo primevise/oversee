@@ -1,4 +1,4 @@
-class Oversee::Dashboard::Actions < Oversee::Base
+class Oversee::Components::Dashboard::Actions < Oversee::Components::Base
   def view_template(&)
     div(class: "flex items-center justify-between px-4 pt-4") do
       div(class: "flex items-center gap-2") do
@@ -31,7 +31,7 @@ class Oversee::Dashboard::Actions < Oversee::Base
         end
       end
     end
-    render Oversee::Dashboard::Filters.new if show_action_section?
+    render Oversee::Components::Dashboard::Filters.new if show_action_section?
   end
 
   private

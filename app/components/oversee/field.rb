@@ -1,4 +1,4 @@
-class Oversee::Field < Oversee::Base
+class Oversee::Field < Oversee::Components::Base
   attr_reader :resource
   attr_reader :key
   attr_reader :value

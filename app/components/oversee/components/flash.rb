@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Oversee::Flash < Phlex::HTML
+class Oversee::Components::Flash < Phlex::HTML
   include Phlex::Rails::Helpers::Flash
 
   def view_template

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Oversee::Resources::Associations::HasMany < Oversee::Resources::Base
+class Oversee::Components::Resource::HasMany < Oversee::Components::Base
   attr_reader :resource
   attr_reader :associations
   attr_reader :params

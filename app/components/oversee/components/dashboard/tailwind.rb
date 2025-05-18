@@ -1,4 +1,4 @@
-class Oversee::Dashboard::Tailwind < Phlex::HTML
+class Oversee::Components::Dashboard::Tailwind < Phlex::HTML
   def view_template
     script(src: "https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4")
     style(type:"text/tailwindcss") do

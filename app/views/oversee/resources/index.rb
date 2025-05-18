@@ -1,26 +1,19 @@
-# frozen_string_literal: true
-
-class Oversee::Resources::Index < Oversee::Base
+class Oversee::Views::Resources::Index < Oversee::Views::Base
   def initialize(resources:, resource_class:, pagy:)
     @resources = resources
     @resource_class = resource_class
     @pagy = pagy
   end
 
-
-  def around_template
-    render Oversee::Layout::Application.new { super }
-  end
-
   def view_template
-    render Oversee::Dashboard::Header.new do |header|
+    render Oversee::Components::Dashboard::Header.new do |header|
       header.item do
         render Phlex::Icons::Iconoir::Folder.new(class: "size-4.5 text-gray-400", stroke_width: 1.75)
         header.title { @resource_class.to_s.pluralize }
       end
       header.item do
 
-        render Oversee::Button.new(
+        render Oversee::Components::Button.new(
           size: :sm,
           kind: :primary,
           href: new_resource_path(params[:resource]),
@@ -32,12 +25,12 @@ class Oversee::Resources::Index < Oversee::Base
       end
     end
 
-    render Oversee::Dashboard::Actions.new
+    render Oversee::Components::Dashboard::Actions.new
 
     hr(class: "mt-4")
-    render Oversee::Resources::Table.new(resource_class: @resource_class, resources: @resources)
+    render Oversee::Components::Resource::Table.new(resource_class: @resource_class, resources: @resources)
     hr
-    render Oversee::Dashboard::Pagination.new(pagy: @pagy)
+    render Oversee::Components::Dashboard::Pagination.new(pagy: @pagy)
   end
 
   private

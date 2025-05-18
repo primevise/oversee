@@ -1,8 +1,7 @@
-class Oversee::Base < Phlex::HTML
+class Oversee::Components::Base < Phlex::HTML
   include Phlex::Rails::Helpers::DOMID
   include Phlex::Rails::Helpers::Routes
   include Phlex::Rails::Helpers::LinkTo
-
 
   register_value_helper :params
 

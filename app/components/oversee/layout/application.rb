@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
-class Oversee::Layout::Application < Oversee::Base
+class Oversee::Layout::Application < Oversee::Components::Base
 
   include Phlex::Rails::Helpers::CSPMetaTag
   include Phlex::Rails::Helpers::CSRFMetaTags
   include Phlex::Rails::Helpers::StylesheetLinkTag
-  include Phlex::Rails::Helpers::JavascriptImportmapTags
 
   def view_template
     doctype
@@ -22,15 +21,15 @@ class Oversee::Layout::Application < Oversee::Base
 
         link(rel: "stylesheet", type: "text/css", href: "https://unpkg.com/trix@2.1.8/dist/trix.css")
 
-        render Oversee::Dashboard::Javascript.new
-        render Oversee::Dashboard::Tailwind.new
+        render Oversee::Components::Dashboard::Javascript.new
+        render Oversee::Components::Dashboard::Tailwind.new
       end
       body(class: "bg-white") do
-        render Oversee::Flash.new
+        render Oversee::Components::Flash.new
 
         div(class: "h-svh") do
           div(class: "h-svh flex flex-col md:flex-row") do
-            div(class: "w-72 shrink-0") { render Oversee::Dashboard::Sidebar.new }
+            div(class: "w-72 shrink-0") { render Oversee::Components::Dashboard::Sidebar.new }
             div(class: "border-l border-gray-100 h-svh w-full overflow-y-scroll bg-white") do
               yield if block_given?
             end

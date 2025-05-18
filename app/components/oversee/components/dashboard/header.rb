@@ -1,4 +1,4 @@
-class Oversee::Dashboard::Header < Oversee::Base
+class Oversee::Components::Dashboard::Header < Oversee::Components::Base
   attr_reader :subtitle
   attr_reader :return_path
   attr_reader :show_back_button
@@ -21,7 +21,7 @@ class Oversee::Dashboard::Header < Oversee::Base
   end
 
   def title(&)
-    render Oversee::Heading.new(as: :h6, &)
+    render Oversee::Components::Heading.new(as: :h6, &)
   end
 
   # def icon(**mattributes, &)

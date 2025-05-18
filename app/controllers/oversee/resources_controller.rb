@@ -9,7 +9,7 @@ module Oversee
     def index
       @pagy, @records = pagy(@records, limit: params[:per_page] || Oversee.configuration.per_page)
 
-      render Oversee::Resources::Index.new(
+      render Oversee::Views::Resources::Index.new(
         resources: @records,
         resource_class: @resource,
         pagy: @pagy,
@@ -18,7 +18,7 @@ module Oversee
 
     def new
       @record = @resource.new
-      render Oversee::Resources::New.new(
+      render Oversee::Views::Resources::New.new(
         record: @record,
         resource: @resource,
         params: params
@@ -41,11 +41,10 @@ module Oversee
     end
 
     def show
-      render Oversee::Resources::Show.new(
+      render Oversee::Views::Resources::Show.new(
         resource: @record,
         resource_class: @resource,
-        resource_associations: resource_associations,
-        params: params
+        resource_associations: resource_associations
       ), layout: false
     end
 
@@ -81,7 +80,7 @@ module Oversee
       @resources = @resource.find(params[:id]).send(params[:association_name])
       @pagy, @resources = pagy(@resources, limit: params[:per_page] || Oversee.configuration.per_page)
 
-      render Oversee::Resources::Index.new(
+      render Oversee::Views::Resources::Index.new(
         resources: @resources,
         resource_class: @resource,
         pagy: @pagy,
@@ -97,7 +96,7 @@ module Oversee
       end
 
       component_id = dom_id(@resource, :table)
-      component = Oversee::Resources::Table.new(resource_class: @resource, resources: @resources, params: params)
+      component = Oversee::Components::Resource::Table.new(resource_class: @resource, resources: @resources, params: params)
 
       respond_to do |format|
         format.turbo_stream do

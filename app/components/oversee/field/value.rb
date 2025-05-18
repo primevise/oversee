@@ -1,4 +1,4 @@
-class Oversee::Field::Value < Oversee::Base
+class Oversee::Field::Value < Oversee::Components::Base
   MAP = {
     string: Oversee::Field::Value::String,
     belongs_to: Oversee::Field::Value::BelongsTo,

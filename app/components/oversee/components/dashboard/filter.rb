@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class Oversee::Dashboard::Filter < Oversee::Base
+class Oversee::Components::Dashboard::Filter < Oversee::Components::Base
   def view_template
     div(class: "flex items-center gap-2") do
       render Phlex::Icons::Iconoir::LongArrowDownRight.new(class: "size-4 text-gray-500")

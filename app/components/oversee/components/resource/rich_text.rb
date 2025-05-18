@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Oversee::Resources::Associations::RichText < Oversee::Resources::Base
+class Oversee::Components::Resource::RichText < Oversee::Components::Base
   attr_reader :resource
   attr_reader :associations
 

@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class Oversee::Dashboard::Pagination < Oversee::Base
+class Oversee::Components::Dashboard::Pagination < Oversee::Components::Base
   include Pagy::Frontend
   include Phlex::Rails::Helpers::Request
 

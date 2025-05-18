@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Oversee::Resources::Form < Oversee::Base
+class Oversee::Components::Resource::Form < Oversee::Components::Base
   include Phlex::Rails::Helpers::FormWith
 
   def initialize(record:)
@@ -9,7 +9,7 @@ class Oversee::Resources::Form < Oversee::Base
 
   def view_template
     div(id: dom_id(@record.record)) do
-      render Oversee::Resources::Errors.new(resource: @record.record)
+      render Oversee::Components::Resource::Errors.new(resource: @record.record)
       form_with(model: @record.record, url: create_resource_path, scope: :record) do |f|
         resource.columns_for_create.each do |key, metadata|
           p {key}

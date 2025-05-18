@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Oversee::Resources::Table < Oversee::Base
+class Oversee::Components::Resource::Table < Oversee::Components::Base
   include Phlex::Rails::Helpers::TurboFrameTag
 
   def initialize(resources:, resource_class:, **options)

@@ -8,10 +8,6 @@ require "oversee/configuration"
 
 # Phlex
 require "phlex-rails"
-# module Views
-# end
-# module ::Components
-# end
 
 # Pagy
 require "pagy"
@@ -28,8 +24,12 @@ module Oversee
 
   class << self
 
+    def root_path
+      @root_path ||= Gem::Specification.find_by_name("oversee").gem_dir
+    end
+
     def application_name
-      Rails.application.class.to_s.gsub("::Application", "")
+      @application_name ||= Rails.application.class.to_s.gsub("::Application", "")
     end
 
     # Resources
@@ -48,5 +48,9 @@ module Oversee
       files = Dir.glob(root.join("**/*.rb"))
       files.map! { |f| f.split(root.to_s).last.delete_suffix(".rb").classify.prepend("Cards::") }
     end
+  end
+
+  # Phlex configuration
+  module Views
   end
 end

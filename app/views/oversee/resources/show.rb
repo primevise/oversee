@@ -1,27 +1,20 @@
-# frozen_string_literal: true
-
-class Oversee::Resources::Show < Oversee::Base
+class Oversee::Views::Resources::Show < Oversee::Views::Base
   include Phlex::Rails::Helpers::ButtonTo
   include Phlex::Rails::Helpers::TurboFrameTag
-
 
   attr_reader :resource
   attr_reader :resource_class
   attr_reader :resource_associations
 
-  def initialize(resource:, resource_class:, resource_associations:, params:)
+  def initialize(resource:, resource_class:, resource_associations:)
     @resource = resource
     @resource_class = resource_class
     @resource_associations = resource_associations
     @oversee_resource = Oversee::Resource.new(klass: @resource_class)
   end
 
-  def around_template
-    render Oversee::Layout::Application.new { super }
-  end
-
   def view_template
-    render Oversee::Dashboard::Header.new do |header|
+    render Oversee::Components::Dashboard::Header.new do |header|
       header.item do
         render Phlex::Icons::Iconoir::Folder.new(class: "size-4.5 text-gray-400", stroke_width: 1.75)
         header.title { @resource_class.to_s.pluralize }
@@ -84,7 +77,7 @@ class Oversee::Resources::Show < Oversee::Base
     # RICH TEXT Associations
     if !!rich_text_associations.length
       hr(class: "my-4")
-      render Oversee::Resources::Associations::RichText.new(resource:, associations: rich_text_associations)
+      render Oversee::Components::Resource::RichText.new(resource:, associations: rich_text_associations)
     end
 
     # BELONGS_TO Associations
@@ -118,7 +111,7 @@ class Oversee::Resources::Show < Oversee::Base
     hr(class: "my-4")
 
     # HAS_MANY Associations
-    render Oversee::Resources::Associations::HasMany.new(resource:, associations: has_many_associations) if !!has_many_associations.length
+    render Oversee::Components::Resource::HasMany.new(resource:, associations: has_many_associations) if !!has_many_associations.length
     end
   end
 

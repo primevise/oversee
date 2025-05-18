@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Oversee::Button < Oversee::Essence
+class Oversee::Components::Button < Oversee::Components::Essence
   BASE = "inline-flex items-center justify-center w-fit rounded-xs border border-transparent font-medium transition duration-150 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-90"
 
   SIZES = {

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Oversee::Resources::Errors < Oversee::Base
+class Oversee::Components::Resource::Errors < Oversee::Components::Base
   def initialize(resource: nil, errors: nil, content: nil, **options)
     @resource = resource
     @errors = errors

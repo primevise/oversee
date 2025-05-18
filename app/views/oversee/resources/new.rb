@@ -1,13 +1,7 @@
-# frozen_string_literal: true
-
-class Oversee::Resources::New < Oversee::Base
-  def initialize(record:, resource:, params:)
+class Oversee::Views::Resources::New < Oversee::Views::Base
+  def initialize(record:, resource:)
     @record = Oversee::Record.new(record:)
     @resource = resource
-  end
-
-  def around_template
-    render Oversee::Layout::Application.new { super }
   end
 
   def view_template
@@ -20,7 +14,7 @@ class Oversee::Resources::New < Oversee::Base
 
 
     div(class: "p-4") do
-      render Oversee::Resources::Form.new(record: @record)
+      render Oversee::Components::Resource::Form.new(record: @record)
     end
   end
 end

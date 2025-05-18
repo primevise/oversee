@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Oversee::Dashboard::Index < Oversee::Base
+class Oversee::Components::Dashboard::Index < Oversee::Components::Base
 
   def around_template
     render Oversee::Layout::Application.new { super }
