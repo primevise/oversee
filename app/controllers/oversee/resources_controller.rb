@@ -21,7 +21,6 @@ module Oversee
       render Oversee::Views::Resources::New.new(
         record: @record,
         resource: @resource,
-        params: params
       ), layout: false
     end
 
