@@ -3,14 +3,16 @@
 class Oversee::Components::Resource::Form < Oversee::Components::Base
   include Phlex::Rails::Helpers::FormWith
 
-  def initialize(record:)
-    @record = record
+  attr_reader :resource
+
+  def initialize(resource:)
+    @resource = resource
   end
 
   def view_template
-    div(id: dom_id(@record.record)) do
-      render Oversee::Components::Resource::Errors.new(resource: @record.record)
-      form_with(model: @record.record, url: create_resource_path, scope: :record) do |f|
+    div(id: dom_id(record)) do
+      render Oversee::Components::Resource::Errors.new(resource: record)
+      form_with(model: record, url: create_resource_path, scope: :record) do |f|
         resource.columns_for_create.each do |key, metadata|
           div(class: "py-2") do
             render Oversee::Components::Field::Label.new(
@@ -33,10 +35,9 @@ class Oversee::Components::Resource::Form < Oversee::Components::Base
     end
   end
 
-
   private
 
-  def resource
-    @resource ||= @record.resource
+  def record
+    @record ||= @resource.record
   end
 end

@@ -20,7 +20,8 @@ module Oversee
     end
 
     def new
-      @record = @resource.new
+      # @record = @resource_class.new
+      @resource.record = @resource_class.new
       render Oversee::Views::Resources::New.new(resource: @resource)
     end
 

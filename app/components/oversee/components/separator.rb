@@ -1,29 +1,25 @@
 # frozen_string_literal: true
 
 class Oversee::Components::Separator < Oversee::Components::Essence
-  BASE = "border-gray-200/50"
+  BASE = "border-gray-950/5"
 
   KINDS = {
     horizontal: "border-t",
     vertical: "border-l h-full"
   }
 
-  attr_reader :kind
-  attr_reader :attributes
+  attr_reader :kind, :attributes
 
   def initialize(kind: :horizontal, **attributes)
     @kind = kind
     super(**attributes)
-    @attributes[:class] = merge_classes([ BASE, KINDS[kind], @attributes[:class] ])
   end
 
   def view_template
-    element_tag(**attributes)
+    tag((kind.to_sym == :horizontal ? :hr : :div), **attributes)
   end
 
   private
 
-  def element_tag(...)
-    kind.to_sym == :horizontal ? hr(...) : div(...)
-  end
+  def initialize_merged_classes = merge_classes([ BASE, KINDS[kind], @attributes[:class] ])
 end
