@@ -33,6 +33,7 @@ class Oversee::Views::Resources::Show < Oversee::Views::Base
     end
 
     div(class: "p-4") do
+
     # COLUMNS
     div(class: "flex flex-col gap-4") do
       @resource_class.columns_hash.each do |key, metadata|
@@ -64,14 +65,13 @@ class Oversee::Views::Resources::Show < Oversee::Views::Base
               render Oversee::Components::Field::Label.new(
                 key: association[:name].to_s.titleize,
                 datatype: :data,
-                href: resources_path(resource_class_name: association[:class_name].to_s)
+                href: resources_path(resource: association[:class_name])
               )
             end
 
             foreign_key = association[:foreign_key]
             foreign_key_value = @resource[association[:foreign_key]]
-            path = !!foreign_key_value ? resource_path(id: foreign_key_value, resource_class_name: association[:class_name]) : resources_path(resource_class_name: association[:class_name])
-
+            path = !!foreign_key_value ? resource_path(id: foreign_key_value, resource: association[:class_name]) : resources_path(resource: association[:class_name])
             div(id: dom_id(@resource, :"#{foreign_key}_row"), class: "flex items-center gap-2 mt-4") do
               render Oversee::Components::Field::Display.new(resource:, key: foreign_key, value: foreign_key_value, datatype: :belongs_to, display_key: true)
               div(id: dom_id(@resource, :"#{foreign_key}_actions")) do
