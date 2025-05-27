@@ -1,7 +1,7 @@
 class Oversee::Views::Resources::New < Oversee::Views::Base
-  def initialize(record:, resource:)
-    @record = Oversee::Record.new(record:)
+  def initialize(resource:)
     @resource = resource
+    @record = @resource.record
   end
 
   def view_template

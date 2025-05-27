@@ -10,7 +10,7 @@ class Oversee::Views::Resources::Show < Oversee::Views::Base
     @resource = resource
     @resource_class = resource_class
     @resource_associations = resource_associations
-    @oversee_resource = Oversee::Resource.new(klass: @resource_class)
+    @oversee_resource = Oversee::Resource.new(resource_class: @resource_class)
   end
 
   def view_template

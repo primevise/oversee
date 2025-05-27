@@ -8,7 +8,7 @@ class Oversee::Components::Resource::Table < Oversee::Components::Base
     @resource_class = resource_class || resources.first.class
     @options = options
 
-    @oversee_resource = Oversee::Resource.new(klass: @resource_class)
+    @oversee_resource = Oversee::Resource.new(resource_class: @resource_class)
   end
 
   def view_template

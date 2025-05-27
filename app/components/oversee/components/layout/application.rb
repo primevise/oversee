@@ -29,7 +29,7 @@ class Oversee::Components::Layout::Application < Oversee::Components::Base
 
         div(class: "h-svh") do
           div(class: "h-svh flex flex-col md:flex-row") do
-            div(class: "w-72 shrink-0") { render Oversee::Components::Dashboard::Sidebar.new }
+            div(class: "w-64 shrink-0") { render Oversee::Components::Dashboard::Sidebar.new }
             div(class: "border-l border-gray-100 h-svh w-full overflow-y-scroll bg-white") do
               yield if block_given?
             end

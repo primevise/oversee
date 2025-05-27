@@ -1,26 +1,31 @@
 class Oversee::Resource
-  attr_reader :klass
+  attr_reader :resource_class
   attr_reader :associations
 
-  def initialize(klass: nil)
-    @klass = klass
-    raise ArgumentError, "klass must be a class" unless klass.is_a?(Class)
+  attr_accessor :record
+
+  def initialize(resource_class:, record: nil)
+    @resource_class = resource_class
+    @record = record
+    raise ArgumentError, "resource_class must be a class" unless resource_class.is_a?(Class)
+    raise ArgumentError, "resource inherit from ActiveRecord" unless resource_class < ActiveRecord::Base
   end
+
 
   # Route helpers
   def index_path(**params)
-    "/#{class_name}"
+    "/#{resource_class_name}"
   end
 
-  def show_path(record:, **params)
-    # Rails.application.routes.url_helpers.resource_path(instance || object, class_name:)
-    "/resources/#{class_name}/#{record.to_param}"
+  def show_path(**params)
+    raise ArgumentError, "record must be initialized" if record.nil?
+    "/#{resource_class_name}/#{record.to_param}"
   end
 
   # Columns
   def columns_for_create
-    excluded_columns = [klass.primary_key, "created_at", "updated_at"]
-    klass.columns_hash.except(*excluded_columns)
+    excluded_columns = [resource_class.primary_key, "created_at", "updated_at"]
+    resource_class.columns_hash.except(*excluded_columns)
   end
 
   # Helpers
@@ -29,8 +34,8 @@ class Oversee::Resource
   # This method returns the name of the class as a string.
   #
   # @return [String] the name of the class
-  def class_name
-    @class_name ||= klass.to_s
+  def resource_class_name
+    @resource_class_name ||= resource_class.name
   end
 
   # Associations
@@ -47,7 +52,7 @@ class Oversee::Resource
     @associations ||= begin
       map = Hash.new { |hash, key| hash[key] = [] }
 
-      klass.reflect_on_all_associations.each do |association|
+      resource_class.reflect_on_all_associations.each do |association|
         map[association.macro] << {
           name: association.name,
           class_name: association.class_name,
@@ -68,7 +73,7 @@ class Oversee::Resource
   #
   # @return [Array<String>] an array of foreign key names
   def foreign_keys
-    klass.reflections.map do |name, reflection|
+    resource_class.reflections.map do |name, reflection|
       reflection.foreign_key if reflection.belongs_to?
     end.compact
   end

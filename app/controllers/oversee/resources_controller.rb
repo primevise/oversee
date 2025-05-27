@@ -2,26 +2,26 @@ module Oversee
   class ResourcesController < BaseController
     include ActionView::RecordIdentifier
 
+    before_action :set_resource_class
     before_action :set_resource
     before_action :set_record, only: %i[show edit update destroy]
     before_action :set_records, only: %i[index]
+
+    layout false
 
     def index
       @pagy, @records = pagy(@records, limit: params[:per_page] || Oversee.configuration.per_page)
 
       render Oversee::Views::Resources::Index.new(
         resources: @records,
-        resource_class: @resource,
+        resource_class: @resource_class,
         pagy: @pagy,
-      ), layout: false
+      )
     end
 
     def new
       @record = @resource.new
-      render Oversee::Views::Resources::New.new(
-        record: @record,
-        resource: @resource,
-      ), layout: false
+      render Oversee::Views::Resources::New.new(resource: @resource)
     end
 
     def create
@@ -42,9 +42,9 @@ module Oversee
     def show
       render Oversee::Views::Resources::Show.new(
         resource: @record,
-        resource_class: @resource,
+        resource_class: @resource_class,
         resource_associations: resource_associations
-      ), layout: false
+      )
     end
 
     def edit
@@ -102,29 +102,32 @@ module Oversee
           render turbo_stream: turbo_stream.replace(component_id, component)
         end
         format.html do
-          render component, layout: false
+          render component
         end
       end
     end
 
     private
 
+    def set_resource_class
+      @resource_class ||= params[:resource].constantize
+    end
+
     def set_resource
-      @resource ||= params[:resource].constantize
+      @resource ||= ::Oversee::Resource.new(resource_class: @resource_class)
     end
 
     def set_record
-      @record = @resource.find(params[:id])
+      @record = @resource_class.find(params[:id])
     end
 
     def set_records
       set_sorting_rules
 
-
       @records = if params[:via_resource].present? && params[:via_record].present?
                    params[:via_resource].constantize.find(params[:via_record]).send(params[:association_name])
                  else
-                   @resource.all
+                   @resource_class.all
                  end
 
       @records = @records.order(@sort_attribute.to_sym => sort_direction)
@@ -133,7 +136,7 @@ module Oversee
     end
 
     def resource_associations
-      @resource_associations ||= @resource.reflect_on_all_associations
+      @resource_associations ||= @resource_class.reflect_on_all_associations
     end
 
     def sort_attribute
