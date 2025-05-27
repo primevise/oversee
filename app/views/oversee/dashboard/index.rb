@@ -1,13 +1,9 @@
 # frozen_string_literal: true
 
-class Oversee::Components::Dashboard::Index < Oversee::Components::Base
-
-  def around_template
-    render Oversee::Layout::Application.new { super }
-  end
+class Oversee::Views::Dashboard::Index < Oversee::Views::Base
 
   def view_template
-    render Oversee::Dashboard::Header.new do |header|
+    render Oversee::Components::Dashboard::Header.new do |header|
       header.item do
         header.title { "Dashboard" }
       end
