@@ -86,13 +86,13 @@ class Oversee::Components::Resource::Table < Oversee::Components::Base
                 foreign_id = resource.send(association.foreign_key)
                 resource_class_name = association.class_name
 
-                path = !!foreign_id ? resource_path(id: foreign_id, resource_class_name:) : resources_path(resource_class_name: resource_class_name)
+                path = !!foreign_id ? resource_path(id: foreign_id, resource: association.class_name) : resources_path(resource: association.class_name)
 
                 row.data do
                   div(class: "max-w-96") do
                     a(
                       href: path,
-                      class:"px-2 py-1 bg-gray-100 text-gray-500 text-sm flex items-center justify-between gap-2 hover:bg-gray-200 hover:text-gray-900 min-w-20") do
+                      class:"px-2 py-1 text-xs bg-gray-100 text-gray-500 text-sm flex items-center justify-between gap-2 hover:bg-gray-200 hover:text-gray-900 min-w-20") do
                       span { foreign_id.presence || "N/A" }
                       render Phlex::Icons::Iconoir::ArrowRight.new(class: "size-3")
                     end

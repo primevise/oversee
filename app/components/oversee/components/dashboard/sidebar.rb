@@ -8,7 +8,7 @@ class Oversee::Components::Dashboard::Sidebar < Oversee::Components::Base
         ul(class: "text-sm text-gray-700") do
           li do
             a(href: root_path, class: "flex items-center gap-2 text-xs text-gray-700 hover:bg-gray-100 transition duration-100 rounded-xs p-1.5") do
-              div(class: "size-5 bg-gray-100 flex items-center justify-center") { render Phlex::Icons::Iconoir::ViewGrid.w(class: "size-3 text-gray-700", stroke_width: 1.75) }
+              div(class: "size-5 bg-gray-100 flex items-center justify-center") { render Phlex::Icons::Iconoir::ViewGrid.new(class: "size-3 text-gray-700", stroke_width: 1.75) }
               span { "Dashboard" }
             end
           end
