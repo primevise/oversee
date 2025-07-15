@@ -12,7 +12,14 @@ class Oversee::Components::Resource::Table < Oversee::Components::Base
   end
 
   def view_template
-    turbo_frame_tag dom_id(@resource_class, :table), target: "_top" do
+    render Oversee::Components::TurboFrame.new(
+      id: dom_id(@resource_class, :table),
+      data: {
+        turbo_frame: "_top",
+        turbo_action: @options[:turbo_action] || "advance"
+      },
+      class: "w-full overflow-x-scroll"
+    ) do
       div(class: "w-full overflow-x-scroll") do
         render Oversee::Components::Table.new do |table|
           # Head
@@ -70,7 +77,9 @@ class Oversee::Components::Resource::Table < Oversee::Components::Base
                             resource: @resource_class
                           )
                         ),
-                      data: { turbo_stream: true },
+                      data: {
+                        turbo_frame: "_top"
+                      },
                       class: "size-6 bg-gray-100 inline-flex items-center justify-center hover:bg-gray-200"
                     ) { render Phlex::Icons::Iconoir::ArrowUpRight.new(class: "size-3.5 text-gray-400") }
                   end
@@ -89,14 +98,13 @@ class Oversee::Components::Resource::Table < Oversee::Components::Base
                 # Associations
                 resource_associations.each do |association|
                   foreign_id = resource.send(association.foreign_key)
-                  # resource_class_name = association.class_name
-
                   path = !!foreign_id ? resource_path(id: foreign_id, resource: association.class_name) : resources_path(resource: association.class_name)
 
                   table.cell(class: "first:border-l-0 border-r last:border-r-0 border-gray-950/5") do
                     div(class: "w-fit max-w-32") do
                       a(
                         href: path,
+                        data: { turbo_frame: "_top" },
                         class:"px-2 py-1 text-xs bg-gray-100 text-gray-500 text-sm flex items-center justify-between gap-2 hover:bg-gray-200 hover:text-gray-900 min-w-20") do
                         span { foreign_id.presence || "N/A" }
                         render Phlex::Icons::Iconoir::ArrowRight.new(class: "size-3")

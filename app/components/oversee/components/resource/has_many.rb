@@ -44,7 +44,9 @@ class Oversee::Components::Resource::HasMany < Oversee::Components::Base
                 render Oversee::Components::Resource::Table.new(
                   resources: records,
                   resource_class: associated_resource,
+                  turbo_action: "replace"
                 )
+                render Oversee::Components::Table::Pagination.new(pagy: @pagy)
               end
             else
               p(class: "bg-gray-50 p-2 pr-4 flex gap-2 items-center text-sm") do

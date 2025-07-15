@@ -26,67 +26,60 @@ class Oversee::Views::Resources::Show < Oversee::Views::Base
       header.item
     end
 
-    if false
-      div(id: "record-toolbar", class: "h-12 flex items-center px-4 border-b") do
-        render Oversee::Components::Button.new(size: :xs) { "Mark as completed" }
-      end
-    end
-
     div(class: "p-4") do
+      # COLUMNS
+      div(class: "flex flex-col gap-4") do
+        @resource_class.columns_hash.each do |key, metadata|
+          next if @oversee_resource.foreign_keys.include?(key.to_s)
+          # render Oversee::Components::Field.new(
+          #   resource:,
+          #   key:,
+          #   value: @resource.send(key),
+          #   datatype: metadata.sql_type_metadata.type
+          # )
 
-    # COLUMNS
-    div(class: "flex flex-col gap-4") do
-      @resource_class.columns_hash.each do |key, metadata|
-        next if @oversee_resource.foreign_keys.include?(key.to_s)
-        # render Oversee::Components::Field.new(
-        #   resource:,
-        #   key:,
-        #   value: @resource.send(key),
-        #   datatype: metadata.sql_type_metadata.type
-        # )
-
-        render Oversee::Components::Field::Set.new(resource:, key:, value: @resource.send(key), datatype: metadata.sql_type_metadata.type)
+          render Oversee::Components::Field::Set.new(resource:, key:, value: @resource.send(key), datatype: metadata.sql_type_metadata.type)
+        end
       end
-    end
 
 
-    # RICH TEXT Associations
-    if !!rich_text_associations.length
-      hr(class: "my-4")
-      render Oversee::Components::Resource::RichText.new(resource:, associations: rich_text_associations)
-    end
+      # RICH TEXT Associations
+      if !!rich_text_associations.length
+        hr(class: "my-4")
+        render Oversee::Components::Resource::RichText.new(resource:, associations: rich_text_associations)
+      end
 
-    # BELONGS_TO Associations
-    if !!belongs_to_associations.length
-      belongs_to_associations.each do |association|
-        div(class: "py-6") do
-          div(class: "space-y-4") do
-            div(class:"flex items-center gap-2") do
-              render Oversee::Components::Field::Label.new(
-                key: association[:name].to_s.titleize,
-                datatype: :data,
-                href: resources_path(resource: association[:class_name])
-              )
-            end
+      # BELONGS_TO Associations
+      if !!belongs_to_associations.length
+        belongs_to_associations.each do |association|
+          div(class: "py-6") do
+            div(class: "space-y-4") do
+              div(class:"flex items-center gap-2") do
+                render Oversee::Components::Field::Label.new(
+                  key: association[:name].to_s.titleize,
+                  datatype: :data,
+                  href: resources_path(resource: association[:class_name])
+                )
+              end
 
-            foreign_key = association[:foreign_key]
-            foreign_key_value = @resource[association[:foreign_key]]
-            path = !!foreign_key_value ? resource_path(id: foreign_key_value, resource: association[:class_name]) : resources_path(resource: association[:class_name])
-            div(id: dom_id(@resource, :"#{foreign_key}_row"), class: "flex items-center gap-2 mt-4") do
-              render Oversee::Components::Field::Display.new(resource:, key: foreign_key, value: foreign_key_value, datatype: :belongs_to, display_key: true)
-              div(id: dom_id(@resource, :"#{foreign_key}_actions")) do
-                a(href: path, class: "bg-gray-100 hover:bg-gray-200 text-gray-400 hover:text-blue-500 size-10 aspect-square inline-flex items-center justify-center transition-colors"){ render Phlex::Icons::Iconoir::ArrowUpRight.new(class: "size-4") }
+              foreign_key = association[:foreign_key]
+              foreign_key_value = @resource[association[:foreign_key]]
+              path = !!foreign_key_value ? resource_path(id: foreign_key_value, resource: association[:class_name]) : resources_path(resource: association[:class_name])
+              div(id: dom_id(@resource, :"#{foreign_key}_row"), class: "flex items-center gap-2 mt-4") do
+                render Oversee::Components::Field::Display.new(resource:, key: foreign_key, value: foreign_key_value, datatype: :belongs_to, display_key: true)
+                div(id: dom_id(@resource, :"#{foreign_key}_actions")) do
+                  a(href: path, class: "bg-gray-100 hover:bg-gray-200 text-gray-400 hover:text-blue-500 size-10 aspect-square inline-flex items-center justify-center transition-colors"){ render Phlex::Icons::Iconoir::ArrowUpRight.new(class: "size-4") }
+                end
               end
             end
           end
         end
       end
-    end
 
-    hr(class: "my-4")
+      hr(class: "my-4")
 
-    # HAS_MANY Associations
-    render Oversee::Components::Resource::HasMany.new(resource:, associations: has_many_associations) if !!has_many_associations.length
+      # HAS_MANY Associations
+      render Oversee::Components::Resource::HasMany.new(resource:, associations: has_many_associations) if !!has_many_associations.length
     end
   end
 
