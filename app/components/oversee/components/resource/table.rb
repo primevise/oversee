@@ -14,50 +14,51 @@ class Oversee::Components::Resource::Table < Oversee::Components::Base
   def view_template
     turbo_frame_tag dom_id(@resource_class, :table), target: "_top" do
       render Oversee::Components::Table.new do |table|
-        table.head do |head|
-          head.row do
-            th(scope: "col", class: "px-4 py-3 text-left text-xs text-gray-900 uppercase")
-            # Attributes
-            @resource_class.columns_hash.each do |key, metadata|
-              next if @oversee_resource.foreign_keys.include?(key.to_s)
-              th(scope: "col", class: "text-left text-xs text-gray-900 uppercase whitespace-nowrap hover:bg-gray-50 transition relative") do
-                a(
-                  href:
-                    (
-                      resources_path(
-                        resource: params[:resource],
-                        sort_attribute: key,
-                        sort_direction:
-                          params[:sort_direction] == "asc" ? :desc : :asc
-                      )
-                    ),
-                  target: "_top",
-                  class: "px-4 py-3 flex items-center justify-between gap-2 w-full h-full hover:text-gray-900 transition-colors"
-                ) do
-                  render Oversee::Components::Field::Label.new(key: key, datatype: metadata.sql_type_metadata.type)
-                  render Phlex::Icons::Iconoir::ArrowSeparateVertical.new(class: "size-3 text-gray-500", stroke_width: 2.5)
-                end
-              end
-            end
+        table.head(class: "divide-x divide-gray-950/5") do
+          # Actions
+          table.column(title: "Actions")
 
-            # Associations
-            resource_associations.each do |association|
-              th(scope: "col", class: "text-left text-xs text-gray-900 uppercase whitespace-nowrap hover:bg-gray-50 transition relative") do
-                span(
-                  class: "px-4 py-3 flex items-center justify-between gap-2 w-full h-full hover:text-gray-900 transition-colors"
-                ) do
-                  render Oversee::Components::Field::Label.new(key: association.name, datatype: nil)
-                end
+          # Attributes
+          @resource_class.columns_hash.each do |key, metadata|
+            next if @oversee_resource.foreign_keys.include?(key.to_s)
+            table.column(title: key.humanize) do
+              a(
+                href:
+                  (
+                    resources_path(
+                      resource: params[:resource],
+                      sort_attribute: key,
+                      sort_direction:
+                        params[:sort_direction] == "asc" ? :desc : :asc
+                    )
+                  ),
+                target: "_top",
+                class: "flex items-center justify-between gap-2 w-full h-full hover:text-gray-900 transition-colors"
+              ) do
+                render Oversee::Components::Field::Label.new(key: key, datatype: metadata.sql_type_metadata.type)
+                render Phlex::Icons::Iconoir::ArrowSeparateVertical.new(class: "size-3 text-gray-500", stroke_width: 2.5)
               end
             end
           end
+
+          # Associations
+          resource_associations.each do |association|
+            table.column do
+              span(
+                class: "flex items-center justify-between gap-2 w-full h-full hover:text-gray-900 transition-colors"
+              ) do
+                render Oversee::Components::Field::Label.new(key: association.name, datatype: nil)
+              end
+            end
+          end
+
         end
 
-        table.body do |body|
+        table.body do
           @resources.each do |resource|
-
-            body.row do |row|
-              td do
+            table.row do
+              # Actions
+              table.cell do
                 div(class: "flex space-x-2 mx-4") do
                   a(
                     href:
@@ -73,22 +74,24 @@ class Oversee::Components::Resource::Table < Oversee::Components::Base
                 end
               end
 
+              # Attributes
               @resource_class.columns_hash.each do |key, metadata|
                 next if @oversee_resource.foreign_keys.include?(key.to_s)
-                row.data do
+                table.cell do
                   div(class: "max-w-96") do
                     render Oversee::Components::Field::Value.new(key:, datatype: metadata.sql_type_metadata.type, value: resource.send(key), for_table: true)
                   end
                 end
               end
 
+              # Associations
               resource_associations.each do |association|
                 foreign_id = resource.send(association.foreign_key)
                 resource_class_name = association.class_name
 
                 path = !!foreign_id ? resource_path(id: foreign_id, resource: association.class_name) : resources_path(resource: association.class_name)
 
-                row.data do
+                table.cell do
                   div(class: "max-w-96") do
                     a(
                       href: path,
