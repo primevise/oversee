@@ -12,7 +12,7 @@ module Oversee
       @excluded_resources = []
       @filter_sensitive_columns = true
       @sensitive_column_titles = %w[password password_digest access_token]
-      @per_page = 24
+      @per_page = 16
     end
   end
 

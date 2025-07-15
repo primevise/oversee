@@ -5,9 +5,9 @@ class Oversee::Components::Table < Oversee::Components::Essence
   CAPTION_CLASSES = "caption-bottom"
   THEAD_CLASSES = "border-b border-gray-950/5"
   TFOOT_CLASSES = "border-t border-gray-950/5"
-  TH_CLASSES = "py-2.5 px-2 text-left text-[0.6rem] font-semibold uppercase text-gray-950/75 tabular-nums"
+  TH_CLASSES = "py-3 px-4 text-left text-[0.6rem] font-semibold uppercase text-gray-950/75 tabular-nums"
   TR_CLASSES = "last:border-b-0 border-b border-gray-950/5"
-  TD_CLASSES = "py-2 px-2 text-left text-sm text-gray-700 tabular-nums whitespace-nowrap"
+  TD_CLASSES = "py-2 px-4 text-left text-sm text-gray-950/70 tabular-nums whitespace-nowrap"
 
   attr_reader :unwrap
 

@@ -29,8 +29,8 @@ class Oversee::Views::Resources::Index < Oversee::Views::Base
 
     hr(class: "mt-4")
     render Oversee::Components::Resource::Table.new(resource_class: @resource_class, resources: @resources)
-    hr
-    render Oversee::Components::Dashboard::Pagination.new(pagy: @pagy)
+    # hr
+    render Oversee::Components::Table::Pagination.new(pagy: @pagy)
   end
 
   private
