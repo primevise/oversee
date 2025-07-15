@@ -30,6 +30,18 @@ class Oversee::Components::Resource::HasMany < Oversee::Components::Base
           end
 
           div(class: "bg-white border border-gray-100 rounded-xs overflow-hidden") do
+            render Oversee::Components::TurboFrame.new(
+              id: dom_id(associated_resource, :table),
+              src: resources_table_path(
+                resource: association[:class_name],
+                via_resource: resource.class.to_s,
+                via_record: resource.to_param,
+                association_name: association[:name]),
+              loading: :lazy
+            ) do
+              div(class: "h-20 flex items-center justify-center") { render Phlex::Icons::Iconoir::DatabaseSearch.new(class: "animate-pulse size-6 text-gray-600") }
+            end
+
             # turbo_frame_tag(
             #   dom_id(associated_resource, :table),
             #   src: resources_table_path(resources_table_params(association)),
@@ -39,21 +51,21 @@ class Oversee::Components::Resource::HasMany < Oversee::Components::Base
             #   div(class: "h-20 flex items-center justify-center") { render Phlex::Icons::Iconoir::DatabaseSearch.new(class: "animate-pulse size-6 text-gray-600") }
             # end
 
-            if records.present?
-              div(class: "bg-white") do
-                render Oversee::Components::Resource::Table.new(
-                  resources: records,
-                  resource_class: associated_resource,
-                  turbo_action: "replace"
-                )
-                render Oversee::Components::Table::Pagination.new(pagy: @pagy)
-              end
-            else
-              p(class: "bg-gray-50 p-2 pr-4 flex gap-2 items-center text-sm") do
-                render Phlex::Icons::Iconoir::DatabaseSearch.new(class: "size-3")
-                plain "No #{association[:name].to_s.titleize.downcase} found"
-              end
-            end
+            # if records.present?
+            #   div(class: "bg-white") do
+            #     render Oversee::Components::Resource::Table.new(
+            #       resources: records,
+            #       resource_class: associated_resource,
+            #       turbo_action: "replace"
+            #     )
+            #     render Oversee::Components::Table::Pagination.new(pagy: @pagy)
+            #   end
+            # else
+            #   p(class: "bg-gray-50 p-2 pr-4 flex gap-2 items-center text-sm") do
+            #     render Phlex::Icons::Iconoir::DatabaseSearch.new(class: "size-3")
+            #     plain "No #{association[:name].to_s.titleize.downcase} found"
+            #   end
+            # end
           end
         end
       end

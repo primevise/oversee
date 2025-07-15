@@ -5,17 +5,17 @@ module Oversee
     before_action :set_resource_class
     before_action :set_resource
     before_action :set_record, only: %i[show edit update destroy]
-    before_action :set_records, only: %i[index]
+    before_action :set_resources, only: %i[index table]
 
     layout false
 
     def index
-      @pagy, @records = pagy(@records, limit: params[:per_page] || Oversee.configuration.per_page)
+      @pagy, @resources = pagy(@resources, limit: params[:per_page] || Oversee.configuration.per_page)
 
       render Oversee::Views::Resources::Index.new(
-        resources: @records,
+        resources: @resources,
         resource_class: @resource_class,
-        pagy: @pagy,
+        pagy: @pagy
       )
     end
 
@@ -89,23 +89,13 @@ module Oversee
     end
 
     def table
-      if params[:association_name].present?
-        @resources = @resource.find(params[:id]).send(params[:association_name])
-      else
-        set_records
-      end
+      @pagy, @resources = pagy(@resources, limit: params[:per_page] || Oversee.configuration.per_page)
 
-      component_id = dom_id(@resource, :table)
-      component = Oversee::Components::Resource::Table.new(resource_class: @resource, resources: @resources, params: params)
-
-      respond_to do |format|
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.replace(component_id, component)
-        end
-        format.html do
-          render component
-        end
-      end
+      render Oversee::Views::Resources::Table.new(
+        resources: @resources,
+        resource_class: @resource_class,
+        pagy: @pagy
+      )
     end
 
     private
@@ -122,18 +112,18 @@ module Oversee
       @record = @resource_class.find(params[:id])
     end
 
-    def set_records
+    def set_resources
       set_sorting_rules
 
-      @records = if params[:via_resource].present? && params[:via_record].present?
+      @resources = if params[:via_resource].present? && params[:via_record].present?
                    params[:via_resource].constantize.find(params[:via_record]).send(params[:association_name])
                  else
                    @resource_class.all
                  end
 
-      @records = @records.order(@sort_attribute.to_sym => sort_direction)
-      @records = Oversee::Filter.new(collection: @records, params:).apply
-      @records = Oversee::Search.new(collection: @records, resource_class: @resource, query: params[:query]).call
+      @resources = @resources.order(@sort_attribute.to_sym => sort_direction)
+      @resources = Oversee::Filter.new(collection: @resources, params:).apply
+      @resources = Oversee::Search.new(collection: @resources, resource_class: @resource, query: params[:query]).call
     end
 
     def resource_associations

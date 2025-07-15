@@ -11,8 +11,8 @@ class Oversee::Views::Resources::Index < Oversee::Views::Base
         render Phlex::Icons::Iconoir::Folder.new(class: "size-4.5 text-gray-400", stroke_width: 1.75)
         header.title { @resource_class.to_s.pluralize }
       end
-      header.item do
 
+      header.item do
         render Oversee::Components::Button.new(
           size: :sm,
           kind: :primary,

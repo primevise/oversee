@@ -3,9 +3,10 @@
 class Oversee::Components::Resource::Table < Oversee::Components::Base
   include Phlex::Rails::Helpers::TurboFrameTag
 
-  def initialize(resources:, resource_class:, **options)
+  def initialize(resources:, resource_class:, pagy: nil, **options)
     @resources = resources
     @resource_class = resource_class || resources.first.class
+    @pagy = pagy
     @options = options
 
     @oversee_resource = Oversee::Resource.new(resource_class: @resource_class)
@@ -117,6 +118,7 @@ class Oversee::Components::Resource::Table < Oversee::Components::Base
           end
         end
       end
+      render Oversee::Components::Table::Pagination.new(pagy: @pagy)
     end
   end
 

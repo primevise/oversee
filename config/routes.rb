@@ -2,13 +2,13 @@ Oversee::Engine.routes.draw do
   # Resources
   scope ":resource", controller: "resources" do
     get "/", action: :index, as: :resources
+    get "/table", action: :table, as: :resources_table
     post "/", action: :create, as: :create_resource
     get "/new", action: :new, as: :new_resource
     get "/:id", action: :show, as: :resource
     get "/:id/edit", action: :edit, as: :edit_resource
     patch "/:id", action: :update, as: :update_resource
     delete "/:id", action: :destroy, as: :destroy_resource
-    get "/table", action: :table, as: :resources_table
 
     get "/:id/input_field", action: :input_field, as: :resource_input_field
     get "/:id/association", action: :association, as: :resource_association
